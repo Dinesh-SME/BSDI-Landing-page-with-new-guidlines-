@@ -9,6 +9,8 @@ import Admin from "./pages/Admin.tsx";
 import MapView from "./pages/MapView.tsx";
 import Search from "./pages/Search.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import ChatAssistant from "@/components/chat/ChatAssistant";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +21,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <LanguageProvider>
+          <ChatAssistant />
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/admin" element={<Admin />} />

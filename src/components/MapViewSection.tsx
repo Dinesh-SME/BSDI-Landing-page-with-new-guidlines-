@@ -42,14 +42,15 @@ export default function MapViewSection() {
         <div
           style={{ opacity: isVisible ? 1 : 0, animation: isVisible ? "fadeBlurUp 0.6s ease-out 0.15s forwards" : "none" }}
         >
-          <div className="clean-card overflow-hidden">
-            <div className="card-image aspect-[21/9] !m-0 !rounded-none">
+          <div className="clean-card overflow-hidden cursor-pointer group" onClick={handleCta}>
+            <div className="card-image aspect-[21/9] !m-0 !rounded-none relative overflow-hidden">
               <img
                 src={mapView.previewImage}
                 alt="Bahrain map preview"
                 loading="lazy"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
             </div>
           </div>
           <div className="flex justify-center mt-8">

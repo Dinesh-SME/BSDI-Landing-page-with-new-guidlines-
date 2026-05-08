@@ -1,199 +1,221 @@
 import {
   LineChart, Line, BarChart, Bar, AreaChart, Area,
-  PieChart, Pie, Cell, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend,
+  PieChart, Pie, Cell, ResponsiveContainer, XAxis, YAxis, Tooltip, LabelList,
 } from "recharts";
+import { ProgressRing } from "./ProgressRing";
 
-export type VizStyle =
-  | "line_smooth" | "line_sharp"
-  | "bar_vertical" | "bar_horizontal" | "bar_stacked"
-  | "pie" | "donut"
-  | "area" | "gradient_area"
-  | "kpi";
+export type VizStyle = 
+  | "line_smooth" 
+  | "line_stepped" 
+  | "bar_vertical" 
+  | "bar_horizontal" 
+  | "area" 
+  | "gradient_area" 
+  | "pie" 
+  | "donut" 
+  | "progress_ring" 
+  | "multi_metric";
 
-export const VIZ_STYLES: { id: VizStyle; label: string }[] = [
-  { id: "line_smooth", label: "Line Graph (Smooth)" },
-  { id: "line_sharp", label: "Line Graph (Sharp)" },
-  { id: "bar_vertical", label: "Bar Chart (Vertical)" },
-  { id: "bar_horizontal", label: "Bar Chart (Horizontal)" },
-  { id: "bar_stacked", label: "Stacked Bar" },
-  { id: "pie", label: "Pie Chart" },
-  { id: "donut", label: "Donut Chart" },
-  { id: "area", label: "Area Chart" },
-  { id: "gradient_area", label: "Gradient Graph" },
-  { id: "kpi", label: "Minimal KPI Chart" },
-];
-
-// BSDI brand palette
-export const BRAND_PALETTE = [
-  "#FF3B30", // primary brand red
-  "#0B2545", // deep navy
-  "#13B5EA", // cyan blue
-  "#2EC4B6", // soft teal
-  "#F2B441", // gold accent
-  "#8AA0B4", // light gray-blue
-];
-
-interface Props {
+interface StatVisualizationProps {
   style: VizStyle;
   data?: number[];
   labels?: string[];
   height?: number;
-  colors?: string[];
   useBrandColors?: boolean;
-  legendEnabled?: boolean;
-  tooltipEnabled?: boolean;
+  colors?: string[];
   animationEnabled?: boolean;
+  isDark?: boolean;
 }
 
-export default function StatVisualization({
-  style,
-  data,
-  labels,
-  height = 80,
-  colors,
-  useBrandColors = true,
-  legendEnabled = false,
-  tooltipEnabled = true,
-  animationEnabled = true,
-}: Props) {
-  const values = data && data.length ? data : [12, 18, 15, 22, 28, 26, 34];
-  const lbls = labels && labels.length === values.length ? labels : values.map((_, i) => `${i + 1}`);
-  const chartData = values.map((v, i) => ({ name: lbls[i], value: v, value2: Math.round(v * 0.65) }));
+export const VIZ_STYLES: { id: VizStyle; label: string }[] = [
+  { id: "line_smooth", label: "Smooth Line Graph" },
+  { id: "bar_vertical", label: "Vertical Bar Chart" },
+  { id: "bar_horizontal", label: "Horizontal Bar Chart" },
+  { id: "gradient_area", label: "Gradient Area Chart" },
+  { id: "donut", label: "Donut Chart" },
+  { id: "progress_ring", label: "Circular Progress" },
+];
 
-  const palette =
-    colors && colors.length
-      ? colors
-      : useBrandColors
-        ? BRAND_PALETTE
-        : ["hsl(var(--primary))", "hsl(var(--primary)/0.7)", "hsl(var(--primary)/0.45)", "hsl(var(--primary)/0.25)"];
+const BRAND_COLORS = ["#003366", "#E31B23", "#0AA2C0", "#3B9B6F", "#FF8300"];
+const BRAND_COLORS_DARK = ["#4d9fff", "#ff6b72", "#22d3ee", "#34d399", "#fbbf24"];
+const LIGHT_COLORS = ["#3b82f6", "#ef4444", "#10b981", "#f59e0b", "#6366f1"];
 
-  const primary = palette[0];
-  const secondary = palette[1] || palette[0];
-  const gradId = `vizGrad-${style}-${Math.round(values.reduce((a, b) => a + b, 0))}`;
+export default function StatVisualization({ 
+  style, data = [], labels = [], height = 130, 
+  useBrandColors = true, colors, animationEnabled = true, isDark = false
+}: StatVisualizationProps) {
+  
+  const chartData = data.map((val, i) => ({
+    name: labels[i] || "",
+    value: val,
+  }));
 
-  if (style === "kpi") {
-    const max = Math.max(...values);
-    return (
-      <div className="flex items-end gap-1 h-full" style={{ height }}>
-        {values.map((v, i) => (
-          <div
-            key={i}
-            className="flex-1 rounded-sm transition-all"
-            style={{
-              height: `${(v / max) * 100}%`,
-              minHeight: 4,
-              backgroundColor: palette[i % palette.length],
-              opacity: 0.85,
-            }}
-            title={`${lbls[i]}: ${v}`}
-          />
-        ))}
-      </div>
-    );
-  }
+  const chartColors = colors && colors.length > 0 
+    ? colors 
+    : (useBrandColors ? (isDark ? BRAND_COLORS_DARK : BRAND_COLORS) : LIGHT_COLORS);
+
+  const labelFill = isDark ? "#94a3b8" : "#374151";
+  const tooltipBg = isDark ? "#1e293b" : "#ffffff";
+  const tooltipBorder = isDark ? "#334155" : "#e5e7eb";
+  const tooltipText = isDark ? "#e2e8f0" : "#111827";
+  const cursorFill = isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)";
+  const gridId = `grad-${style}-${isDark ? "d" : "l"}`;
+
+  const tooltipStyle = {
+    borderRadius: '14px',
+    border: `1px solid ${tooltipBorder}`,
+    boxShadow: isDark ? '0 10px 30px rgba(0,0,0,0.4)' : '0 10px 20px rgba(0,0,0,0.08)',
+    background: tooltipBg,
+    color: tooltipText,
+    fontSize: '12px',
+    fontWeight: 600,
+  };
+
+  const renderChart = () => {
+    switch (style) {
+      case "line_smooth":
+        return (
+          <ResponsiveContainer width="100%" height={height}>
+            <LineChart data={chartData} margin={{ top: 15, right: 15, left: -15, bottom: 5 }}>
+              <XAxis dataKey="name" tick={{ fontSize: 10, fill: labelFill }} axisLine={false} tickLine={false} />
+              <YAxis hide />
+              <Tooltip contentStyle={tooltipStyle} />
+              <Line 
+                type="monotone" 
+                dataKey="value" 
+                stroke={chartColors[0]} 
+                strokeWidth={2.5} 
+                dot={{ r: 3.5, strokeWidth: 2, fill: isDark ? '#1e293b' : '#fff' }}
+                activeDot={{ r: 5, strokeWidth: 0, fill: chartColors[0] }}
+                isAnimationActive={animationEnabled}
+              >
+                <LabelList dataKey="value" position="top" offset={8} style={{ fontSize: '9px', fontWeight: 700, fill: labelFill }} />
+              </Line>
+            </LineChart>
+          </ResponsiveContainer>
+        );
+
+      case "bar_vertical":
+        return (
+          <ResponsiveContainer width="100%" height={height}>
+            <BarChart data={chartData} margin={{ top: 20, right: 5, left: 5, bottom: 5 }}>
+              <XAxis dataKey="name" tick={{ fontSize: 10, fill: labelFill }} axisLine={false} tickLine={false} />
+              <YAxis hide />
+              <Tooltip cursor={{ fill: cursorFill }} contentStyle={tooltipStyle} />
+              <Bar 
+                dataKey="value" 
+                fill={chartColors[0]} 
+                radius={[6, 6, 0, 0]} 
+                isAnimationActive={animationEnabled}
+                maxBarSize={28}
+              >
+                <LabelList dataKey="value" position="top" offset={6} style={{ fontSize: '10px', fontWeight: 700, fill: labelFill }} />
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        );
+
+      case "bar_horizontal":
+        return (
+          <ResponsiveContainer width="100%" height={height}>
+            <BarChart layout="vertical" data={chartData} margin={{ top: 0, right: 40, left: 5, bottom: 0 }}>
+              <XAxis type="number" hide />
+              <YAxis dataKey="name" type="category" tick={{ fontSize: 10, fill: labelFill }} axisLine={false} tickLine={false} width={30} />
+              <Tooltip cursor={{ fill: cursorFill }} contentStyle={tooltipStyle} />
+              <Bar 
+                dataKey="value" 
+                fill={chartColors[0]} 
+                radius={[0, 6, 6, 0]} 
+                isAnimationActive={animationEnabled}
+                barSize={14}
+              >
+                <LabelList dataKey="value" position="right" offset={8} style={{ fontSize: '10px', fontWeight: 700, fill: labelFill }} />
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        );
+
+      case "gradient_area":
+        return (
+          <ResponsiveContainer width="100%" height={height}>
+            <AreaChart data={chartData} margin={{ top: 15, right: 5, left: -15, bottom: 5 }}>
+              <defs>
+                <linearGradient id={gridId} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor={chartColors[0]} stopOpacity={isDark ? 0.25 : 0.3}/>
+                  <stop offset="95%" stopColor={chartColors[0]} stopOpacity={0}/>
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="name" tick={{ fontSize: 10, fill: labelFill }} axisLine={false} tickLine={false} />
+              <YAxis hide />
+              <Tooltip contentStyle={tooltipStyle} />
+              <Area 
+                type="monotone" 
+                dataKey="value" 
+                stroke={chartColors[0]} 
+                strokeWidth={2.5}
+                fillOpacity={1} 
+                fill={`url(#${gridId})`} 
+                isAnimationActive={animationEnabled}
+              >
+                <LabelList dataKey="value" position="top" offset={8} style={{ fontSize: '9px', fontWeight: 700, fill: labelFill }} />
+              </Area>
+            </AreaChart>
+          </ResponsiveContainer>
+        );
+
+      case "donut":
+      case "pie":
+        return (
+          <ResponsiveContainer width="100%" height={height}>
+            <PieChart>
+              <Pie
+                data={chartData}
+                cx="50%"
+                cy="50%"
+                innerRadius={style === "donut" ? 32 : 0}
+                outerRadius={48}
+                paddingAngle={4}
+                dataKey="value"
+                isAnimationActive={animationEnabled}
+                stroke="none"
+              >
+                {chartData.map((_, index) => (
+                  <Cell key={`cell-${index}`} fill={chartColors[index % chartColors.length]} />
+                ))}
+                <LabelList 
+                  dataKey="value" 
+                  position="outside" 
+                  offset={12}
+                  style={{ fontSize: '10px', fontWeight: 700, fill: labelFill }}
+                  formatter={(val: any) => `${val}%`}
+                />
+              </Pie>
+              <Tooltip contentStyle={tooltipStyle} />
+            </PieChart>
+          </ResponsiveContainer>
+        );
+
+      case "progress_ring":
+        return (
+          <div className="flex items-center justify-center h-full w-full">
+            <ProgressRing 
+              value={data[0] || 0} 
+              size={height} 
+              strokeWidth={12}
+              color={chartColors[0]}
+              animationEnabled={animationEnabled}
+            />
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   return (
-    <ResponsiveContainer width="100%" height={height}>
-      {(() => {
-        switch (style) {
-          case "line_smooth":
-            return (
-              <LineChart data={chartData} margin={{ top: 4, right: 4, left: 4, bottom: 4 }}>
-                {tooltipEnabled && <Tooltip cursor={{ stroke: primary, strokeOpacity: 0.2 }} />}
-                {legendEnabled && <Legend wrapperStyle={{ fontSize: 11 }} />}
-                <Line type="monotone" dataKey="value" stroke={primary} strokeWidth={2.5} dot={false} isAnimationActive={animationEnabled} />
-                <Line type="monotone" dataKey="value2" stroke={secondary} strokeWidth={2} strokeDasharray="4 4" dot={false} isAnimationActive={animationEnabled} />
-              </LineChart>
-            );
-          case "line_sharp":
-            return (
-              <LineChart data={chartData} margin={{ top: 4, right: 4, left: 4, bottom: 4 }}>
-                {tooltipEnabled && <Tooltip />}
-                {legendEnabled && <Legend wrapperStyle={{ fontSize: 11 }} />}
-                <Line type="linear" dataKey="value" stroke={primary} strokeWidth={2.5} dot={{ r: 2, fill: primary }} isAnimationActive={animationEnabled} />
-              </LineChart>
-            );
-          case "bar_vertical":
-            return (
-              <BarChart data={chartData} margin={{ top: 4, right: 4, left: 4, bottom: 4 }}>
-                {tooltipEnabled && <Tooltip cursor={{ fill: primary + "10" }} />}
-                {legendEnabled && <Legend wrapperStyle={{ fontSize: 11 }} />}
-                <Bar dataKey="value" radius={[4, 4, 0, 0]} isAnimationActive={animationEnabled}>
-                  {chartData.map((_, i) => (
-                    <Cell key={i} fill={palette[i % palette.length]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            );
-          case "bar_horizontal":
-            return (
-              <BarChart data={chartData} layout="vertical" margin={{ top: 4, right: 4, left: 4, bottom: 4 }}>
-                <XAxis type="number" hide />
-                <YAxis type="category" dataKey="name" hide />
-                {tooltipEnabled && <Tooltip cursor={{ fill: primary + "10" }} />}
-                {legendEnabled && <Legend wrapperStyle={{ fontSize: 11 }} />}
-                <Bar dataKey="value" radius={[0, 4, 4, 0]} isAnimationActive={animationEnabled}>
-                  {chartData.map((_, i) => (
-                    <Cell key={i} fill={palette[i % palette.length]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            );
-          case "bar_stacked":
-            return (
-              <BarChart data={chartData} margin={{ top: 4, right: 4, left: 4, bottom: 4 }}>
-                {tooltipEnabled && <Tooltip />}
-                {legendEnabled && <Legend wrapperStyle={{ fontSize: 11 }} />}
-                <Bar dataKey="value" stackId="a" fill={primary} isAnimationActive={animationEnabled} />
-                <Bar dataKey="value2" stackId="a" fill={secondary} radius={[4, 4, 0, 0]} isAnimationActive={animationEnabled} />
-              </BarChart>
-            );
-          case "pie":
-            return (
-              <PieChart>
-                {tooltipEnabled && <Tooltip />}
-                {legendEnabled && <Legend wrapperStyle={{ fontSize: 11 }} />}
-                <Pie data={chartData} dataKey="value" nameKey="name" outerRadius="90%" isAnimationActive={animationEnabled}>
-                  {chartData.map((_, i) => <Cell key={i} fill={palette[i % palette.length]} />)}
-                </Pie>
-              </PieChart>
-            );
-          case "donut":
-            return (
-              <PieChart>
-                {tooltipEnabled && <Tooltip />}
-                {legendEnabled && <Legend wrapperStyle={{ fontSize: 11 }} />}
-                <Pie data={chartData} dataKey="value" nameKey="name" innerRadius="55%" outerRadius="90%" paddingAngle={2} isAnimationActive={animationEnabled}>
-                  {chartData.map((_, i) => <Cell key={i} fill={palette[i % palette.length]} />)}
-                </Pie>
-              </PieChart>
-            );
-          case "area":
-            return (
-              <AreaChart data={chartData} margin={{ top: 4, right: 4, left: 4, bottom: 4 }}>
-                {tooltipEnabled && <Tooltip />}
-                {legendEnabled && <Legend wrapperStyle={{ fontSize: 11 }} />}
-                <Area type="monotone" dataKey="value" stroke={primary} fill={primary} fillOpacity={0.25} isAnimationActive={animationEnabled} />
-              </AreaChart>
-            );
-          case "gradient_area":
-            return (
-              <AreaChart data={chartData} margin={{ top: 4, right: 4, left: 4, bottom: 4 }}>
-                <defs>
-                  <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={primary} stopOpacity={0.7} />
-                    <stop offset="100%" stopColor={secondary} stopOpacity={0.05} />
-                  </linearGradient>
-                </defs>
-                {tooltipEnabled && <Tooltip />}
-                {legendEnabled && <Legend wrapperStyle={{ fontSize: 11 }} />}
-                <Area type="monotone" dataKey="value" stroke={primary} strokeWidth={2} fill={`url(#${gradId})`} isAnimationActive={animationEnabled} />
-              </AreaChart>
-            );
-          default:
-            return <div />;
-        }
-      })()}
-    </ResponsiveContainer>
+    <div className="w-full flex items-center justify-center overflow-visible">
+      {renderChart()}
+    </div>
   );
 }

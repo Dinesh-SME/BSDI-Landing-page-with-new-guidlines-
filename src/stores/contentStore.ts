@@ -36,7 +36,7 @@ export interface UserCard {
   link?: string;
 }
 
-export type VisualizationType = "none" | "graph" | "chart" | "bar";
+export type VisualizationType = "none" | "graph" | "chart" | "bar" | "progress" | "multi_metric";
 
 export interface StatCard {
   id: string;
@@ -167,6 +167,18 @@ export interface VisionContent extends SectionStyles {
   cards: VisionCard[];
 }
 
+export interface StatisticsContent extends SectionStyles {
+  enabled: boolean;
+  heading: string;
+  heading_ar?: string;
+  description?: string;
+  description_ar?: string;
+  ctaText?: string;
+  ctaText_ar?: string;
+  ctaLink?: string;
+  stats: StatCard[];
+}
+
 export interface AboutContent extends SectionStyles {
   heading: string;
   heading_ar?: string;
@@ -286,6 +298,36 @@ export interface AuthContent {
   loginBackground: string;
 }
 
+export interface SuccessStory {
+  id: string;
+  quote: string;
+  quote_ar?: string;
+  subtext: string;
+  subtext_ar?: string;
+  image: string;
+  link: string;
+}
+
+export interface SuccessStoriesContent extends SectionStyles {
+  enabled: boolean;
+  heading: string;
+  heading_ar?: string;
+  stories: SuccessStory[];
+}
+
+export interface ChatbotSettings {
+  enabled: boolean;
+  assistantName: string;
+  assistantName_ar?: string;
+  welcomeMessage: string;
+  welcomeMessage_ar?: string;
+  suggestionChips: string[];
+  suggestionChips_ar?: string[];
+  restrictedKeywords: string[];
+  categories: string[];
+  themeColor: string;
+}
+
 interface ContentStore {
   hero: HeroContent;
   vision: VisionContent;
@@ -299,7 +341,9 @@ interface ContentStore {
   news: NewsContent;
   mapView: MapViewContent;
   technologies: TechnologiesContent;
+  successStories: SuccessStoriesContent;
   auth: AuthContent;
+  chatbot: ChatbotSettings;
   updateHero: (data: Partial<HeroContent>) => void;
   updateVision: (data: Partial<VisionContent>) => void;
   updateAbout: (data: Partial<AboutContent>) => void;
@@ -312,7 +356,9 @@ interface ContentStore {
   updateNews: (data: Partial<NewsContent>) => void;
   updateMapView: (data: Partial<MapViewContent>) => void;
   updateTechnologies: (data: Partial<TechnologiesContent>) => void;
+  updateSuccessStories: (data: Partial<SuccessStoriesContent>) => void;
   updateAuth: (data: Partial<AuthContent>) => void;
+  updateChatbot: (data: Partial<ChatbotSettings>) => void;
 }
 
 // ============= Light, infrastructure-themed imagery (curated to match descriptions) =============
@@ -453,8 +499,8 @@ export const defaultStatistics: StatisticsContent = {
     { id: "s5", target: "18", suffix: "%", label: "Annual Growth Rate", label_ar: "معدل النمو السنوي",
       icon: "TrendingUp", description: "Year-over-year expansion of datasets and integrations.", description_ar: "توسّع سنوي في مجموعات البيانات والتكاملات.",
       trend: 18, trendDirection: "up",
-      visualizationType: "chart", visualizationStyle: "donut", useBrandColors: true,
-      vizData: [40, 25, 20, 15], vizLabels: ["GIS","BIM","GeoAI","Other"], legendEnabled: true, animationEnabled: true },
+      visualizationType: "bar", visualizationStyle: "bar_vertical", useBrandColors: true,
+      vizData: [12, 14, 15, 16, 18], vizLabels: ["21","22","23","24","25"], animationEnabled: true },
     { id: "s6", target: "250", suffix: "TB", label: "Spatial Data Managed", label_ar: "بيانات مكانية مُدارة",
       icon: "Database", description: "Petabyte-ready storage tier for national geospatial assets.", description_ar: "تخزين جاهز للبيتابايت للأصول الجغرافية الوطنية.",
       trend: 30, trendDirection: "up",
@@ -662,7 +708,7 @@ export const defaultMapView: MapViewContent = {
   description_ar: "تصوّر مجموعات البيانات المكانية والبنية التحتية والمناطق بشكل تفاعلي في مملكة البحرين.",
   ctaLabel: "Open Map View",
   ctaLabel_ar: "افتح الخريطة",
-  ctaHref: "/map",
+  ctaHref: "https://bsdi-mapview-theme-v3.vercel.app/",
   previewImage: IMG.bahrainMap,
 };
 
@@ -672,23 +718,53 @@ export const defaultTechnologies: TechnologiesContent = {
   description: "Powering BSDI with modern GIS platforms, cloud infrastructure, analytics, AI, and enterprise technologies.",
   description_ar: "تشغيل BSDI بمنصات نظم المعلومات الجغرافية الحديثة والبنية السحابية والتحليلات والذكاء الاصطناعي وتقنيات المؤسسات.",
   cards: [
-    { id: "t1", previewSlot: 1, title: "ArcGIS Enterprise", title_ar: "ArcGIS Enterprise", description: "Enterprise GIS platform for publishing and managing spatial services.", description_ar: "منصة نظم معلومات جغرافية مؤسسية لنشر وإدارة الخدمات المكانية.", icon: "https://cdn.simpleicons.org/arcgis/0079C1", category: "GIS", category_ar: "نظم معلومات جغرافية", tags: ["Enterprise", "GIS"], tags_ar: ["مؤسسي", "نظم معلومات جغرافية"], link: "" },
-    { id: "t2", previewSlot: 2, title: "ArcGIS Pro", title_ar: "ArcGIS Pro", description: "Desktop application for GIS data creation, editing, and analysis.", description_ar: "تطبيق سطح المكتب لإنشاء بيانات نظم المعلومات الجغرافية وتحريرها وتحليلها.", icon: "https://cdn.simpleicons.org/arcgis/0079C1", category: "GIS", category_ar: "نظم معلومات جغرافية", tags: ["Desktop", "Analysis"], tags_ar: ["سطح المكتب", "تحليل"], link: "" },
-    { id: "t3", previewSlot: 3, title: "PostgreSQL + PostGIS", title_ar: "PostgreSQL + PostGIS", description: "Spatial database for storing and managing geospatial data.", description_ar: "قاعدة بيانات مكانية لتخزين وإدارة البيانات الجغرافية.", icon: "https://cdn.simpleicons.org/postgresql/4169E1", category: "Database", category_ar: "قاعدة بيانات", tags: ["Spatial", "SQL"], tags_ar: ["مكاني", "SQL"], link: "" },
-    { id: "t4", previewSlot: 4, title: "React", title_ar: "React", description: "Frontend framework for building responsive web applications.", description_ar: "إطار عمل واجهة أمامية لبناء تطبيقات ويب متجاوبة.", icon: "https://cdn.simpleicons.org/react/61DAFB", category: "Frontend", category_ar: "واجهة أمامية", tags: ["UI", "Web"], tags_ar: ["واجهة", "ويب"], link: "" },
-    { id: "t5", title: "FME", title_ar: "FME", description: "Data integration and transformation workflows for multiple systems.", description_ar: "تكامل البيانات وتحويلها عبر أنظمة متعددة.", icon: "https://cdn.simpleicons.org/safe/0091EA", category: "Integration", category_ar: "تكامل", tags: ["ETL", "Integration"], tags_ar: ["ETL", "تكامل"], link: "" },
-    { id: "t6", title: "REST APIs", title_ar: "واجهات REST", description: "Integration layer for system communication and data exchange.", description_ar: "طبقة تكامل لتواصل الأنظمة وتبادل البيانات.", icon: "https://cdn.simpleicons.org/openapiinitiative/6BA539", category: "APIs", category_ar: "واجهات برمجة", tags: ["REST", "Integration"], tags_ar: ["REST", "تكامل"], link: "" },
-    { id: "t7", title: "Dashboard & Reporting", title_ar: "لوحات ومعلومات", description: "Interactive dashboards for monitoring project activities and KPIs.", description_ar: "لوحات تفاعلية لمراقبة أنشطة المشاريع ومؤشرات الأداء.", icon: "https://cdn.simpleicons.org/grafana/F46800", category: "Analytics", category_ar: "تحليلات", tags: ["Dashboards", "KPIs"], tags_ar: ["لوحات", "مؤشرات"], link: "" },
-    { id: "t8", title: "Spatial Analytics", title_ar: "التحليلات المكانية", description: "GIS-based analysis and visualization of spatial information.", description_ar: "تحليل وتصور المعلومات المكانية باستخدام نظم المعلومات الجغرافية.", icon: "https://cdn.simpleicons.org/qgis/589632", category: "Analytics", category_ar: "تحليلات", tags: ["Spatial", "GIS"], tags_ar: ["مكاني", "GIS"], link: "" },
-    { id: "t9", title: "GeoAI", title_ar: "الذكاء الجغرافي", description: "AI-assisted spatial analysis and image interpretation.", description_ar: "تحليل مكاني وتفسير صور بمساعدة الذكاء الاصطناعي.", icon: "https://cdn.simpleicons.org/tensorflow/FF6F00", category: "AI", category_ar: "ذكاء اصطناعي", tags: ["AI", "ML"], tags_ar: ["ذكاء اصطناعي", "تعلم آلي"], link: "" },
-    { id: "t10", title: "AWS Cloud", title_ar: "سحابة AWS", description: "Cloud infrastructure hosting and deployment environment.", description_ar: "بيئة استضافة ونشر للبنية السحابية.", icon: "https://cdn.simpleicons.org/amazonaws/FF9900", category: "Cloud", category_ar: "سحابة", tags: ["Cloud", "Hosting"], tags_ar: ["سحابة", "استضافة"], link: "" },
-    { id: "t11", title: "Role-Based Access", title_ar: "وصول قائم على الأدوار", description: "Secure access control and user permission management.", description_ar: "تحكم آمن في الوصول وإدارة صلاحيات المستخدمين.", icon: "https://cdn.simpleicons.org/keycloak/4D4D4D", category: "Security", category_ar: "أمان", tags: ["Auth", "Security"], tags_ar: ["مصادقة", "أمان"], link: "" },
-    { id: "t12", title: "Web GIS Services", title_ar: "خدمات Web GIS", description: "Web-based access to maps, layers, and geospatial services.", description_ar: "وصول عبر الويب للخرائط والطبقات والخدمات الجغرافية.", icon: "https://cdn.simpleicons.org/leaflet/199900", category: "GIS", category_ar: "نظم معلومات جغرافية", tags: ["Web", "Maps"], tags_ar: ["ويب", "خرائط"], link: "" },
+    { id: "t1", previewSlot: 1, title: "ArcGIS Enterprise", title_ar: "ArcGIS Enterprise", description: "Enterprise GIS platform for publishing and managing spatial services.", description_ar: "منصة نظم معلومات جغرافية مؤسسية لنشر وإدارة الخدمات المكانية.", icon: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80", category: "GIS", category_ar: "نظم معلومات جغرافية", tags: ["Enterprise", "GIS"], tags_ar: ["مؤسسي", "نظم معلومات جغرافية"], link: "" },
+    { id: "t2", previewSlot: 2, title: "ArcGIS Pro", title_ar: "ArcGIS Pro", description: "Desktop application for GIS data creation, editing, and analysis.", description_ar: "تطبيق سطح المكتب لإنشاء بيانات نظم المعلومات الجغرافية وتحريرها وتحليلها.", icon: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80", category: "GIS", category_ar: "نظم معلومات جغرافية", tags: ["Desktop", "Analysis"], tags_ar: ["سطح المكتب", "تحليل"], link: "" },
+    { id: "t3", previewSlot: 3, title: "PostgreSQL + PostGIS", title_ar: "PostgreSQL + PostGIS", description: "Spatial database for storing and managing geospatial data.", description_ar: "قاعدة بيانات مكانية لتخزين وإدارة البيانات الجغرافية.", icon: "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=800&q=80", category: "Database", category_ar: "قاعدة بيانات", tags: ["Spatial", "SQL"], tags_ar: ["مكاني", "SQL"], link: "" },
+    { id: "t4", previewSlot: 4, title: "React", title_ar: "React", description: "Frontend framework for building responsive web applications.", description_ar: "إطار عمل واجهة أمامية لبناء تطبيقات ويب متجاوبة.", icon: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80", category: "Frontend", category_ar: "واجهة أمامية", tags: ["UI", "Web"], tags_ar: ["واجهة", "ويب"], link: "" },
+    { id: "t5", title: "FME", title_ar: "FME", description: "Data integration and transformation workflows for multiple systems.", description_ar: "تكامل البيانات وتحويلها عبر أنظمة متعددة.", icon: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80", category: "Integration", category_ar: "تكامل", tags: ["ETL", "Integration"], tags_ar: ["ETL", "تكامل"], link: "" },
+    { id: "t6", title: "REST APIs", title_ar: "واجهات REST", description: "Integration layer for system communication and data exchange.", description_ar: "طبقة تكامل لتواصل الأنظمة وتبادل البيانات.", icon: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80", category: "APIs", category_ar: "واجهات برمجة", tags: ["REST", "Integration"], tags_ar: ["REST", "تكامل"], link: "" },
+    { id: "t7", title: "Dashboard & Reporting", title_ar: "لوحات ومعلومات", description: "Interactive dashboards for monitoring project activities and KPIs.", description_ar: "لوحات تفاعلية لمراقبة أنشطة المشاريع ومؤشرات الأداء.", icon: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80", category: "Analytics", category_ar: "تحليلات", tags: ["Dashboards", "KPIs"], tags_ar: ["لوحات", "مؤشرات"], link: "" },
+    { id: "t8", title: "Spatial Analytics", title_ar: "التحليلات المكانية", description: "GIS-based analysis and visualization of spatial information.", description_ar: "تحليل وتصور المعلومات المكانية باستخدام نظم المعلومات الجغرافية.", icon: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80", category: "Analytics", category_ar: "تحليلات", tags: ["Spatial", "GIS"], tags_ar: ["مكاني", "GIS"], link: "" },
+    { id: "t9", title: "GeoAI", title_ar: "الذكاء الجغرافي", description: "AI-assisted spatial analysis and image interpretation.", description_ar: "تحليل مكاني وتفسير صور بمساعدة الذكاء الاصطناعي.", icon: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80", category: "AI", category_ar: "ذكاء اصطناعي", tags: ["AI", "ML"], tags_ar: ["ذكاء اصطناعي", "تعلم آلي"], link: "" },
+    { id: "t10", title: "AWS Cloud", title_ar: "سحابة AWS", description: "Cloud infrastructure hosting and deployment environment.", description_ar: "بيئة استضافة ونشر للبنية السحابية.", icon: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80", category: "Cloud", category_ar: "سحابة", tags: ["Cloud", "Hosting"], tags_ar: ["سحابة", "استضافة"], link: "" },
+    { id: "t11", title: "Role-Based Access", title_ar: "وصول قائم على الأدوار", description: "Secure access control and user permission management.", description_ar: "تحكم آمن في الوصول وإدارة صلاحيات المستخدمين.", icon: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80", category: "Security", category_ar: "أمان", tags: ["Auth", "Security"], tags_ar: ["مصادقة", "أمان"], link: "" },
+    { id: "t12", title: "Web GIS Services", title_ar: "خدمات Web GIS", description: "Web-based access to maps, layers, and geospatial services.", description_ar: "وصول عبر الويب للخرائط والطبقات والخدمات الجغرافية.", icon: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=800&q=80", category: "GIS", category_ar: "نظم معلومات جغرافية", tags: ["Web", "Maps"], tags_ar: ["ويب", "خرائط"], link: "" },
   ],
+};
+
+export const defaultSuccessStories: SuccessStoriesContent = {
+  enabled: true,
+  heading: "Success Stories",
+  heading_ar: "قصص النجاح",
+  stories: [
+    {
+      id: "ss1",
+      quote: "The Ministry of parliamentary affairs extends its congratulations to employee Hessa on obtaining her master’s degree in Commercial Law.",
+      quote_ar: "وزارة الشؤون البرلمانية تتقدم بخالص التهاني للموظفة حصة بمناسبة حصولها على درجة الماجستير في القانون التجاري.",
+      subtext: "Employee Hessa Obtains Master’s Degree in Commercial Law",
+      subtext_ar: "الموظفة حصة تحصل على درجة الماجستير في القانون التجاري",
+      image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=80",
+      link: "#"
+    }
+  ]
 };
 
 export const defaultAuth: AuthContent = {
   loginBackground: IMG.loginBg,
+};
+
+export const defaultChatbot: ChatbotSettings = {
+  enabled: true,
+  assistantName: "BSDI Infrastructure AI",
+  assistantName_ar: "مساعد البنية التحتية الذكي",
+  welcomeMessage: "Welcome to Bahrain Spatial Data Infrastructure Platform. You can ask anything about Bahrain's infrastructure data.",
+  welcomeMessage_ar: "مرحباً بكم في منصة البنية التحتية للبيانات المكانية في البحرين. يمكنك طرح أي سؤال حول بيانات البنية التحتية في البحرين.",
+  suggestionChips: ["Roads Infrastructure", "Smart City Data", "Utility Networks", "GIS Layers", "Transportation", "Environment Data", "Urban Planning"],
+  suggestionChips_ar: ["بنية الطرق", "بيانات المدن الذكية", "شبكات المرافق", "طبقات GIS", "النقل", "بيانات البيئة", "التخطيط العمراني"],
+  restrictedKeywords: ["movies", "cricket", "politics", "entertainment"],
+  categories: ["Infrastructure", "Smart Cities", "GIS Data", "Roads & Utilities", "Environmental Layers", "Urban Planning", "Spatial Analytics"],
+  themeColor: "#003366",
 };
 
 const OLD_MAP_HEADINGS = ["Explore Bahrain on the Map"];
@@ -708,7 +784,9 @@ export const useContentStore = create<ContentStore>()(
       news: defaultNews,
       mapView: defaultMapView,
       technologies: defaultTechnologies,
+      successStories: defaultSuccessStories,
       auth: defaultAuth,
+      chatbot: defaultChatbot,
       updateHero: (data) => set((s) => ({ hero: { ...s.hero, ...data } })),
       updateVision: (data) => set((s) => ({ vision: { ...s.vision, ...data } })),
       updateAbout: (data) => set((s) => ({ about: { ...s.about, ...data } })),
@@ -721,11 +799,13 @@ export const useContentStore = create<ContentStore>()(
       updateNews: (data) => set((s) => ({ news: { ...s.news, ...data } })),
       updateMapView: (data) => set((s) => ({ mapView: { ...s.mapView, ...data } })),
       updateTechnologies: (data) => set((s) => ({ technologies: { ...s.technologies, ...data } })),
+      updateSuccessStories: (data) => set((s) => ({ successStories: { ...s.successStories, ...data } })),
       updateAuth: (data) => set((s) => ({ auth: { ...s.auth, ...data } })),
+      updateChatbot: (data) => set((s) => ({ chatbot: { ...s.chatbot, ...data } })),
     }),
     {
       name: "bsdi-content",
-      version: 14,
+      version: 16,
       migrate: (persisted: any, version: number) => {
         if (persisted?.hero && version < 5) {
           persisted.hero.heroImages = [];
@@ -769,6 +849,9 @@ export const useContentStore = create<ContentStore>()(
             delete persisted.about.stats;
           }
         }
+        if (version < 16) {
+          if (!persisted?.chatbot) persisted.chatbot = defaultChatbot;
+        }
         return persisted;
       },
       merge: (persisted: any, current: any) => {
@@ -805,6 +888,9 @@ export const useContentStore = create<ContentStore>()(
         if (!persisted?.auth) merged.auth = defaultAuth;
         if (!persisted?.technologies?.cards) {
           merged.technologies = { ...defaultTechnologies, ...(persisted?.technologies || {}), cards: defaultTechnologies.cards };
+        }
+        if (!persisted?.successStories?.stories) {
+          merged.successStories = { ...defaultSuccessStories, ...(persisted?.successStories || {}), stories: defaultSuccessStories.stories };
         }
         return merged;
       },

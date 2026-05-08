@@ -164,6 +164,32 @@
     gap: 0.75rem;
   }
 
+  /* Premium Glassmorphism */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
+  }
+
+  .glass-card-dark {
+    @apply bg-[#001f3f]/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+  }
+
+  /* Premium Gradient Border Card */
+  .premium-card {
+    @apply relative overflow-hidden bg-white rounded-[32px] border border-gray-100 shadow-xl transition-all duration-500;
+  }
+
+  .premium-card:hover {
+    @apply shadow-2xl -translate-y-2;
+  }
+
+  .gradient-border-card {
+    @apply relative p-[1px] rounded-[32px] bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20;
+  }
+
+  .gradient-border-card > div {
+    @apply bg-white rounded-[31px] h-full w-full;
+  }
+
   /* Legacy classes kept for admin/other pages */
   .glass-neu {
     background: hsl(0, 0%, 100%);
@@ -229,6 +255,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 9rem; /* Account for fixed two-tier header */
 }
 
 @keyframes wave-slow {
@@ -239,9 +266,33 @@ html {
   0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
 }
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
 .animate-wave-slow {
   animation: wave-slow 20s linear infinite;
 }
 .animate-wave-fast {
   animation: wave-fast 15s linear infinite;
 }
+
+/* Utility: hide scrollbar */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

@@ -20,6 +20,9 @@ import MapViewEditor from "./editors/MapViewEditor";
 import LoginEditor from "./editors/LoginEditor";
 import TechnologiesEditor from "./editors/TechnologiesEditor";
 import StatisticsEditor from "./editors/StatisticsEditor";
+import SuccessStoriesEditor from "./editors/SuccessStoriesEditor";
+import ChatbotEditor from "./editors/ChatbotEditor";
+import { Sparkles, Bot } from "lucide-react";
 
 const tabs = [
   { id: "hero", label: "Hero Section", icon: LayoutDashboard },
@@ -32,6 +35,8 @@ const tabs = [
   { id: "vision", label: "BSDI Vision", icon: Eye },
   { id: "users", label: "Who Can Use BSDI", icon: Users },
   { id: "technologies", label: "Technologies", icon: Cpu },
+  { id: "success-stories", label: "Success Stories", icon: Sparkles },
+  { id: "chatbot", label: "AI Chatbot", icon: Bot },
   { id: "data", label: "Data Services", icon: Building2 },
   { id: "footer", label: "Footer", icon: FileText },
 ];
@@ -53,6 +58,8 @@ export default function AdminLayout() {
       case "users": return <UsersEditor />;
       case "technologies": return <TechnologiesEditor />;
       case "layers": return <LayersEditor />;
+      case "success-stories": return <SuccessStoriesEditor />;
+      case "chatbot": return <ChatbotEditor />;
       case "data": return <DataServicesEditor />;
       case "login": return <LoginEditor />;
       case "footer": return <FooterEditor />;
@@ -63,7 +70,7 @@ export default function AdminLayout() {
   const currentTab = tabs.find((t) => t.id === activeTab);
 
   return (
-    <div dir="ltr" className="h-screen bg-background flex overflow-hidden">
+    <div dir="ltr" className="fixed inset-0 bg-background flex overflow-hidden z-50">
       {/* Sidebar */}
       <aside className="w-64 border-r border-sidebar-border flex flex-col shrink-0" style={{ background: 'linear-gradient(180deg, hsl(215 50% 22%) 0%, hsl(215 50% 14%) 100%)' }}>
         <div className="px-5 pt-8 pb-10 border-b border-sidebar-border flex items-center justify-center">
@@ -88,7 +95,7 @@ export default function AdminLayout() {
       </aside>
 
       {/* Main */}
-      <div className="flex-1 flex flex-col h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Header */}
         <header className="h-16 border-b border-sidebar-border flex items-center justify-between px-6 shrink-0" style={{ background: 'linear-gradient(90deg, hsl(215 50% 18%) 0%, hsl(215 45% 22%) 100%)' }}>
           <div className="flex items-center gap-3">

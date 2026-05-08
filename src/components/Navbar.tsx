@@ -65,9 +65,10 @@ export default function Navbar() {
   return (
     <header 
       id="govbh-header" 
-      className={`govbh-header fixed top-0 left-0 right-0 z-50 bg-background transition-all duration-300 ${
+      className={`govbh-header fixed top-0 left-0 right-0 z-50 bg-background transition-shadow duration-300 will-change-transform ${
         scrolled ? "shadow-md" : ""
       }`}
+      style={{ margin: 0, padding: 0 }}
     >
       {/* Tier 1: Logo & Secondary Tools */}
       <div className="govbh-head border-b border-border/40">

@@ -25,11 +25,11 @@ export function BilingualField({
 }: BilingualFieldProps) {
   const Field: any = multiline ? Textarea : Input;
   return (
-    <div className="space-y-1.5">
-      <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}</Label>
+    <div className="space-y-2">
+      <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{label}</Label>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div>
-          <span className="text-[10px] uppercase font-semibold text-muted-foreground/70">EN</span>
+        <div className="space-y-1">
+          <span className="text-[9px] font-bold uppercase text-muted-foreground/50 tracking-tighter">EN</span>
           <Field
             value={value}
             onChange={(e: any) => onChange(e.target.value)}
@@ -38,8 +38,8 @@ export function BilingualField({
             className="mt-1"
           />
         </div>
-        <div>
-          <span className="text-[10px] uppercase font-semibold text-muted-foreground/70">AR · العربية</span>
+        <div className="space-y-1">
+          <span className="text-[9px] font-bold uppercase text-muted-foreground/50 tracking-tighter">AR · العربية</span>
           <Field
             value={valueAr}
             onChange={(e: any) => onChangeAr(e.target.value)}

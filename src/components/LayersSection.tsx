@@ -135,9 +135,9 @@ export default function LayersSection() {
 
       {/* Layer details modal — modern glassmorphism GIS dashboard */}
       <Dialog open={!!selectedLayer} onOpenChange={(o) => !o && setSelectedLayer(null)}>
-        <DialogContent className="max-w-3xl p-0 overflow-hidden max-h-[92vh] sm:rounded-3xl border border-white/40 bg-white/70 backdrop-blur-2xl shadow-[0_30px_80px_-30px_rgba(0,0,0,0.3)]">
+        <DialogContent className="max-w-3xl p-0 overflow-hidden max-h-[95vh] sm:rounded-3xl border border-border/50 bg-background shadow-[0_30px_80px_-30px_rgba(0,0,0,0.3)]">
           {selectedLayer && (
-            <div className="flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-300">
+            <div className="flex flex-col max-h-[95vh] animate-in fade-in zoom-in-95 duration-300">
               {/* Hero image */}
               <div className="relative w-full aspect-[16/7] bg-muted shrink-0 overflow-hidden">
                 <img
@@ -145,44 +145,45 @@ export default function LayersSection() {
                   alt={L(selectedLayer.title, selectedLayer.title_ar)}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
                   {(selectedLayer.category || selectedLayer.category_ar) && (
-                    <Badge className="mb-2 bg-primary text-primary-foreground border-0">
+                    <Badge className="mb-3 bg-primary/90 text-white border-0 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold">
                       {L(selectedLayer.category || "", selectedLayer.category_ar)}
                     </Badge>
                   )}
-                  <h3 className="font-display text-2xl md:text-3xl font-bold drop-shadow-md">
+                  <h3 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-2">
                     {L(selectedLayer.title, selectedLayer.title_ar)}
                   </h3>
                   {selectedLayer.description && (
-                    <p className="mt-1 text-sm text-white/90 line-clamp-2">
+                    <p className="text-sm md:text-base text-white/80 line-clamp-2 max-w-xl">
                       {L(selectedLayer.description, selectedLayer.description_ar)}
                     </p>
                   )}
                 </div>
               </div>
 
-              {/* Body */}
-              <div className="overflow-y-auto p-6 space-y-6">
+              <div className="overflow-y-auto p-8 space-y-10 custom-scrollbar">
                 {/* Dataset Overview */}
                 {(selectedLayer.detailedDescription || selectedLayer.detailedDescription_ar) && (
                   <section>
-                    <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
-                      <Info size={15} className="text-primary" /> {labels.overview}
+                    <h4 className="flex items-center gap-2.5 text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      {labels.overview}
                     </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                    <p className="text-[15px] text-gray-600 leading-relaxed font-medium">
                       {L(selectedLayer.detailedDescription || "", selectedLayer.detailedDescription_ar)}
                     </p>
                   </section>
                 )}
 
-                {/* Spatial Information / Key Attributes grid */}
+                {/* Spatial Information Grid */}
                 <section>
-                  <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
-                    <LayersIcon size={15} className="text-primary" /> {labels.spatial}
+                  <h4 className="flex items-center gap-2.5 text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    {labels.spatial}
                   </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[
                       { icon: FileType, label: labels.format, value: selectedLayer.dataFormat },
                       { icon: Globe, label: labels.crs, value: selectedLayer.coordinateSystem },
@@ -194,11 +195,13 @@ export default function LayersSection() {
                     ].filter((m) => m.value).map((m, i) => {
                       const Icon = m.icon;
                       return (
-                        <div key={i} className="flex items-start gap-2.5 p-3 rounded-xl bg-white/60 border border-white/50 backdrop-blur-sm">
-                          <Icon size={15} className="text-primary mt-0.5 shrink-0" />
+                        <div key={i} className="group/item flex items-center gap-4 p-4 rounded-2xl bg-gray-50/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all duration-300">
+                          <div className="p-2.5 rounded-xl bg-white border border-gray-100 text-primary shadow-sm group-hover/item:bg-primary group-hover/item:text-white transition-colors">
+                            <Icon size={16} />
+                          </div>
                           <div className="min-w-0">
-                            <div className="text-[10px] uppercase tracking-wide text-muted-foreground font-medium">{m.label}</div>
-                            <div className="text-sm font-medium text-foreground truncate">{m.value}</div>
+                            <div className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-0.5">{m.label}</div>
+                            <div className="text-sm font-bold text-gray-900 truncate">{m.value}</div>
                           </div>
                         </div>
                       );

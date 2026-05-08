@@ -17,6 +17,7 @@ const STYLE_TO_TYPE: Record<string, VisualizationType> = {
   line_smooth: "graph", line_sharp: "graph", gradient_area: "graph", area: "graph",
   bar_vertical: "bar", bar_horizontal: "bar", bar_stacked: "bar", kpi: "bar",
   pie: "chart", donut: "chart",
+  progress_ring: "progress", multi_metric: "multi_metric",
 };
 
 export default function VisualizationPickerModal({ open, onClose, value, onApply }: Props) {

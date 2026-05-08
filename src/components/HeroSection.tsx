@@ -85,14 +85,6 @@ export default function HeroSection() {
                     {subtitle}
                   </p>
                 </div>
-                <div className="mt-8 flex flex-wrap gap-4">
-                   <a href="#services" className="govbh-btn govbh-btn--primary">
-                      {language === "ar" ? "ابدأ الآن" : "Get Started"}
-                   </a>
-                   <a href="#about" className="govbh-btn govbh-btn--outline theme--dark">
-                      {language === "ar" ? "تعرف علينا" : "Learn More"}
-                   </a>
-                </div>
               </div>
             </div>
           </div>

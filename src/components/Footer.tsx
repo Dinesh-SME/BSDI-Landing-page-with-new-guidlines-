@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Globe, Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
-import { useT, useLocalized } from "@/lib/i18n";
 import { useContentStore } from "@/stores/contentStore";
-import bahrain2030 from "@/assets/bahrain-2030.png";
-import igaLogo from "@/assets/iga-logo.png";
+import { useT, useLocalized } from "@/lib/i18n";
 
 export default function Footer() {
   const t = useT();
@@ -14,7 +12,7 @@ export default function Footer() {
     <footer id="footer" className="govbh-footer theme--dark pb-0">
       <div className="container mx-auto px-4">
         <div className="row flex flex-wrap -mx-4">
-          
+
           {/* Contact Column */}
           <div className="col-xl-3 col-lg-3 col-md-6 w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
             <div className="govbh-footer__head govbh-fs-h5 mb-6">{t("footer.contact")}</div>
@@ -76,8 +74,8 @@ export default function Footer() {
             <div className="govbh-footer__body mb-8">
               <form className="govbh-footer__newsletter flex">
                 <div className="govbh-footer__newsletter-input relative flex-1">
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     placeholder={t("footer.emailPlaceholder")}
                     className="w-full bg-white/10 border border-white/20 rounded-l-md px-4 py-2 text-sm focus:outline-none focus:border-accent transition-colors"
                   />
@@ -87,15 +85,15 @@ export default function Footer() {
                 </div>
               </form>
             </div>
-            
+
             <div className="govbh-footer__solcial-widget">
               <div className="govbh-fs-h5 mb-4">{t("footer.followUs")}</div>
               <ul className="flex gap-4">
                 {footer.socialLinks?.map((link, idx) => {
-                  const Icon = link.platform === "Facebook" ? Facebook : 
-                               link.platform === "Twitter" ? Twitter :
-                               link.platform === "Instagram" ? Instagram :
-                               link.platform === "LinkedIn" ? Linkedin : Youtube;
+                  const Icon = link.platform === "Facebook" ? Facebook :
+                    link.platform === "Twitter" ? Twitter :
+                      link.platform === "Instagram" ? Instagram :
+                        link.platform === "LinkedIn" ? Linkedin : Youtube;
                   return (
                     <li key={idx}>
                       <a href={link.href} className="opacity-70 hover:opacity-100 hover:text-accent transition-all">
@@ -110,30 +108,13 @@ export default function Footer() {
 
           {/* Divider */}
           <div className="w-full px-4">
-            <div className="h-[1px] bg-white/10 my-8"></div>
-          </div>
-
-          {/* Footer Logos Section */}
-          <div className="w-full px-4 mb-12">
-            <div className="govbh-footer__logos flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="govbh-footer__logos-col">
-                <img src={igaLogo} alt="IGA Logo" className="h-12 w-auto brightness-0 invert opacity-90" />
-              </div>
-              <div className="govbh-footer__logos-col-services flex items-center gap-8">
-                 <a href="https://www.bahrain.bh" target="_blank" rel="noreferrer" className="opacity-80 hover:opacity-100 transition-opacity">
-                    <span className="text-xl font-bold tracking-tighter">bahrain.bh</span>
-                 </a>
-                 <a href="#" target="_blank" rel="noreferrer" className="opacity-80 hover:opacity-100 transition-opacity">
-                    <img src={bahrain2030} alt="Bahrain 2030" className="h-14 w-auto grayscale brightness-200" />
-                 </a>
-              </div>
-            </div>
+            <div className="h-[1px] bg-white/10 mt-8"></div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Menu & Copyright */}
-      <div className="govbh-footer__menu bg-black/20 py-6">
+      {/* Simplified Copyright Bar (No logos as requested) */}
+      <div className="govbh-footer__menu bg-black/20 py-6 mt-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="govbh-footer__menu-col flex flex-col md:flex-row items-center gap-6">
@@ -152,7 +133,7 @@ export default function Footer() {
               </ul>
             </div>
             <div className="govbh-footer__copyrights text-xs opacity-60">
-              <p>© {new Date().getFullYear()} {L(footer.copyright, footer.copyright_ar)}</p>
+              <p>© {new Date().getFullYear()} {L(footer.copyright || "Information & eGovernment Authority", footer.copyright_ar || "هيئة المعلومات والحكومة الإلكترونية")}</p>
             </div>
           </div>
         </div>
