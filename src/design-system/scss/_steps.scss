@@ -1,0 +1,400 @@
+.govbh-steps {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    &.govbh-steps--number{
+        .govbh-steps__item{
+            &.done{
+                .govbh-steps__item-cricle{
+                    &:after{
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                    span{
+                        color:var(--bh-light);
+                    }
+                }
+                &:hover{
+                    .govbh-steps__item-cricle{
+                        &:after{
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+            .govbh-steps__item-cricle{
+                &:after{
+                    content: "\e182";
+                    font-family: "Phosphor-Bold" !important;
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    background: var(--bh-brand);
+                    color: var(--bh-light);
+                    transform: scale(0.5);
+                    @include transition(0.5s);
+                    opacity: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 28px;
+                    border-radius: 100%;
+                    @media #{$xl}{
+                        font-size: 26px;
+                    }
+                    @media #{$xm}{
+                        font-size: 24px;
+                    }
+                    @media #{$xs}{
+                        font-size: 20px;
+                    }
+                    @media #{$xss}{
+                        font-size: 17px;
+                    }
+                }
+            }
+        }
+    }
+    &.govbh-steps--vertical {
+        flex-direction: column;
+        display: inline-flex;
+        .govbh-steps__item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 50px;
+            @media #{$xm}{
+                gap: 15px;
+                padding-bottom: 35px;
+            }
+            @media #{$xss}{
+                gap: 10px;
+            }
+            &:last-child{
+                padding-bottom: 0px;
+                .govbh-steps__item-progress{
+                    display: none;
+                }
+            }
+            .govbh-steps__item-content{
+                padding-inline-end: 0px;
+                span{
+                    margin-top: 0;
+                    margin-bottom: 2px;
+                }
+            }
+            .govbh-steps__item-progress{
+                width: 4px;
+                top: 70px;
+                left: 30px;
+                height: calc(100% - 75px);
+                @media #{$xl}{
+                    top: 68px;
+                    height: calc(100% - 75px);
+                    left: 28px;
+                }
+                @media #{$xm}{
+                    left: 26px;
+                    top: 60px;
+                    height: calc(100% - 65px);
+                }
+                @media #{$xs}{
+                    left: 23px;
+                    top: 55px;
+                    height: calc(100% - 60px);
+                }
+                @media #{$xss}{
+                    left: 21px;
+                    width: 3px;
+                    top: 50px;
+                    height: calc(100% - 55px);
+                }
+                @media #{$xsss}{
+                    left: 19px;
+                    top: 43px;
+                    height: calc(100% - 47px);
+                }
+            }
+        }
+    }
+    .govbh-steps__item {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        width: 100%;
+        &.done{
+            cursor: pointer;
+            .govbh-steps__item-progress{
+                &:before{
+                    width: 100%;
+                }
+            }
+            .govbh-steps__item-cricle{
+                background-color: var(--bh-brand);
+                img{
+                    filter: brightness(0) invert(1);
+                }
+                span{
+                    color: var(--bh-brand);
+                }
+            }
+            .govbh-steps__item-content{
+                span{
+                    color: var(--bh-secondary);
+                }
+                .govbh-steps__item-content-title{
+                    color: var(--bh-brand);
+                }
+            }
+        }
+        &.active{
+            cursor: pointer;
+            .govbh-steps__item-cricle{
+                background-color: var(--bh-border-accent);
+                box-shadow: 0 0px 0px 4px var(--bh-focus);
+                @media #{$xs}{
+                    box-shadow: 0 0px 0px 3px var(--bh-focus);
+                }
+                img{
+                    filter: brightness(0) invert(1);
+                }
+                span{
+                    color: var(--bh-light);
+                }
+            }
+            .govbh-steps__item-content{
+                span{
+                    color: var(--bh-secondary);
+                }
+                .govbh-steps__item-content-title{
+                    color: var(--bh-brand);
+                }
+            }
+        }
+        .govbh-steps__item-progress {
+            position: absolute;
+            overflow: hidden;
+            top: 30px;
+            left: 75px;
+            height: 4px;
+            width: calc(100% - 85px);
+            background:var(--bh-border-tertiary);
+            @media #{$xl}{
+                left: 68px;
+                width: calc(100% - 75px);
+                top: 28px;
+            }
+            @media #{$xm}{
+                top: 26px;
+                left: 60px;
+                width: calc(100% - 65px);
+            }
+            @media #{$xs}{
+                top: 23px;
+                left: 55px;
+                width: calc(100% - 60px);
+            }
+            @media #{$xss}{
+                top: 21px;
+                height: 3px;
+                left: 50px;
+                width: calc(100% - 55px);
+            }
+            @media #{$xsss}{
+                top: 19px;
+                left: 43px;
+                width: calc(100% - 47px);
+            }
+            &:before{
+                content: "";
+                position: absolute;
+                top: 0;
+                width: 0%;
+                height: 100%;
+                background-color: var(--bh-brand);
+                @include transition(0.5s);
+            }
+        }
+        .govbh-steps__item-cricle {
+            height: 64px;
+            width: 64px;
+            min-width: 64px;
+            background: var(--bh-border-tertiary);
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            position: relative;
+            overflow:hidden;
+            z-index: 1;
+            @include transition(0.5s);
+            @media #{$xl}{
+                height: 60px;
+                width: 60px;
+                min-width: 60px;
+                padding: 5px;
+            }
+            @media #{$xm}{
+                height: 55px;
+                width: 55px;
+                min-width: 55px;
+            }
+            @media #{$xs}{
+                height: 50px;
+                width: 50px;
+                min-width: 50px;
+            }
+            @media #{$xss}{
+                height: 45px;
+                width: 45px;
+                min-width: 45px;
+            }
+            @media #{$xsss}{
+                height: 40px;
+                width: 40px;
+                min-width: 40px;
+            }
+            img{
+                max-width: 32px;
+                @media #{$xs}{
+                    max-width: 28px;
+                }
+                @media #{$xss}{
+                    max-width: 25px;
+                }
+            }
+            span{
+                font-size: 26px;
+                font-weight: var(--bh-fw-bold);
+                color: var(--bh-tertiary);
+                text-decoration: none;
+                @media #{$xl}{
+                    font-size: 24px;
+                }
+                @media #{$xm}{
+                    font-size: 20px;
+                }
+                @media #{$xss}{
+                    font-size: 17px;
+                }
+            }
+        }
+        a{
+            text-decoration: none;
+        }
+        .govbh-steps__item-content{
+            padding-inline-end: 20px;
+            span{
+                font-size: var(--bh-fs-p-s);
+                font-weight: var(--bh-fw-bold);
+                color: var(--bh-tertiary);
+                margin-bottom: 5px;
+                margin-top: 10px;
+                @media #{$xs}{
+                    margin-top: 5px;
+                }
+            }
+            .govbh-steps__item-content-title{
+                font-size: var(--bh-fs-p-l);
+                font-weight: var(--bh-fw-bold);
+                color: var(--bh-tertiary);
+            }
+        }
+        &:hover{
+            &.done{
+                .govbh-steps__item-cricle{
+                    background-color: var(--bh-accent);
+                }
+            }
+        }
+    }
+}
+.govbh-mobile-steps {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--bh-border-radius-xs);
+  background-color: var(--bh-bg-secondary);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+    @media #{$xss}{
+        padding: 12px;
+        gap: 10px;
+    }
+  .govbh-mobile-steps__text{
+    h3{
+        color: var(--bh-brand);
+        margin:0 0 4px;
+        font-size: var(--bh-fs-h5);
+        span {
+            display: block;
+            font-size: var(--bh-fs-p-xs);
+            color: var(--bh-secondary);
+        }
+    }
+    p{
+        margin: 0;
+        font-size: var(--bh-fs-p-m);
+    }
+  }
+  .pie-container{
+    position: relative;
+    .pie{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+    }
+  }
+}
+//Pie Chart with Percentage Styles
+// @property --p{
+// syntax: '<number>';
+//     inherits: true;
+//     initial-value: 1;
+// }
+
+.pie {
+--p:20;      /* the percentage */
+--b:5px;    /* the thickness */
+--c:darkred; /* the color */
+--w:75px;   /* the size*/
+width:var(--w);
+aspect-ratio:1/1;
+position:relative;
+margin:5px;
+}
+.pie:before,
+.pie:after {
+content:"";
+position:absolute;
+border-radius:50%;
+}
+.pie:before {
+inset:0;
+background:radial-gradient(farthest-side,#C63B2B 98%,#0000) top/var(--b) var(--b) no-repeat,
+conic-gradient(#C63B2B calc(var(--p)*1%),#0000 0);
+-webkit-mask: radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(99% - var(--b)), #000 calc(100% - var(--b)));
+}
+.pie:after {
+inset:calc(50% - var(--b)/2);
+background:#C63B2B;
+transform:rotate(calc(var(--p)*3.6deg - 90deg)) translate(calc(var(--w)/2 - 50%));
+}
+.animate {
+animation:p 1s .5s both;
+}
+.no-round:before {
+background-size:0 0,auto;
+}
+.no-round:after {
+content:none;
+}
+@keyframes p{
+from{--p:0;}
+}

@@ -1,0 +1,259 @@
+:root.govbh-darkmode{
+    --bh-primary: #FFFFFF;
+    --bh-brand: #FFFFFF;
+    --bh-link: #FFFFFF;
+    --bh-secondary:#F7F7F7;
+    --bh-tertiary:#F1F1F1;
+    --bh-accent: #FFFFFF;
+    --bh-linkinverse: #222222;
+    --bh-linkinverse-secondary: #F1F1F1;
+    --bh-error-star: #FFF7F6;
+    --bh-bg-primary:#333333;
+    --bh-bg-secondary:#444444;
+    --bh-bg-tertiary:#555555;
+    --bh-bg-brand: #222222;
+    --bh-bg-brand-accent: #FFFFFF;
+    --bh-bg-light-brand: #555555; 
+    --bh-bg-accent: #C63B2B; 
+    --bh-bg-light:#C63B2B;
+    --bh-bg-inverse-accent: #C63B2B;
+    --bh-bg-white:#FFFFFF;
+    --bh-bg-light-grey: #555555;
+    --bh-bg-dark-inverse:#222222;
+    --bh-bg-primary-rgba:25,25,25;
+    --bh-secondary-rgb: 255, 255, 255;
+    --bh-border-tertiary:#555555;
+    --bh-border-secondary:#555555;
+    --bh-bg-light-brand1:#555555;
+    --bh-bg-tertiary1:#CBCBCB;
+    .govbh-logo-light{
+        display: none;
+    }
+    .govbh-logo-dark{
+        display: block;
+    }
+    .govbh-card-horizontal--border img{
+        background-color: var(--bh-bg-white);
+    }
+    
+    .govbh-fullwidthslider .govbh-fullwidthslider__content .govbh-fullwidthslider__playpause.pause:hover{
+        background-color: var(--bh-accent-hover);
+    }
+    .govbh-datatable .govbh-datatable__table thead tr th, .govbh-datatable table thead tr th,table.table.dataTable.fixedHeader-floating > :not(caption) > * > *{
+        background: var(--bh-bg-brand);
+    }
+    .govbh-card:hover .govbh-card__foot .govbh-btn.govbh-btn--outline,.govbh-card:has(a:focus-visible) .govbh-card__foot .govbh-btn.govbh-btn--outline,.govbh-accessibility-widget .govbh-accessibility-widget__pop .govbh-accessibility-widget__items ul li.active button i{
+        background-color: var(--bh-bg-accent);
+        border: 1px solid var(--bh-bg-accent);
+    }
+    .govbh-card .govbh-card__head .govbh-card__date .govbh-card__status--completed,.govbh-card .govbh-card__head .govbh-card__date .govbh-card__status--progress,.govbh-card .govbh-card__head .govbh-card__date .govbh-card__status--awarded,.govbh-block-status.govbh-block-status--completed span{
+        color:var(--bh-primary);
+    }
+    .form-floating > .form-control:disabled ~ label, .form-floating > :disabled ~ label,.ms-options-wrap .ms-options .ms-search input,.select2-container .select2-dropdown .select2-search .select2-search__field{
+        color:var(--bh-secondary-rgb);
+    }
+    .govbh-map .govbh-map__wrapper .govbh-map__filter .govbh-map__filter-form .govbh-map__filter-input button:hover{
+        color: var(--bh-bg-inverse-accent);
+    }
+    .govbh-section.bg-light-linear::before {
+        background: #333333;
+        background: -webkit-linear-gradient(180deg, rgba(51, 51, 51, 1) 0%, rgba(0, 0, 0, 0.85) 100%);
+        background: -moz-linear-gradient(180deg, rgba(51, 51, 51, 1) 0%, rgba(0, 0, 0, 0.85) 100%);
+        background: linear-gradient(180deg, rgba(51, 51, 51, 1) 0%, rgba(0, 0, 0, 0.85) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#333333", endColorstr="#000000", GradientType=0);
+    }
+    .govbh-image-block::before,.ms-options-wrap .ms-options .ms-search input,.select2-container .select2-dropdown .select2-search .select2-search__field{
+        background-color: var(--bh-bg-primary);
+    }
+    .govbh-card .govbh-card__head .govbh-card__head-icon img,.govbh-statistic .govbh-statistic__icon img{
+        filter: brightness(0) invert(1);
+    }
+    .govbh-card,.govbh-floatinglist-vertical ul li .govbh-floatinglist__pop,.govbh-floatinglist-vertical,.govbh-scrollToTopBtn,.govbh-head__textsize .govbh-head__textsize-body,.ms-options-wrap .ms-options,.govbh-accessibility-widget .govbh-accessibility-widget__pop{
+        box-shadow: 0px 0 10px -3px rgba(255,255,255,.35);
+    }
+   
+    .govbh-tabs.theme--dark .govbh-tabs__head .govbh-tabs__head-tabs::before{
+        background: rgba(#ffffff,0.2);
+    }
+    .govbh-tabs.theme--dark .govbh-tabs__head .govbh-tabs__head-tabs .govbh-tabs__list::before {
+        background: rgba(255,255,255,.03);
+    }
+    .govbh-parallax .govbh-content-block.bg--light{
+        background: rgba(25,25,25,.9);
+    }
+    .Zebra_Tooltip .Zebra_Tooltip_Arrow.Zebra_Tooltip_Arrow_Bottom div{
+        border-color: #C63B2B rgba(0,0,0,0) rgba(0,0,0,0);
+    }
+    .Zebra_Tooltip .Zebra_Tooltip_Arrow.Zebra_Tooltip_Arrow_Top div{
+        border-color: rgba(0,0,0,0) rgba(0,0,0,0) #C63B2B;
+    }
+    .govbh-modal,.govbh-popup-model-slider,.fancybox__backdrop{
+        background: rgba(0, 0, 0, 0.8);
+    }
+    .govbh-head__darkmode.active::before {
+        background-color: var(--bh-primary);
+    }
+    .govbh-footer .govbh-footer__menu{
+        background: rgba(0,0,0,.15);
+    }
+    .govbh-section.bg-brand-overlay::before{
+        background: rgba(0,0,0,.85);
+    }
+    .Zebra_Tooltip .Zebra_Tooltip_Message,.govbh-general__navigation-arrow:hover,.govbh-pagination ul li a:hover,.govbh-pagination ul li.govbh-pagination__current,.govbh-user-rating .govbh-user-rating__head .govbh-btn[data-toggled="1"],.govbh-popup-model-slider .govbh-popup-model-slider-next:hover,.govbh-popup-model-slider .govbh-popup-model-slider-prev:hover,.govbh-fullwidthslider .govbh-fullwidthslider__content .govbh-fullwidthslider__playpause.pause{
+        background-color: var(--bh-bg-accent);
+    }
+    .govbh-user-rating .govbh-user-rating__head .govbh-btn[data-toggled="1"],.govbh-popup-model-slider .govbh-popup-model-slider-next:hover,.govbh-popup-model-slider .govbh-popup-model-slider-prev:hover,.govbh-general__navigation-arrow:hover,.govbh-pagination ul li:hover,.govbh-pagination ul li.govbh-pagination__current{
+        border: 1px solid var(--bh-bg-accent);
+    }
+    .govbh-head__textsize .govbh-head__textsize-body ul li{
+        button i:hover{
+            background-color: var(--bh-bg-accent);
+            border: 1px solid var(--bh-bg-accent);
+        }
+        &.active button i{
+            background-color: var(--bh-bg-accent);
+            border: 1px solid var(--bh-bg-accent);
+        }
+    }
+    .govbh-btn.govbh-btn--outline:hover,.govbh-accessibility-widget .govbh-accessibility-widget__pop .govbh-accessibility-widget__items ul li:hover button i{
+        background-color: var(--bh-bg-accent);
+        border: 1px solid var(--bh-bg-accent);
+    }
+    .govbh-btn.govbh-btn--primary{
+        border: 1px solid var(--bh-bg-light);
+        background-color: var(--bh-bg-light);
+        &:hover{
+            background-color: var(--bh-bg-accent);
+            border: 1px solid var(--bh-bg-accent);
+        }
+    }
+    .govbh-btn.govbh-btn--secondary{
+        background-color: var(--bh-bg-accent);
+        border: 1px solid var(--bh-bg-accent);
+        &:hover{
+            background-color: var(--bh-accent-hover);
+        }
+    }
+    .ms-options-wrap .ms-options .ms-search input{
+        border-bottom: 1px solid var(--bh-bg-tertiary);
+    }
+    .govbh-btn.govbh-btn--outline,.form-check .form-check__group .form-check__item input[type="radio"]::after,table.table.dataTable > :not(caption) > * > *,.dt-column-title,.govbh-search-card .govbh-form-control--select,.govbh-search-card .form-floating .form-control,.form-group .form-control,.govbh-form-control--select{
+        background-color: transparent;
+    }
+    .govbh-search-card .form-floating > .form-control:not(:placeholder-shown) ~ label,.govbh-search-card .form-floating.govbh-form-control--label-top > label,.ms-options-wrap button::before {
+        background: var(--bh-bg-secondary);
+    }
+    .govbh-datatable .govbh-datatable__table tbody tr:hover td, .govbh-datatable table tbody tr:hover td {
+        background-color: var(--bh-bg-tertiary);
+    }
+    .govbh-card.govbh-card--with-image .govbh-card__head .govbh-card__head-image .govbh-card__head-thumb, .govbh-card.govbh-card--card-profile .govbh-card__head .govbh-card__head-image .govbh-card__head-thumb{
+        background: rgba(25,25,25,.9);
+    }
+    .form-check .form-check__group .form-check__item input[type="radio"]:checked:after {
+        background: var(--bh-primary);
+    }
+    .form-check.theme--dark .form-check__group .form-check__item input[type="radio"]{
+        border: 1px solid var(--bh-primary);
+    }
+    .govbh-title-left-border{
+        border-left: 5px solid var(--bh-border-accent);
+    }
+    .govbh-history-timeline .govbh-history-timeline__wrapper .govbh-history-timeline__item li,.govbh-history-timeline .govbh-history-timeline__wrapper .govbh-history-timeline__item li::before{
+        background-color: var(--bh-bg-tertiary);
+    }
+    .govbh-blockquote.theme--dark .govbh-blockquote__content{
+        border-color:var(--bh-bg-light-brand);
+    }
+    .govbh-progress .govbh-progress__container .govbh-progress__bar{
+        background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.15) 25%, #0000 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, #0000 75%, transparent);
+    }
+    .govbh-datatable .govbh-datatable__table tbody tr:nth-child(2n) td, .govbh-datatable table tbody tr:nth-child(2n) td{
+        background-color: var(--bh-bg-secondary);
+    }
+    .govbh-history-timeline .govbh-history-timeline__wrapper .govbh-history-timeline__item li:hover,.govbh-history-timeline .govbh-history-timeline__wrapper .govbh-history-timeline__item li:hover ::before {
+        background-color: var(--bh-linkinverse);
+    }
+    *::-moz-selection {
+        background: #000;
+        color: var(--bh-light);
+        text-shadow: none;
+    }
+    ::-moz-selection {
+        background: #000;
+        color: var(--bh-light);
+        text-shadow: none;
+    }
+    ::selection {
+        background: #000;        
+        color: var(--bh-light);
+        text-shadow: none;
+    }
+    *::placeholder {
+        color: rgba(#F7F7F7, .5);
+    }
+    input::-webkit-input-placeholder {  
+        color: rgba(#F7F7F7, .5);
+    }
+    input::-moz-input-placeholder { 
+        color: rgba(#F7F7F7, .5);
+    }
+    input::placeholder {
+        color: rgba(#F7F7F7, .5);
+    }
+    body{
+        @include placeholder {
+            color: rgba(#F7F7F7, .5);
+        }
+    }
+    .govbh-card:has(a:focus-visible){
+        outline: 3px solid var(--bh-focus);
+    }
+    .govbh-card{
+        &:focus-visible{
+            outline: 3px solid var(--bh-focus);
+        }
+    }
+    .govbh-popup-model-slider .govbh-popup-model-slider-next,.govbh-popup-model-slider .govbh-popup-model-slider-prev{
+        @media #{$xm}{
+            background-color: var(--bh-bg-brand);
+        }
+    }
+    .govbh-scrollToTopBtn {
+        &:hover{
+            background-color: var(--bh-bg-accent);
+            border: 1px solid var(--bh-bg-accent);
+        }
+        &:focus-visible {
+            background-color: var(--bh-bg-accent);
+        }
+    }
+    .govbh-card-horizontal img,.govbh-contact-cards .govbh-contact-cards__item .govbh-contact-cards__head img{
+        padding: 4px;
+        border-radius: var(--bh-border-radius-xs);
+        background-color: var(--bh-bg-white);
+        border: 1px solid var(--bh-border-secondary);
+    }
+    .govbh-contact-cards .govbh-contact-cards__item .govbh-contact-cards__head img{
+        padding: 10px;
+    }
+    .govbh-card-horizontal--border img{
+        padding: 0px;
+    }
+    .daterangepicker .calendar-table th, .daterangepicker .calendar-table td{
+        color: var(--bh-linkinverse);
+    }
+    .daterangepicker .calendar-table th, .daterangepicker .calendar-table td{
+        &.weekend{
+            color: var(--bh-bg-tertiary1);
+        }
+    }
+    .daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date{
+        color: var(--bh-bg-tertiary1);
+    }
+    .cancelBtn.btn.btn-sm.btn-default{
+        color: var(--bh-bg-inverse-accent);
+    }
+    .govbh-user-rating .govbh-user-rating__body{
+        border-top: 1px solid var(--bh-border-primary);
+    }
+}

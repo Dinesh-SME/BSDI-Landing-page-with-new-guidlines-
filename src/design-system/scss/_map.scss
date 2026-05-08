@@ -1,0 +1,449 @@
+.govbh-map{
+    position: relative;
+    border-radius: var(--bh-border-radius-xs);
+    overflow: hidden;
+    z-index: 0;
+    .govbh-map__container{
+        display: none;
+    }
+    .govbh-map__wrapper {
+        display: flex;
+        aspect-ratio: 16/7;
+        max-height: 600px;
+        width: 100%;
+        background-color: var(--bh-bg-primary);
+        border: 1px solid var(--bh-border-secondary);
+        @media #{$xm}{
+            aspect-ratio: 16/11;
+        }
+        @media #{$xs}{
+            aspect-ratio: 16/14;
+        }
+        @media #{$xsss}{
+            aspect-ratio: 16/20;
+        }
+        .govbh-map__filter {
+            min-width: 340px;
+            position: relative;
+            z-index: 2;
+            @media #{$xl}{
+                min-width: 300px;
+            }
+            @media #{$xm}{
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 300px;
+                background: var(--bh-bg-primary);
+                z-index: 2;
+                box-shadow: 0 0px 8px 2px rgba(0, 0, 0, 0.15);
+                transform: translateX(-100%);
+                @include transition(0.5s);
+                &.active{
+                    transform: translateX(0);
+                }
+            }
+            @media #{$xsss}{
+                width: 65%;
+            }
+
+            .govbh-map__filter-close {
+                position: absolute;
+                top: 7px;
+                right: -35px;
+                height: 30px;
+                width: 30px;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                border-radius: 100%;
+                background: var(--bh-bg-primary);
+                color: var(--bh-brand);
+                cursor: pointer;
+                font-size: 15px;
+                @include transition(0.3s);
+                box-shadow: 0px 0px 4px var(--bh-brand);
+                @media #{$xm}{
+                    display: flex;
+                }
+                &:hover{
+                    background-color: var(--bh-accent);
+                    color: var(--bh-light);
+                }
+            }
+            ul{
+                padding-top: 88px;
+                overflow-y: auto;
+                height: 100%;
+                li{
+                    position: relative;
+                    &.active{
+                        button{
+                        background-color: var(--bh-bg-secondary);
+                        color: var(--bh-accent);
+                        }
+                    }
+                    .visually-hidden{
+                        color: var(--bh-secondary);
+                        h3{
+                            color: var(--bh-secondary);
+                        }
+                    }
+                    span{
+                        position: relative;
+                        width: 8px;
+                        min-width: 8px;
+                        height: 8px;
+                        border-radius: 100%;
+                        background-color: var(--bh-success);
+                        @media #{$xm}{
+                            width: 6px;
+                            min-width: 6px;
+                            height: 6px;
+                        }
+                        &.govbh-map__filter--closed{
+                            background-color: var(--bh-bg-quartenary);
+                        }
+                    }
+                    button{
+                        color: var(--bh-primary);
+                        font-size: var(--bh-fs-p-l);
+                        font-weight: var(--bh-fw-bold);
+                        border: none;
+                        border-bottom: 1px solid var(--bh-border-secondary);
+                        padding: 15px;
+                        cursor: pointer;
+                        width: 100%;
+                        text-decoration: none;
+                        box-shadow: none;
+                        background-color: transparent;
+                        @include transition(0.3s);
+                        text-align: left;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 10px;
+                        &:focus-visible{
+                            box-shadow: 0 0px 0px 3px var(--bh-focus) inset;
+                            border-bottom: 1px solid transparent;
+                        }
+                        &:hover{
+                            background-color: var(--bh-bg-secondary);
+                            color: var(--bh-accent);
+                        }
+                    }
+                    &:last-child{
+                        border-bottom: 0px;
+                    }
+                }
+            }
+            .govbh-map__filter-form{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: var(--bh-bg-primary);
+                z-index: 1;
+                h3{
+                    color:var(--bh-secondary);
+                }
+                .govbh-map__filter-input {
+                    position: relative;
+                    margin: 20px 15px;
+                    input{
+                        border: 1px solid var(--bh-border-primary);
+                        color: var(--bh-secondary);
+                        background: var(--bh-bg-primary);
+                        width: calc(100% - 63px);
+                        min-width: 150px;
+                        height: 48px;
+                        min-height: auto;
+                        padding: 10px 15px;
+                        font-size: var(--bh-fs-p-m);
+                        line-height: 1.2;
+                        font-weight: var(--bh-fw-regular);
+                        box-shadow: none;
+                        outline: none;
+                        border-radius: var(--bh-border-radius-xs);
+                        &:focus-visible{
+                            box-shadow: 0 0px 0px 3px var(--bh-focus);
+                        }
+                        @media #{$xm}{
+                            width: 100%;
+                        }
+                        @include placeholder {
+                            color: var(--bh-tertiary);
+                        }
+                    }
+                    button {
+                        position: absolute;
+                        right: 0;
+                        height: 100%;
+                        width: 55px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        top: 0;
+                        background: var(--bh-bg-inverse-accent);
+                        border: none;
+                        box-shadow: none;
+                        font-size: 20px;
+                        color: var(--bh-primary-inverse);
+                        border-radius: var(--bh-border-radius-xs);
+                        @include transition(0.3s);
+                        @media #{$xm}{
+                            display: none;
+                        }
+                        &:focus-visible{
+                            box-shadow: 0 0px 0px 3px var(--bh-focus);
+                        }
+                        &:hover{
+                            background-color: var(--bh-accent);
+                            color: var(--bh-primary-inverse);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .govbh-map__output{
+        position: relative;
+        font-family: var(--bh-ff-primary);
+        width: 100%;
+        z-index: 1;
+        a{
+            color: var(--bh-brand);
+        }
+        .govbh-map__output-timelist {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 10px;
+            li{
+                position: relative;
+                color: var(--bh-secondary);
+                font-size: var(--bh-fs-p-xs);
+                padding-inline-start: 12px;
+                &.govbh-map__filter--closed{
+                    &:before{
+                        background-color: var(--bh-bg-quartenary);
+                    }
+                }
+                &:before{
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    width: 8px;
+                    min-width: 8px;
+                    height: 8px;
+                    border-radius: 100%;
+                    background-color: var(--bh-success);
+                    @media #{$xl}{
+                        width: 6px;
+                        min-width: 6px;
+                        height: 6px;
+                    }
+                    @media #{$xm}{
+                        top: 5px;
+                    }
+                }
+            }
+        }
+        .leaflet-control-container{
+            .leaflet-bottom{
+                display: none;
+            }
+            .leaflet-left{
+                right: 0;
+                left: auto;
+                .leaflet-control-zoom{
+                    margin-right: 10px;
+                    a{
+                        background-color: var(--bh-bg-primary);
+                        color: var(--bh-secondary);
+                        &:hover{
+                            color: var(--bh-accent);
+                        }
+                    }
+                }
+            }
+        }
+        .leaflet-popup{
+            margin-bottom: 40px;
+            .leaflet-popup-tip{
+                background-color: var(--bh-bg-primary);
+            }
+            .leaflet-popup-content-wrapper{
+                border-radius: var(--bh-border-radius-xs);
+                background-color: var(--bh-bg-primary);
+                padding-inline-end: 15px;
+                .leaflet-popup-content{
+                    margin: 15px;
+                    @media #{$xs}{
+                        max-width: 250px;
+                    }
+                }
+                .govbh-map__callout-title{
+                    color: var(--bh-accent);
+                    font-size: var(--bh-fs-p-xl);
+                    font-weight: var(--bh-fw-bold);
+                    text-wrap: balance;
+                    text-wrap: pretty;
+                    span{
+                        position: relative;
+                        color:var(--bh-secondary);
+                        font-size: var(--bh-fs-p-xs);
+                        font-weight: var(--bh-fw-regular);
+                        padding-inline-start: 12px;
+                        margin-inline-start: 10px;
+                        vertical-align: middle;
+                        @media #{$xl}{
+                            padding-inline-start: 10px;
+                        }
+                        &.govbh-map__filter--closed{
+                            &:before{
+                                background-color: var(--bh-bg-quartenary);
+                            }
+                        }
+                        &:before{
+                            content: "";
+                            position: absolute;
+                            left: 0;
+                            top: 4px;
+                            width: 8px;
+                            min-width: 8px;
+                            height: 8px;
+                            border-radius: 100%;
+                            background-color: var(--bh-success);
+                            @media #{$xl}{
+                                width: 6px;
+                                min-width: 6px;
+                                height: 6px;
+                            }
+                        }
+                    }
+                }
+                .govbh-map__callout-address{
+                    margin: 10px 0;
+                    p{
+                        margin: 0;
+                        font-size: var(--bh-fs-p-s);
+                        color: var(--bh-secondary);
+                    }
+                }
+                .govbh-map__callout-timing {
+                    display: flex;
+                    gap: 5px;
+                    margin-bottom: 10px;
+                    i{
+                        color: var(--bh-brand);
+                        margin-top: 2px;
+                    }
+                    .govbh-map__callout-timing-col{
+                        font-size: var(--bh-fs-p-s);
+                        color: var(--bh-secondary);
+                    }
+                }
+                .govbh-map__callout-direction{
+                    a{
+                        color: var(--bh-brand);
+                        text-decoration: underline;
+                        font-size: var(--bh-fs-p-xs);
+                        position: relative;
+                        &[target="_blank"]{
+                            &:after{
+                                content: "\e5de";
+                                font-family: "Phosphor" !important;
+                                position: absolute;
+                                color: var(--bh-brand);
+                                font-size: 15px;
+                                padding-inline-start: 3px;
+                                @include transition(0.3s);
+                                @media #{$xl}{
+                                    font-size: 13px;
+                                }
+                                @media #{$xss}{
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                        i{
+                            font-size: 16px;
+                            vertical-align: text-bottom;
+                            padding-inline-end: 3px;
+                            @media #{$xl}{
+                                font-size: 14px;
+                            }
+                            @media #{$xss}{
+                                font-size: 12px;
+                            }
+                        }
+                        &:hover{
+                            color: var(--bh-accent);
+                            &:after{
+                                color: var(--bh-accent);
+                            }
+                        }
+                    }
+                }
+                .govbh-map__callout-social{
+                    position: relative;
+                    margin: 15px 0px 10px;
+                    @media #{$xs}{
+                        margin: 10px 0px 10px;
+                    }
+                    a{
+                        font-size: var(--bh-fs-p-m);
+                        font-weight: var(--bh-fw-bold);
+                        color: var(--bh-brand);
+                        padding: 4px 0;
+                        display: block;
+                        padding-inline-start: 22px;
+                        position: relative;
+                        &:hover{
+                            color: var(--bh-accent);
+                        }
+                        i{
+                            position: absolute;
+                            left: 0;
+                            top: 6px;
+                        }
+                    }
+                }
+            }
+            .leaflet-popup-close-button{
+                top: 5px;
+                right: 8px;
+                position: absolute;
+                border: none;
+                // box-shadow: none;
+                background: transparent;
+                &:before{
+                    content: "\e4f6";
+                    font-family: "Phosphor" !important;
+                    font-size: 17px;
+                    color: var(--bh-tertiary);
+                    @include transition(0.3s);
+                }
+                span{
+                    display: none;
+                }
+            }
+        }
+    }
+}
+.leaflet-container .leaflet-marker-pane img{
+    &:focus-visible,&:focus{
+        box-shadow: 0 0px 0px 3px var(--bh-focus)!important;
+        border-radius: var(--bh-border-radius-xss)!important;     
+        outline: none;
+    }
+}

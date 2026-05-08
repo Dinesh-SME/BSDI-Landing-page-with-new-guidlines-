@@ -1,0 +1,10 @@
+@media print {
+    header,footer,.govbh-user-rating,.govbh-floatinglist-vertical,.govbh-scrollToTopBtn{
+        display: none!important;
+    }
+    .swiper-wrapper{
+        display: grid!important;
+        grid-template-columns: 1fr 1fr 1fr !important;
+        max-width: 100%!important;
+    }
+}

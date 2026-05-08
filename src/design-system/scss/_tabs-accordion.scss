@@ -1,0 +1,496 @@
+//Tabs css starts
+.govbh-tabs{
+  position: relative;
+  overflow: hidden;
+  &.govbh-tabs--vertical{
+    display: flex;
+    gap: 0 40px;
+    @media #{$xm}{
+      display: block;
+    }    
+    .govbh-tabs__head {
+      max-width: 300px;
+      min-width: 150px;
+      width: 285px;
+      height: auto !important;
+      @media #{$xl}{
+        max-width: 200px;
+      }
+      @media #{$xm}{
+        max-width: 100%;
+        width: 100%;
+      }
+      &:after{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 4px;
+        background: #34587d;
+        @media #{$xm}{
+          content: none;
+        }
+      }
+      .govbh-tabs__head-tabs {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: end;
+        @media #{$xm}{
+          flex-wrap: nowrap;
+          flex-direction: inherit;
+          align-items: center;
+        }
+        &:before{
+          content: none;
+          @media #{$xm}{
+            content: "";
+          }
+        }
+        .govbh-tabs__list{
+          white-space:normal;
+          text-align: right;
+          padding-inline-start: 0;
+          @media #{$xm}{
+            padding-inline-start: 20px;
+            white-space:nowrap;
+            text-align: center;
+          }
+          @media #{$xs}{
+            padding: 15px;
+          }
+          
+          &:before{
+            height: 100%;
+            width: 4px;
+            @media #{$xm}{
+              height: 4px;
+              width: 100%;
+            }
+          }
+          &:after{
+            bottom: 0;
+            height: 0%;
+            width: 4px;
+            @media #{$xm}{
+              height: 4px;
+              width: 0%;
+            }
+          }
+          &.active{
+            color: var(--bh-brand);
+            &:after{
+              height: 100%;
+              width: 4px;
+              @media #{$xm}{
+                height: 4px;
+                width: 100%;
+              }
+            }
+          }
+          &:hover{
+            &:after{
+              right: 0;
+              left: auto;
+              bottom: auto;
+              top: 0;
+              width: 4px;
+              height: 100%;
+              @media #{$xm}{
+                height: 4px;
+                width: 100%;
+                right: auto;
+                left: 0;
+                bottom: 0; 
+                top: auto;
+              }
+            }
+          }
+          
+        }
+      }
+    }
+    .govbh-tabs__content {
+      width: 100%;
+    }
+  }
+  &.theme--dark{
+    .govbh-tabs__head .govbh-tabs__head-tabs {
+      &:before{
+        background: #34587D;
+      }
+      .govbh-tabs__list::before{
+        background: #34587D;
+        opacity: 1;
+      }
+    }
+    .govbh-tabs__head {
+      .govbh-tabs__head-tabs{
+        // &:before{
+        //   content: none;
+        //   @media #{$xm}{
+        //     content: "";
+        //   }
+        // }
+        .govbh-tabs__list{
+          color: var(--bh-inverse);
+          &:hover{
+            color: var(--bh-light);
+          }
+          &:before{
+            opacity: 1;
+          }
+          &.active{
+            color: var(--bh-light);
+          }
+        }
+      }
+    }
+  }
+  .govbh-tabs__head {
+    position: relative;
+    overflow:hidden;
+    .govbh-tabs__head-tabs{
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      @media #{$xm}{
+        overflow-x: scroll;
+      }
+      &.govbh-tabs__head-tabs--border-dark{
+        &:before{
+          background: #E7E7E7;
+        }
+        .govbh-tabs__list::before{
+          background: #E7E7E7;
+        }
+      }
+      &:before{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width:100%;
+        height: 4px;
+        background: var(--bh-bg-secondary);
+        @include transition(0.4s);
+        @media #{$xs}{
+          height: 3px;
+        }
+      }
+      .govbh-tabs__list{
+        position: relative;
+        font-size: var(--bh-fs-p-xl);
+        font-weight: var(--bh-fw-bold);
+        color: var(--bh-secondary);
+        white-space: nowrap;
+        cursor: pointer;
+        padding: 20px;
+        background:transparent;
+        border:none;
+        box-shadow: none;
+        @include transition(0.3s);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap:5px;
+        @media #{$xs}{
+          padding: 15px;
+        }
+        &:focus-visible{
+          outline: none;
+          box-shadow: 0 0px 0px 3px var(--bh-focus) inset;
+          border-radius: var(--bh-border-radius-xs);
+        }
+        .govbh-tabs__list-item {
+          margin: 0;
+          font-size: var(--bh-fs-p-xl);
+          font-weight: var(--bh-fw-bold);
+        }
+        // .govbh-tabs__list-pills{
+        //   font-size: var(--bh-fs-p-xxs);
+        //   font-weight: var(--bh-fw-bold);
+        //   color: var(--bh-light);
+        //   padding:2px 4px;
+        //   border-radius:var(--bh-border-radius-xs);
+        //   &.--warning{
+        //     background-color: var(--bh-warning);
+        //   }
+        //   &.--info{
+        //     background-color: var(--bh-info);
+        //   }
+        //   &.--success{
+        //     background-color: var(--bh-success);
+        //   }
+        //   &.--error{
+        //     background-color: var(--bh-error);
+        //   }
+        // }
+        &:before{
+          content: "";
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width:100%;
+          height: 4px;
+          background: var(--bh-bg-secondary);
+          @include transition(0.4s);
+          @media #{$xs}{
+            height: 3px;
+          }
+        }
+        &:after{
+          content: "";
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width:0%;
+          height: 4px;
+          background: var(--bh-bg-tertiary);
+          @include transition(0.4s);
+          @media #{$xs}{
+            height: 3px;
+          }
+        }
+        &.active{
+          color: var(--bh-brand);
+          &:after{
+            width: 100%;
+            background: var(--bh-border-accent);
+          }
+        }
+        &:hover{
+          color: var(--bh-brand);
+          &:after{
+            right: auto;
+            left: 0;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .govbh-tabs__content{
+    padding: 20px 5px;
+    position: relative;
+    overflow: hidden;
+    .tab-pane{
+      &.active{
+        display: block;
+      }
+      display: none;
+    }
+  }
+}
+//Tabs css ends
+//Accordion css starts
+.govbh-accordion{
+  position: relative;
+  overflow:hidden;
+  border-radius:var(--bh-border-radius-xs);
+  .govbh-accordion__expand {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    cursor: pointer;
+    font-size: var(--bh-fs-p-m);
+    color: var(--bh-brand);
+    text-decoration: underline;
+    margin-bottom: 15px;
+    @include transition(0.3s);
+    float: right;
+    background-color: transparent;
+    border: none;
+    &:hover{
+      color: var(--bh-accent);
+    }
+    &:focus-visible{
+      box-shadow: 0 0px 0px 3px var(--bh-focus) inset;
+    }
+  }
+  .govbh-accordion__item{
+    position: relative;
+    min-width: 100%;
+    overflow: hidden;
+    &:last-child{
+      .govbh-accordion__item-head{
+        .accordion-button{
+          border-bottom: 0px solid var(--bh-border-secondary)!important;
+        }
+      }
+      .govbh-accordion__item-body{
+        border-bottom: 0px solid var(--bh-border-secondary)!important;
+      }
+    }
+    .govbh-accordion__item-head{
+      .accordion-button{
+        color: var(--bh-primary);
+        background-color: transparent;
+        font-size: var(--bh-fs-p-xl);
+        font-weight: var(--bh-fw-bold);
+        padding:20px 0;
+        padding-inline-end: 10%;
+        @include transition(0.3s);
+        border-bottom: 1px solid transparent;
+        @media #{$xl}{
+          padding-inline-end: 10%;
+        }
+        @media #{$xm}{
+          padding-inline-end: 10%;
+        }
+        @media #{$xss}{
+          padding:15px;
+          padding-inline-start: 0;
+          padding-inline-end: 30px;
+        }
+        &:focus-visible{
+          outline: none;
+          box-shadow: 0 0px 0px 3px var(--bh-focus) inset;
+          border-radius: var(--bh-border-radius-xs);
+        }
+        &.collapsed{
+          color: var(--bh-primary);
+          border-bottom: 1px solid var(--bh-border-secondary);
+          &:before{
+            background: var(--bh-brand);
+          }
+          &:after{
+            height: 18px;
+            @media #{$xl}{
+              height: 16px;
+            }
+            @media #{$xss}{
+              height: 14px;
+            }
+          }
+        }
+        &:before{
+          content: "";
+          font-weight: normal;
+          position: absolute;
+          top: 35px;
+          right: 20px;
+          left: auto;
+          height: 2px;
+          width: 18px;
+          background: var(--bh-accent);
+          border-radius: var(--bh-border-radius-xs);
+          @media #{$xl}{
+            top: 32px;
+            right: 20px;
+            width: 16px;
+          }
+          @media #{$xss}{
+            top: 28px;
+            right: 0px;
+            width: 14px;
+          }
+        }
+        &:after{
+          content: "";
+          font-weight: normal;
+          position: absolute;
+          top: 27px;
+          right: 28px;
+          left: auto;
+          height: 0px;
+          width: 2px;
+          background: var(--bh-brand);
+          border-radius: var(--bh-border-radius-xs);
+          @include transition(0.3s);
+          @media #{$xl}{
+            top: 25px;
+            right: 27px;
+          }
+          @media #{$xss}{
+            top: 22px;
+            right: 6px;
+          }
+        }
+        &:hover{
+          color: var(--bh-accent);
+        }
+      }
+    }
+    .govbh-accordion__item-body{
+      border-bottom: 1px solid var(--bh-border-secondary);
+      .govbh-accordion__item-content {
+        padding: 0px 0 20px;
+        max-width: 95%;
+        @media #{$xss}{
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  button:focus-visible {
+    text-decoration: none;
+    outline: none;
+    box-shadow: 0 0px 0px 3px var(--bh-focus);
+    border-radius: var(--bh-border-radius-xss);
+  }
+}
+//Accordion css ends
+//Accordion with Image - 21/07/2025 - 3:45 PM - Tanveer
+.accordion-img {
+  .govbh-accordion__item {
+    .govbh-accordion__item-head {
+      .accordion-button {
+        gap: 1rem;
+
+        &:before {
+          top: 50%;
+          transform: translateY(-50%);
+
+          @media #{$xl} {
+            top: 32px;
+            transform: translateY(0px);
+          }
+
+          @media #{$xss} {
+            top: 28px;
+            transform: translateY(0px);
+          }
+        }
+
+        &:after {
+          top: 50%;
+          transform: translateY(-50%);
+
+          @media #{$xl} {
+            top: 25px;
+            transform: translateY(0px);
+          }
+
+          @media #{$xss} {
+            top: 22px;
+            transform: translateY(0px);
+          }
+        }
+
+        .accordion-img-wrapper {
+          flex-shrink: 0;
+          width: 80px;
+
+          img {
+            height: 80px;
+          }
+        }
+
+        @media #{$xm} {
+          align-items: start;
+
+          .accordion-img-wrapper {
+            width: 50px;
+
+            img {
+              height: 50px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+//Accordion with Image Ends - 21/07/2025 - 3:45 PM - Tanveer

@@ -1,0 +1,1393 @@
+/*-----------------------------
+SKIPLINK SECTION STARTS
+-----------------------------*/
+.govbh-logo-dark{
+    display: none;
+}
+.govbh-skiplink{
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    background: var(--bh-bg-primary);
+    a{
+        color: var(--bh-brand);
+        font-size: var(--bh-fs-p-m);
+        font-weight: var(--bh-fw-regular);
+        text-decoration: underline;
+        height: 0px;
+        width: 0px;
+        position: absolute;
+        overflow: hidden;
+        &:hover{
+            color: var(--bh-accent);
+        }
+         &:focus{
+            position: relative;
+            height: auto;
+            width: auto;
+            padding: 5px;
+            margin: 5px;
+            outline: none;
+            box-shadow: 0 0px 0px 3px var(--bh-focus);
+            border-radius: var(--bh-border-radius-xss);
+        }
+    }
+   
+}
+/*-----------------------------
+SKIPLINK SECTION ENDS
+-----------------------------*/
+/*-----------------------------
+MASTHEAD SECTION STARTS
+-----------------------------*/
+.govbh-header{
+    position: relative;
+    z-index: 10;
+    background: var(--bh-bg-primary);
+    width: 100%;
+    min-width: 100%;
+    box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.15);
+    .govbh-menu__navmenu{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        .govbh-menu__navmenu-home{
+            display: none;
+            a{
+                color: var(--bh-primary);
+                font-size: 25px;
+                padding-inline-end: 15px;
+                &:hover{
+                    color: var(--bh-accent);
+                }
+            }
+        }
+    }
+    &.sticky{
+        .govbh-menu__navmenu-home{
+            display: block;
+            @media #{$xl}{
+                display: none;
+            }
+        }
+        .govbh-masthead{
+            display: none;
+        }
+        .govbh-head{
+            display: none;
+            @media #{$xl}{
+                display: block;
+            }
+        }
+    }
+    &.slideDown {
+        transform: translateY(0);
+    }
+    &.slideUp {
+        transform: translateY(-100%);
+    }
+    &.headroom--not-top{
+        .govbh-head .govbh-head__headrow{
+            padding: 10px 0;
+            .govbh-head__logo img {
+                height: 50px;
+                min-height: 50px;
+                @media #{$xsss}{
+                    height: 45px;
+                    min-height: 45px;
+                }
+            }
+        }
+        .govbh-menu nav > ul li a{
+            padding: 10px 15px;
+        }
+    }
+}
+.govbh-masthead{
+    position: relative;
+}
+.govbh-masthead-head {
+    position: relative;
+    padding: 9px 0;
+    img{
+        width: 25px;
+        height: auto;
+        @media #{$xss}{
+            width: 22px;
+        }
+    }
+    p{
+        font-size: var(--bh-fs-p-xs);
+        color: var(--bh-primary);
+        margin: 0;
+        // text-wrap: pretty;
+        // text-wrap: balance;
+        span{
+            padding-inline-end:5px;
+            display: inline;
+        }
+        a{
+            color: var(--bh-link);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            position: relative;
+            line-height: 1.3;
+        }        
+        button{
+            color: var(--bh-link);
+            text-underline-offset: 4px;
+            text-decoration: underline;
+            position: relative;
+            //box-shadow: none;
+            border: none;
+            background-color: transparent;
+            line-height: 1.3;
+            @include transition(0.3s);
+            &.active{
+                i{
+                    transform: scaleY(-1);
+                }
+            }
+            &:hover{
+                color: var(--bh-accent);
+            }
+            i{
+                vertical-align: bottom;
+                font-size: 15px;
+                @include transition(0.3s);
+                @media #{$xl}{  
+                    font-size: 12px;
+                }
+                @media #{$xs}{  
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}
+.govbh-masthead-body{
+    display: none;
+    position: relative;
+    border-top: 1px solid rgba(#CBCBCB,0.2);
+    padding: 30px 0;
+    @media #{$xm}{
+        padding: 15px 0;
+    }
+    .govbh-masthead-body__content {
+        position: relative;
+        padding-inline-start: 30px;
+        @media #{$xm}{
+            padding-inline-start: 22px;
+        }
+    }
+    .govbh-masthead-body__title{
+        font-size: var(--bh-fs-p-xl);
+        font-weight: var(--bh-fw-bold);
+        display: block;
+        text-wrap: pretty;
+        text-wrap: balance;
+        margin-bottom: 5px;
+        i{
+            color: var(--bh-tertiary);
+            font-size: 20px;
+            position: absolute;
+            left: 1px;
+            @media #{$xm}{
+                font-size: 15px;
+                top: 3px;
+            }
+        }       
+    }
+    p{
+        margin: 0;
+        font-size: var(--bh-fs-p-s);
+        i{
+            color: var(--bh-tertiary);
+        }
+        a{
+            color: var(--bh-brand);
+            text-decoration: underline;
+            &:hover{
+                color: var(--bh-accent);
+            }
+        }
+    }
+}
+/*-----------------------------
+MASTHEAD SECTION ENDS
+-----------------------------*/
+/*-----------------------------
+HEAD SECTION STARTS
+-----------------------------*/
+// .govbh-header.has-masthead ~ #govbh-main {
+//     margin-top: 196px;
+//     @media #{$xxl} {
+//         margin-top: 175px;
+//     }
+//     @media #{$xl} {
+//         margin-top: 117px;
+//     }
+//     @media #{$xm} {
+//         margin-top: 113px;
+//     }
+//     @media #{$xss} {
+//         margin-top: 105px;
+//     }
+//     @media #{$xsss} {
+//         margin-top: 98px;
+//     }
+// }
+// #govbh-main {
+//   margin-top: 163px;
+//   @media #{$xxl} {
+//     margin-top: 142px;
+//   }
+//   @media #{$xl} {
+//     margin-top: 85px;
+//   }
+//   @media #{$xm} {
+//     margin-top: 80px;
+//   }
+//   @media #{$xss} {
+//     margin-top: 72px;
+//   }
+//   @media #{$xsss} {
+//     margin-top: 65px;
+//   }
+// }
+// main{
+//     margin-top: 190px;
+//     @media #{$xl}{
+//         margin-top: 115px;
+//     }
+//     @media #{$xm}{
+//         margin-top: 110px;
+//     }
+//     @media #{$xss}{
+//         margin-top: 90px;
+//     }
+// }
+// .govbh-head{
+//     background-color: var(--bh-bg-primary);
+//     & + div {
+//     position: relative !important;
+//     }
+//     &.scroll-to-fixed-fixed{
+//         box-shadow: 0 2px 8px 0px rgba(0,0,0,.15);
+//     }
+// }
+.govbh-head {
+    position: relative;
+    z-index: 2;
+    .govbh-head__headrow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--bh-border-secondary);
+        padding: 20px 0;
+        @include transition(0.5s);
+        @media #{$xxl}{
+            padding: 12px 0;
+        }
+        @media #{$xl}{
+            border-bottom: 0px solid var(--bh-border-secondary);
+        }
+        @media #{$xss}{
+            padding: 10px 0;
+        }
+        .govbh-head__logo {
+            display: flex;
+            align-items: center;
+            gap: 5px 15px;
+            @media #{$xss}{
+                gap: 5px 10px;
+            }
+            img{
+                width: auto;
+                height: 71px;
+                min-height: 71px;
+                @include transition(0.5s);
+                @media #{$xxl}{
+                    height: 65px;
+                    min-height: 65px;
+                }
+                @media #{$xl}{
+                    height: 60px;
+                    min-height: 60px;
+                }
+                @media #{$xm}{
+                    height: 55px;
+                    min-height: 55px;
+                }
+                @media #{$xss}{
+                    height: 52px;
+                    min-height: 52px;
+                }
+                @media #{$xsss}{
+                    height: 45px;
+                    min-height: 45px;
+                }
+            }
+        }
+        .govbh-head__secondary-menu {
+            display: flex;
+            align-items: center;
+            gap: 5px 20px;
+            @media #{$xm}{
+                gap: 5px 15px;
+            }
+            @media #{$xss}{
+                gap: 5px 10px;
+            }
+            ul{
+                display: flex;
+                align-items: center;
+                gap: 5px 25px;
+                li{
+                    position: relative;
+                    line-height: 1;
+                    display: flex;
+                    align-items: center;
+                    a{
+                        color: var(--bh-brand);
+                        font-size: var(--bh-fs-p-s);
+                        text-decoration: underline;
+                        &:hover{
+                            color: var(--bh-accent);
+                        }
+                    }
+                    &::after{
+                        content: "";
+                        position: absolute;
+                        right: -13px;
+                        top: 0px;
+                        height: 15px;
+                        width: 1px;
+                        background-color: var(--bh-border-secondary);
+                    }
+                    &:last-child::after{
+                        display: none;
+                    }
+                }
+            }
+            .govbh-head__textsize {
+                .govbh-head__textsize-body {
+                    padding-bottom: 60px;
+                     ul{
+                        display: flex;
+                        align-items: end;
+                        gap: 8px;
+                        position: absolute;
+                        bottom: 20px;
+                        li{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            &:after{
+                                content: none!important;
+                            }
+                        }
+                    }
+                }
+            }
+            .govbh-head__accessibility{                
+                display: flex;
+                align-items: center;
+                position: relative;
+                @include transition(.4s);
+                text-decoration: none;                
+                i{
+                    font-size: 25px;
+                    @include transition(.4s);
+                    @media #{$xm} {
+                        font-size: 22px;
+                    }
+                    @media #{$xss} {
+                        font-size: 20px;
+                    }
+                }
+                .icon--close{
+                    position: absolute;
+                    opacity: 0;
+                    visibility: hidden;
+                }
+                .icon--active{
+                    opacity: 1;
+                }
+                &.active{
+                    .icon--close{
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                    .icon--active{
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                }
+            }
+            .govbh-head__lang-switcher {
+                font-family: var(--bh-ff-secondary);
+                font-weight: 500;
+                font-size: var(--bh-fs-p-m);
+                display: flex;
+                align-items: center;
+                gap: 3px;
+                text-decoration: none;
+                i{
+                    color: var(--bh-tertiary);
+                    @include transition(.4s);
+                    font-size: 20px;
+                    @media #{$xs}{
+                        font-size: 18px;
+                    }
+                }
+                &:hover{
+                    color: var(--bh-accent);
+                    span{
+                        color: var(--bh-accent);
+                    }
+                }
+            }
+            .govbh-head__search-switcher{
+                font-size: var(--bh-fs-p-m);
+                display: flex;
+                align-items: center;
+                position: relative;
+                @include transition(.4s);
+                text-decoration: none;
+                cursor: pointer;
+                @media #{$xs}{
+                    padding: 5px;
+                }
+                .icon--close{
+                    position: absolute;
+                    opacity: 0;
+                    visibility: hidden;
+                }
+                .icon--active{
+                    opacity: 1;
+                }
+                &.active{
+                    .icon--close{
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                    .icon--active{
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                }
+                i{
+                    color: var(--bh-brand);
+                    @include transition(.4s);
+                    font-size: 24px;
+                    @media #{$xxl}{
+                        font-size: 22px;
+                    }
+                    @media #{$xs}{
+                        font-size: 20px;
+                    }
+                    &:hover{
+                        color: var(--bh-accent);
+                    }
+                }
+            }
+            .govbh-hamburger{
+                display: flex;
+                align-items: center;
+                position: relative;
+                @include transition(.4s);
+                cursor: pointer;
+                text-decoration: none;
+                .icon--close{
+                    position: absolute;
+                    opacity: 0;
+                    visibility: hidden;
+                }
+                .icon--active{
+                    opacity: 1;
+                }
+                &.active{
+                    .icon--close{
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                    .icon--active{
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                }
+                i{
+                    color: var(--bh-brand);
+                    @include transition(.4s);
+                    font-size: 35px;
+                    @media #{$xs}{
+                        font-size: 30px;
+                    }
+                    &:hover{
+                        color: var(--bh-accent);
+                    }
+                }
+            }
+        }
+    }
+}
+.govbh-search{
+    position: relative;
+    display: none;
+    form{
+        position: relative;
+        border-bottom: 1px solid var(--bh-border-secondary);
+        @media #{$xl}{
+            border-bottom: 0px solid var(--bh-border-secondary);
+            border-top: 1px solid var(--bh-border-secondary);
+        }
+        input{
+            border: none;
+            color: var(--bh-secondary);
+            background: var(--bh-bg-primary);
+            width: 100%;
+            min-width: 150px;
+            height: 65px;
+            min-height: auto;
+            padding: 10px 15px;
+            padding-inline-end: 50px;
+            //padding-inline-start: 0;
+            font-size: var(--bh-fs-h6);
+            line-height: 1.2;
+            font-weight: var(--bh-fw-regular);
+            box-shadow: none;
+            outline: none;
+            @include transition(0.5s);
+            @include placeholder {
+                opacity: 0.4;
+            }
+            @media #{$xm}{
+                height:55px;
+            }
+            &:focus-visible{
+                box-shadow: 0 0px 0px 3px var(--bh-focus);
+            }
+        }
+        button{
+            position: absolute;
+            right: 0;
+            height: 100%;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            font-size: 22px;
+            color: var(--bh-accent);
+            @include transition(0.3s);
+            @media #{$xs}{
+                font-size: 20px;
+            }
+            i{
+                @include transition(0.3s);
+            }
+            &:hover{
+                color: var(--bh-brand);
+            }
+            &:focus-visible{
+                box-shadow: 0 0px 0px 3px var(--bh-focus);
+            }
+        }
+    }
+}
+.govbh-accessibility{
+    @media #{$xss}{
+        border-top: 1px solid var(--bh-border-secondary);
+    }
+    .govbh-accessibility__wrapper{
+        border-bottom: 1px solid var(--bh-border-secondary);
+        padding: 10px 0;
+        @media #{$xl}{
+            border-top: 1px solid var(--bh-border-secondary);
+            border-bottom: 0px solid var(--bh-border-secondary);
+        }
+        @media #{$xss}{
+            border-top: 0px solid var(--bh-border-secondary);
+        }
+    }
+}
+.govbh-head__darkmode{
+    position: relative;
+    cursor: pointer;
+    width: 45px;
+    height: 24px;
+    border: 1px solid var(--bh-border-primary);
+    background-color: var(--bh-bg-primary);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-decoration: none;
+    i{
+        font-size: 18px;
+        color: #F6AE1D;
+        @include transition(0.3s);
+    }
+    &:before{
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 2px;
+        bottom: 2px;
+        background-color: var(--bh-bg-brand);
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+    &.active{
+         //background-color: #012E5D;
+         &:before{
+            background-color: #012E5D;
+            -webkit-transform: translateX(21px);
+            -ms-transform: translateX(21px);
+            transform: translateX(21px);
+         }
+    }
+}
+.govbh-head__textsize {
+    position: relative;
+    @media #{$xs}{
+        display: none;
+    }
+    &.active{
+        .govbh-head__textsize-btn{
+            color: var(--bh-accent);
+        }
+        .govbh-head__textsize-body{
+            top: 40px;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    .govbh-head__textsize-btn{
+        color:var(--bh-brand);
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        cursor: pointer;
+        @include transition(0.3s);
+        @media #{$xl}{
+            font-size: 16px;
+        }
+        @media #{$xss}{
+            font-size: 14px;
+        }
+        &:hover{
+            color:var(--bh-accent);
+        }
+    }
+    .govbh-head__textsize-body {
+        position: absolute;
+        top: 50px;
+        right: -10px;
+        min-width: 220px;
+        background: var(--bh-bg-primary);
+        padding: 16px;
+        border-radius: var(--bh-border-radius-xs);
+        box-shadow: 0px -2px 10px 0px rgba(0, 0, 0, 0.15);
+        opacity: 0;
+        visibility: hidden;
+        @include transition(0.3s);
+        @media #{$xss}{
+           min-width: 200px;
+        }
+        &:after{
+            content: "";
+            position: absolute;
+            top: -7px;
+            right: 15px;
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 7px solid var(--bh-bg-primary);
+        }
+        .govbh-head__textsize-close{
+            border: none;
+            background-color: transparent;
+            position: absolute;
+            right: 12px;
+            top: 10px;
+            line-height: 1;
+            i{
+                font-size: 18px;
+                @include transition(0.3s);
+                color: var(--bh-tertiary);
+                cursor: pointer;
+            }
+            &:hover{
+                i{
+                    color: var(--bh-accent);
+                }
+            }
+        }
+        .govbh-head__textsize-title{
+            font-size: var(--bh-fs-p-m);
+            font-weight: var(--bh-fw-bold);
+            margin: 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+            button{
+                font-size: var(--bh-fs-p-xs);
+                font-weight: var(--bh-fw-regular);
+                color: var(--bh-brand);
+                text-decoration: underline;
+                cursor: pointer;
+                //box-shadow: none;
+                border: none;
+                background-color: transparent;
+                @include transition(0.3s);
+                &:focus-visible{
+                    box-shadow: 0 0px 0px 3px var(--bh-focus);
+                }
+                &:hover{
+                    color: var(--bh-accent);
+                }
+            }
+        }
+        ul{
+            display: flex;
+            align-items: end;
+            gap: 8px;
+            li{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                &.active{
+                    button{
+                        i{
+                            color: var(--bh-light);
+                            background-color: var(--bh-brand);
+                        }
+                    }
+                }
+                &:after{
+                    content: none!important;
+                }
+                button{
+                    //box-shadow: none;
+                    border: none;
+                    background-color: transparent;
+                }
+                i{
+                    font-size: 24px;
+                    color: var(--bh-brand);
+                    border: 1px solid var(--bh-brand);
+                    border-radius: var(--bh-border-radius-xs);
+                    background-color: transparent;
+                    padding: 5px;
+                    @include transition(0.3s);
+                }
+                &:hover{
+                    i{
+                        color: var(--bh-light);
+                        background-color: var(--bh-brand);
+                    }
+                }
+                &.govbh-head__textsize-small{
+                    i{
+                        font-size: 12px;
+                    }
+                }
+                &.govbh-head__textsize-medium{
+                    i{
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+/*-----------------------------
+HEAD SECTION ENDS
+-----------------------------*/
+/*-----------------------------
+MENU SECTION STARTS
+-----------------------------*/
+@media (min-width: 1200px) {
+    // .govbh-menu__navmenu li > ul {
+    //     display: block !important;
+    //     opacity: 0;
+    //     transition: all 0.2s ease-in-out;
+    //     visibility: hidden;
+    //     pointer-events: none;
+    // }
+    // .govbh-menu__navmenu li:hover > ul {
+    //     visibility: visible;
+    //     opacity: 1;
+    //     pointer-events: inherit;
+    // }  
+}
+.govbh-menuclose {
+    position: fixed;
+    height: 100dvh;
+    width: 100%;
+    background: var(--bh-bg-brand);
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 2;
+    visibility: hidden;
+    pointer-events: none;
+    @include transition(0.3s);
+    &.active{
+        opacity: 0.5;
+        visibility: visible;    
+        pointer-events: inherit;
+    }
+}
+.govbh-menu {
+    position: relative;
+    @media #{$xl} {
+        position: fixed;
+        width: 500px;
+        height: 100dvh;
+        z-index: 3;
+        right: 0;
+        top: 0;
+        background:var(--bh-bg-primary);
+        transform: translateX(100%);
+        overflow-y: auto;
+        padding-bottom: 40px;
+        &.active{
+            transform: translateX(0);
+        }
+        &.has-animate{
+            @include transition(0.5s);
+        }
+    }
+    @media #{$xm} {
+        width: 430px;
+    }
+    @media #{$xss} {
+        width: 380px;
+    }
+    @media #{$xsss} {
+        width: 95%;
+    }
+    .scroll-up,.scroll-down{
+        display: none!important;
+    }
+    .govbh-menu__top {
+        z-index: 2;
+        position: relative;
+        @media #{$xl}{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0px 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+    }
+    .govbh-menu__logo{
+        a{
+            img{
+                height: 60px;
+                min-height: 60px;
+                width: auto;
+                @media #{$xss} {
+                    height: 50px;
+                    min-height: 50px;
+                }
+            }
+        }
+    }
+    .govbh-menu__switchers {
+        align-items: center;
+        gap: 10px;
+        min-width:100%;
+        justify-content: space-between;
+        border-top: 1px solid var(--bh-border-tertiary);
+        border-bottom: 1px solid var(--bh-border-tertiary);
+        padding: 15px 0;
+        @media #{$xl}{
+            .govbh-menu__switchers-col {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                .govbh-head__textsize{
+                    display: flex;
+                    .govbh-head__textsize-body{
+                        right: auto;
+                        left: -10px;
+                        top: 30px;
+                        padding-bottom: 60px;
+                        &:after{
+                            right: auto;
+                            left: 15px;
+                        }
+                        ul{
+                            position: absolute;
+                            bottom: 15px;
+                        }
+                    }   
+                }
+            }
+        }
+        .govbh-head__lang-switcher {
+            font-family: var(--bh-ff-secondary);
+            font-weight: 500;
+            font-size: var(--bh-fs-p-m);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            text-decoration: none;
+            i{
+                color: var(--bh-tertiary);
+                @include transition(.4s);
+                font-size: 20px;
+                @media #{$xs}{
+                    font-size: 18px;
+                }
+            }
+            &:hover{
+                color: var(--bh-accent);
+                span{
+                    color: var(--bh-accent);
+                }
+            }
+        }
+    }
+    .govbh-menu__close{
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        i{
+            color: var(--bh-tertiary);
+            @include transition(0.3s);
+            font-size: 26px;
+            @media #{$xs} {
+                font-size: 22px;
+            }
+            &:hover{
+                color: var(--bh-accent);
+            }
+        }
+    }
+    .govbh-menu__secondary-menu-list {
+        padding: 25px 15px;
+        ul{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px 25px;
+            @media #{$xs}{
+                gap: 15px 20px;
+            }
+            li{
+                position: relative;
+                line-height: 1;
+                display: flex;
+                align-items: center;
+                a{
+                    color: var(--bh-brand);
+                    font-size: var(--bh-fs-p-s);
+                    text-decoration: underline;
+                    &:hover{
+                        color: var(--bh-accent);
+                    }
+                    &[target="_blank"]{
+                        padding-inline-end: 15px;
+                        &:after{
+                            content: "\e5de";
+                            font-family: "Phosphor" !important;
+                            position: absolute;
+                            color: var(--bh-brand);
+                            padding-inline-start: 3px;
+                            @include transition(0.3s);
+                        }
+                    }
+                }
+                &::after{
+                    content: "";
+                    position: absolute;
+                    right: -13px;
+                    top: 0px;
+                    height: 15px;
+                    width: 1px;
+                    background-color: var(--bh-border-secondary);
+                    @media #{$xs}{
+                        height: 13px;
+                        right: -10px;
+                    }
+                }
+                &:last-child::after{
+                    display: none;
+                }
+            }
+        }
+    }
+    nav > ul{
+        display: flex;
+        align-items: center;
+        gap: 0;
+        position: relative;
+        width: 100%;
+        @media #{$xl} {
+            align-items: start;
+            flex-wrap: wrap;
+        }
+        a{
+            text-decoration: none;
+            &.govbh-is-external{
+                justify-content: start;
+                gap: 2px;
+            }
+        }
+        dt{
+            border-bottom: 1px solid var(--bh-border-secondary);
+        }
+        > li{
+            a.highlighted,a:focus-visible{
+                background-color: var(--bh-bg-secondary);
+            }
+        }
+        > li > ul > li > ul{
+            @media #{$xl} {
+                padding-inline-start: 0px!important;
+                padding-inline-end: 0px!important;
+            }
+            > li{
+                @media #{$xl} {
+                    padding-inline-start: 10px;
+                    border-left: 2px solid var(--bh-border-secondary)!important;
+                    border-bottom: 0px solid var(--bh-border-tertiary)!important;
+                }
+                &:hover{
+                    @media #{$xl} {
+                        border-left: 2px solid var(--bh-accent)!important;
+                    }
+                }
+            }
+        }
+        li{
+            position: relative;   
+            @media #{$xl} {
+                width: 100%;
+                border-bottom: 1px solid var(--bh-border-tertiary);
+            }      
+            a{
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                min-width: 100%;
+                .sub-arrow {
+                    display: flex;
+                    align-items: center;
+                    @media #{$xl} {
+                        position: absolute;
+                        height: 100%;
+                        width:100%;
+                        top: 0;
+                        left: 0;
+                    }   
+                    &:before {
+                        content: "\e136";
+                        font-family: "Phosphor" !important;
+                        font-size: 17px;
+                        font-weight: 400;
+                        color: var(--bh-bg-tertiary);
+                        @media #{$xl} {
+                            right: 17px;
+                            position: absolute;
+                        }  
+                    }
+                }
+            }   
+            &>ul{
+                //position: absolute;
+                top: 100%;
+                left: 0;
+                min-width: 300px!important;
+                background-color: var(--bh-bg-secondary);
+                padding: 10px 15px;
+                box-shadow:0 10px 8px -5px rgba(0, 0, 0, 0.05);
+                border-bottom-right-radius: 4px;
+                border-bottom-left-radius: 4px;
+                @media #{$xl} {
+                    //position: relative;
+                    // top: auto;
+                    // width: 100%!important;
+                    box-shadow:none;
+                    border-bottom-right-radius: 0px;
+                    border-bottom-left-radius: 0px;
+                    padding: 10px 15px;
+                    padding-block-start: 0;
+                    // padding-inline-end: 0;
+                }
+                @media #{$xss} {
+                    min-width: 100%!important;
+                }
+                li{
+                    border-bottom: 1px solid var(--bh-border-secondary);
+                    &:last-child{
+                        border-bottom: 0px solid var(--bh-border-secondary);
+                    }
+                    a{
+                        padding: 12px 0px;
+                        font-size: var(--bh-fs-p-m);
+                        font-weight: var(--bh-fw-regular);
+                        justify-content: space-between;
+                        @media #{$xl} {
+                            padding: 10px 0px;
+                            font-weight: var(--bh-fw-semibold);
+                        }
+                        &:hover{
+                            color: var(--bh-accent);
+                            background-color: var(--bh-bg-secondary);
+                            padding-inline-start: 5px;
+                            padding-inline-end: 10px;
+                            @media #{$xl} {
+                                padding-inline-start: 0px;
+                                padding-inline-end: 0px;
+                            }
+                        }
+                        &.highlighted{
+                            .sub-arrow{
+                                &:before{
+                                    @media #{$xl} {
+                                        content: "\e32a";
+                                    }
+                                }
+                            }
+                        }
+                        .sub-arrow{
+                            transform: rotate(-90deg);
+                            @media #{$xl} {
+                                transform: none;
+                                padding: 0;
+                            }
+                            &:before{
+                                @media #{$xl} {
+                                    content: "\e3d4";
+                                    font-family: "Phosphor-Bold" !important;
+                                    right: 2px;
+                                }
+                            }
+                            &.dropdown-open{
+                                &:before{
+                                    @media #{$xl} {
+                                        content: "\e32a";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    li{
+                        a{
+                            @media #{$xl} {
+                                font-weight: var(--bh-fw-regular);
+                            }
+                        }
+                    }
+                }
+                ul{
+                    top: -10px;
+                    left: 100%;
+                    box-shadow: 0 5px 8px 0px rgba(0, 0, 0, 0.2);
+                    @media #{$xl} {
+                        top: auto;
+                        left: 0;
+                        padding: 10px 10px;
+                        padding-block-start: 0;
+                        box-shadow: none;
+                    }
+                }
+            }
+            a{
+                color: var(--bh-primary);
+                font-size: var(--bh-fs-p-l);
+                font-weight: var(--bh-fw-bold);
+                padding: 15px 20px;      
+                @media #{$xxl} {  
+                    padding: 15px 12px;     
+                }
+                @media #{$xl} {  
+                    padding: 15px 18px;     
+                    display: block;
+                }
+                @media #{$xss} {  
+                    padding: 12px 15px;     
+                }
+            }
+            &:hover{
+               >a{
+                    color: var(--bh-accent);
+                    background-color: var(--bh-bg-secondary);
+                }
+            }
+            &.megamenu{
+                position: initial;
+                &>ul{
+                    width: 100%!important;
+                    max-width: 100%!important;
+                    min-width: 100%!important;
+                    margin: 0!important;
+                    padding: 30px;
+                    overflow: hidden;
+                    @media #{$xl} {
+                        padding: 15px;
+                        padding-block-start: 0;
+                    }
+                    ol{
+                        padding-inline-start: 0px;
+                    }
+                    li{
+                        width: 100%;
+                        .govbh-menu__megamenu-title {
+                            font-size: var(--bh-fs-p-l);
+                            font-weight: var(--bh-fw-bold);
+                            margin-bottom: 10px;
+                        }
+                        ul {
+                            @media #{$xl} {
+                                padding: 0;
+                            }
+                            li{
+                                &:last-child{
+                                    @media #{$xl} {
+                                        border-bottom: 1px solid var(--bh-border-secondary);
+                                    }
+                                }
+                                a{
+                                    padding: 10px 10px 10px 0px;
+                                    &:hover{
+                                        padding-inline-start: 5px;
+                                        padding-inline-end: 5px;
+                                        @media #{$xl} {
+                                            padding-inline-start: 0px;
+                                            padding-inline-end: 0px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .govbh-menu__megamenu-img {
+                        height: 100%;
+                        border-radius: 4px;
+                        position: relative;
+                        overflow: hidden;
+                        img{
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    .govbh-menu__megamenu--two-col {
+                        display: grid;
+                        grid-template-columns:1fr 1fr;
+                        margin: 0;
+                        gap: 0 50px;
+                        @media #{$xs} {
+                            grid-template-columns:1fr;
+                            gap: 0 30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/* Mobile first layout SmartMenus Core CSS (it's not recommended editing these rules)
+   You need this once per page no matter how many menu trees or different themes you use.
+-------------------------------------------------------------------------------------------*/
+.sm{box-sizing:border-box;position:relative;z-index:1;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+.sm,.sm ul,.sm li{display:block;list-style:none;margin:0;padding:0;line-height:normal;}
+.sm-rtl,.sm-rtl ul,.sm-rtl li{direction:rtl;text-align:right;}
+.sm>li>h1,.sm>li>h2,.sm>li>h3,.sm>li>h4,.sm>li>h5,.sm>li>h6{margin:0;padding:0;}
+.sm ul{display:none;}
+.sm li,.sm a{position:relative;}
+.sm a{display:block;}
+.sm a.disabled{cursor:default;}
+.sm::after{content:"";display:block;height:0;font:0px/0 serif;clear:both;overflow:hidden;}
+.sm *,.sm *::before,.sm *::after{box-sizing:inherit;}
+@media (min-width: 1200px) {
+   .sm ul {
+     position: absolute;
+   }
+}
+/*-----------------------------
+MENU SECTION ENDS
+-----------------------------*/
+.govbh-header.sticky {
+position: fixed;
+width: 100%;
+-webkit-animation-name: stickyTransition;
+animation-name: stickyTransition;
+-webkit-animation-duration: 0.5s;
+animation-duration: 0.5s;
+-webkit-animation-fill-mode: both;
+animation-fill-mode: both;
+}
+@-webkit-keyframes stickyTransition {
+from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+}
+to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+}
+}
+@keyframes stickyTransition {
+from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+}
+to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+}
+}
+
+    @-webkit-keyframes stickyTransitionout {
+from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+}
+to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+}
+}
+@keyframes stickyTransitionout {
+from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+}
+to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+}
+} 

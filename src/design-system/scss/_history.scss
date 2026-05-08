@@ -1,0 +1,158 @@
+.govbh-history-timeline {
+  position: relative;
+    .govbh-history-timeline__wrapper {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding-bottom: 50px;
+        @media #{$xs}{
+            padding-bottom: 20px;
+        }
+        &:before{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 23px;
+            height: 100%;
+            background-color: var(--bh-bg-light-brand1);
+            z-index: 1;
+            @media #{$xs}{
+                transform: translateX(0%);
+                left: 0;
+                width: 18px;
+            }
+        }
+        .govbh-history-timeline__title{
+            color: var(--bh-secondary);
+            background: var(--bh-bg-primary);
+            padding: 12px;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            margin-top: 60px;
+            margin-bottom: 50px;
+            @media #{$xs}{
+                text-align: left;
+                padding-inline-start: 0;
+            }
+        }
+        .govbh-history-timeline__item{
+            position: relative;
+            z-index: 2;
+            &:first-child{
+                .govbh-history-timeline__title{
+                    margin-top: 0;
+                }
+            }
+            li{
+                background: var(--bh-bg-primary);
+                border-radius: var(--bh-border-radius-xs);
+                box-shadow: 0 2px 8px 0px rgba(0,0,0,.15);
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                max-width: 45%;
+                position: relative;
+                align-items: start;
+                cursor: pointer;
+                @include transition(0.3s);
+                @media #{$xs}{
+                    max-width: calc(100% - 35px);
+                    margin-bottom: 30px;
+                }
+                &:before{
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    width: 12px;
+                    height: 18px;
+                    transform: translateY(-50%);
+                    background: var(--bh-bg-primary);
+                    @include transition(0.3s);
+                }
+                &:nth-child(odd){
+                    margin-left: calc(55%);
+                    box-shadow: -4px 2px 10px -1px rgba(0,0,0,.15);
+                    @media #{$xs}{
+                        margin-left: 35px;
+                    }
+                    &:before{
+                        left: -11px;
+                        clip-path: polygon(100% 0, 0 50%, 100% 100%);
+                    }
+                }
+                &:nth-child(even){
+                    box-shadow: 4px 2px 10px -1px rgba(0,0,0,.15);
+                    text-align: right;
+                    align-items: end;
+                    .govbh-history-timeline__card{
+                        text-align: right;  
+                        @media #{$xs}{
+                            text-align: left;
+                            align-items: start;
+                        }
+                    }
+                    @media #{$xs}{
+                        margin-left: 35px;
+                        box-shadow: -4px 2px 10px -1px rgba(0,0,0,.15);
+                        text-align: left;
+                        align-items: start;
+                    }
+                    &:before{
+                        right: -11px;
+                        clip-path: polygon(0 0, 100% 50%, 0 100%);
+                        @media #{$xs}{
+                            left: -11px;
+                            right: auto;
+                            clip-path: polygon(100% 0, 0 50%, 100% 100%);
+                        }
+                    }
+                }
+                .govbh-history-timeline__card{
+                    background-color: transparent;
+                    border: none;
+                    text-align: left;
+                    padding: 24px;
+                    @media #{$xm}{
+                        padding: 15px;
+                    }
+                }
+                .govbh-history-timeline__item-year{
+                    color: var(--bh-brand);
+                    margin: 0;
+                    @include transition(0.3s);
+                }
+                .govbh-history-timeline__item-para{
+                    font-size: var(--bh-fs-p-l);
+                    color: var(--bh-secondary);
+                    margin: 0;
+                    @include transition(0.3s);
+                    display: block;
+                }
+                .govbh-history-timeline__card-btn{
+                    border-bottom: 1px solid var(--bh-brand);
+                    color: var(--bh-brand);
+                    display: inline-block;
+                    margin-top: 10px;
+                     @include transition(0.3s);
+                }
+                &:hover{
+                    background-color: var(--bh-brand);
+                    &:before{
+                        background-color: var(--bh-brand);
+                    }
+                    .govbh-history-timeline__item-year,.govbh-history-timeline__item-para{
+                        color: var(--bh-linkinverse-secondary);
+                    }
+                    .govbh-history-timeline__card-btn{
+                        color: var(--bh-linkinverse-secondary);
+                        border-bottom: 1px solid var(--bh-linkinverse-secondary);
+                    }
+                }
+            }
+        }
+    }
+}

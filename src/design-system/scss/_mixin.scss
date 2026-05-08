@@ -1,0 +1,89 @@
+@mixin transition($time) {
+-webkit-transition: all $time ease 0s !important;
+-moz-transition: all $time ease 0s !important;
+-ms-transition: all $time ease 0s !important;
+-o-transition: all $time ease 0s !important;
+transition: all $time ease 0s !important;
+}
+@mixin transition1($time) {
+-webkit-transition: all $time ease-in-out 0s;
+-moz-transition: all $time ease-in-out 0s;
+-ms-transition: all $time ease-in-out 0s;
+-o-transition: all $time ease-in-out 0s;
+transition: all $time ease-in-out 0s;
+}
+  
+  
+  @mixin transform($value) {
+	-webkit-transform: $value;
+	   -moz-transform: $value;
+		-ms-transform: $value;
+		 -o-transform: $value;
+			transform: $value;
+  }
+  
+  @mixin box-sizing($value) {
+	-webkit-box-sizing: $value;
+	   -moz-box-sizing: $value;
+			box-sizing: $value;
+  }
+  
+  @mixin box-shadow($value) {
+	-webkit-box-shadow: $value;
+	   -moz-box-shadow: $value;
+			box-shadow: $value;
+  }
+  @mixin line-clamp($value) {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: $value;
+    -webkit-box-orient: vertical;
+  }
+
+  @mixin width-calc-100percent($value) {
+	width: -webkit-calc(100% - #{$value});
+	width: -moz-calc(100% - #{$value});
+	width: calc(100% - #{$value});
+  }	
+
+	@mixin width-calc-plus-100percent($value) {
+		width: -webkit-calc(100% + #{$value});
+		width: -moz-calc(100% + #{$value});
+		width: calc(100% + #{$value});
+	  }	
+
+
+	@mixin border-radius($value) {
+		-webkit-border-radius: $value;
+		-moz-border-radius: $value;
+		border-radius: $value;
+	}
+
+	@mixin bg-rgba-theme-opacity($value) {
+		background: rgba(54, 167, 233, $value);
+	}
+
+@mixin half-circle ($direction: right) {
+  @if $direction == right {
+    border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+  }
+  @else if $direction == left {
+    border-radius: 100% 0 0 100% / 50% 0 0 50%;
+  }
+  @else if $direction == top {
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  @else if $direction == bottom {
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  }
+  @else {
+    @error 'Please set correct $direction value.'
+  }
+}
+
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}

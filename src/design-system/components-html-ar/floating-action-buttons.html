@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ar-BH" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
+    <title> Floating Action Buttons | Bahrain Government Guidelines Design System - Components</title>
+    <meta name="author" content="Bahrain Government Guidlines Design System">
+    <meta name="copyright" content="Bahrain Government Guidlines Design System">
+    <meta name="keywords" content="Bahrain Government Guidlines Design System">
+    <meta name="description" content="Bahrain Government Guidlines Design System">
+    <!-- Social Media Meta Start -->
+    <meta property="og:description" content="Bahrain Government Guidlines Design System">
+    <meta property="og:image" content="http://boxondemo.net/2025/BHGOV/html_v1/images/og-image.png">
+    <meta property="og:site_name" content="Bahrain Government Guidlines Design System">
+    <meta property="og:title" content="Bahrain Government Guidlines Design System">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://boxondemo.net/2025/BHGOVTEMP/html_v1/php/index.php">
+    <!-- Logo Icon Starts -->
+    <link rel="apple-touch-icon" sizes="57x57" href="../images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="../images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/icons/favicon-16x16.png">
+    <link rel="manifest" href="../images/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Public Sans Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.rtl.min.css" integrity="sha384-Xbg45MqvDIk1e563NLpGEulpX6AvL404DP+/iCgW9eFa2BqztiwTexswJo2jLMue" crossorigin="anonymous">
+                    
+                <!-- Style -->
+    <link rel="stylesheet" href="../css/style.min.css" media="all">
+    <link rel="stylesheet" href="../css/style-ar.min.css" media="all">
+    <style>
+        body{
+            display:block;
+            min-height: auto;
+        }
+    </style>
+</head>
+<body>    <!--Component Floating Action Button:Default Starts -->
+    <div class="govbh-floatinglist-vertical">
+        <ul id="myList" class="open">
+            <li class="govbh-accessibility-widget">
+                <button type="button" class="govbh-floatinglist__btn govbh-accessibility-widget__btn" aria-label="Accessibility Menu" data-tooltip="tooltip" data-tooltip-position="right" title="قائمة تسهيل الوصول">
+                    <span class="icon-accessibility" aria-hidden="true"></span>
+                </button>
+                <!-- Pop Widget Starts -->
+                <div class="govbh-accessibility-widget__pop">
+                    <div class="govbh-accessibility-widget__pop-title pb-2">أدوات إمكانية الوصول</div>
+                    <div class="govbh-accessibility-widget__items">
+                        <!-- Dark Mode widget -->
+                        <div class="govbh-accessibility-widget__items-list">
+                            <!-- Dark Mode -->
+                            <div class="govbh-head__textsize-title">الوضع المظلم</div>
+                            <div class="govbh-accessibility-widget__toggle">
+                                <div class="form-toggle__switch-label">عن</div>
+                                <a href="#" class="govbh-head__darkmode d-flex" data-tooltip="tooltip" title="اضغط هنا للتحول لنسخة بخلفية بيضاء" role="button" aria-label="Click here to switch between light and dark mode"><i class="ph ph-moon dark--moon" aria-hidden="true"></i><i class="ph ph-sun-dim dark--sun" aria-hidden="true"></i></a>
+                                <div class="form-toggle__switch-label">على</div>
+                            </div>
+                        </div>
+                        <div class="hr mt-3 mb-3"></div>
+                        <!-- Play Speaker widget -->
+                        <div class="govbh-accessibility-widget__items-list">
+                            <div class="govbh-head__textsize-title">قارئ الشاشة</div>
+                            <a href="#" data-tooltip="tooltip" title="انقر هنا لتشغيل/إيقاف مكبر الصوت مؤقتًا" role="button" aria-label="Click here to switch between light and dark mode" class="govbh-accessibility-widget__toggle-play">
+                                <div class="toggle-play-icon">
+                                    <i class="ph-fill ph-play" aria-hidden="true"></i>
+                                    <i class="ph-fill ph-pause" aria-hidden="true"></i>
+                                </div>
+                                <div class="govbh-accessibility-widget__toggle-play-text">تشغيل مكبر الصوت</div>
+                            </a>
+                        </div>
+                        <div class="hr mt-3 mb-2"></div>
+                        <!-- Text Resize widget -->
+                        <div class="govbh-accessibility-widget__items-list govbh-head__textsize-body">
+                            <ul>
+                                <li class="govbh-head__textsize-small"><button type="button" aria-label="Text resize small"><i class="ph ph-text-aa" aria-hidden="true"></i></button></li>
+                                <li class="govbh-head__textsize-medium active"><button type="button" aria-label="Text resize medium"><i class="ph ph-text-aa" aria-hidden="true"></i></button></li>
+                                <li class="govbh-head__textsize-large"><button type="button" aria-label="Text resize large"><i class="ph ph-text-aa" aria-hidden="true"></i></button></li>
+                            </ul>
+                            <div class="govbh-head__textsize-title">تغيير حجم النص ( <button type="button" class="textsizereset">إعادة ضبط</button> )</div>
+                        </div>
+                    </div>
+                    <button type="button" class="govbh-accessibility-widget__pop-close" aria-label="Feedback close button"><i class="ph ph-x" aria-hidden="true"></i></button>
+                </div>
+                <!-- Pop Widget Ends -->
+            </li>
+            <li class="govbh-floatinglist__smiley">
+                <button type="button" class="govbh-floatinglist__smiley-btn govbh-floatinglist__btn" aria-label="Submit your feedback" data-tooltip="tooltip" data-tooltip-position="right" title="ملاحظاتكم">
+                    <span class="icon-smiley" aria-hidden="true"></span>
+                </button>
+                <div class="govbh-floatinglist__pop">
+                    <div class="govbh-floatinglist__pop-title">رأيك</div>
+                    <div class="govbh-floatinglist__items">
+                        <!-- Smily feedback -->
+                        <a href="javascript:void(0);" role="button" aria-label="Thank you for your feedback" class="govbh-floatinglist__item" data-bs-toggle="modal" data-bs-target="#smilyfeedback"><i class="ph ph-smiley text--success" aria-hidden="true"></i></a>
+                        <!-- Smily Meh feedback -->
+                        <a href="javascript:void(0);" role="button" aria-label="Enter your feedback" class="govbh-floatinglist__item" data-bs-toggle="modal" data-bs-target="#smilymehfeedback"><i class="ph ph-smiley-meh text--tertiary" aria-hidden="true"></i></a>
+                        <!-- Sad feedback -->
+                        <a href="javascript:void(0);" role="button" aria-label="Enter your feedback" class="govbh-floatinglist__item" data-bs-toggle="modal" data-bs-target="#sadfeedback"><i class="ph ph-smiley-sad text--accent" aria-hidden="true"></i></a>
+                    </div>
+                    <button type="button" class="govbh-floatinglist__pop-close" aria-label="Feedback close button"><i class="ph ph-x" aria-hidden="true"></i></button>
+                </div>
+            </li>
+            <li>
+                <a href="https://services.bahrain.bh/wps/portal/tawasul/en/!ut/p/z1/hY_BCoJAEIafxqszrVRbt9VIEEOpQNtLaGyroK6sW75-UhEYSXOb-b9vhgEOKfAmu5cyM6VqsmroT3xxptT3ZoSSAHchRRbHlK1iz0GyhOQfwIcYJ4rh4PMn8tkQHTcMGQsisg3nBCPyBr5Nd09cB9GfAEZHAuCyUvnrH9bkDpXAtbgKLbR908O4MKbt1hZa2Pe9LZWSlbAvqrbwl1KozkA6JuEgGmjrFMu4Tqih7AEMXdlA/dz/d5/L3dJdyEvUUd3QndNQSEvNE5sRS9aNl84OEdDMTI4MkowTUw4MEFQUDhBOVBDMzAyNw!!/" target="_blank" data-tooltip="tooltip" data-tooltip-position="right" title="تواصل - النظام الوطني للمقترحات والشكاوى " aria-label="Tawasul - The National Suggestions & Complaints System - Open in a new window">
+                    <span><img src="../images/utilities/tawasul-icon.svg" alt="Tawasul - The National Suggestions & Complaints System" loading="lazy"></span>
+                </a>
+            </li>
+            <li>
+                <a href="tel:80008001" aria-label="Call Government Services Contact Center" data-tooltip="tooltip" data-tooltip-position="right" title="مركز اتصال الخدمات الحكومية">
+                    <span class="icon-call" aria-hidden="true"></span>
+                </a>
+            </li>
+            <li>
+                <button type="button" class="govbh-floatinglist__btn" aria-label="Chat with our Expert" data-tooltip="tooltip" data-tooltip-position="right" title="تحدث مع خبير">
+                    <span class="icon-chattext" aria-hidden="true"></span>
+                </button>
+            </li>
+        </ul>
+        <button type="button" aria-label="Close the floating menu" class="govbh-floatinglist-vertical__backarrow"><i class="ph ph-caret-up" aria-hidden="true"></i></button>
+    </div>
+    <!--Component Floating Action Button:Default Ends --> 
+
+<!-- Script Starts -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+	crossorigin="anonymous"></script>
+<!-- Icons -->
+<script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2"></script>
+<!-- Accessibility Widget -->
+<!-- <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script> -->
+<!-- Header Sticky -->
+<script src="../js/govbh-menu-sticky.js"></script>
+<!-- Text Localization -->
+<script src="../js/govbh-lang-ar.js"></script>
+<!-- Library -->
+<script src="../js/govbh-library.min.js"></script>
+<!-- Utils -->
+<script src="../js/govbh-utils.js"></script>
+<!-- smartmenus -->
+<script src="../js/jquery.smartmenus.min.js"></script>
+<!-- Themes -->
+<script src="../js/govbh-themes-0.0.1.js"></script>
+<!-- Script Ends -->
+</body>
+
+</html>

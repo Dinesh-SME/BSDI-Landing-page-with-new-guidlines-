@@ -1,0 +1,19 @@
+.govbh-carousel{
+    .swiper-wrapper{
+        height: auto;
+    }
+}
+.govbh-heroslider__swiper{
+    .swiper-wrapper{
+        height: auto;
+    }
+}
+.form-group__range .form-group__range-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-group__range .form-group__range-input .form-group__range-slider {
+    top: 50%;
+    transform: translateY(-50%);
+}

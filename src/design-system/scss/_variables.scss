@@ -1,0 +1,389 @@
+@font-face {
+    font-family:'Public Sans';
+    unicode-range: U+30-39;
+}
+// The CSS Variables starts here
+:root {
+    --bh-ff-primary:'Public Sans','Noto Kufi Arabic', sans-serif;
+    --bh-ff-secondary:'Noto Kufi Arabic', sans-serif;
+    /* Heading Variable */
+    --bh-fs-h1: 36px;
+    --bh-fs-h2: 34px;
+    --bh-fs-h3: 32px;
+    --bh-fs-h4: 30px;
+    --bh-fs-h5: 28px;
+    --bh-fs-h6: 26px;
+    /* Paragraph Variable */
+    --bh-fs-p-xl: 20px;
+    --bh-fs-p-l: 18px;
+    --bh-fs-p-m: 16px;
+    --bh-fs-p-s: 14px;
+    --bh-fs-p-xs: 12px;
+    --bh-fs-p-xxs: 10px;
+    /* Font Weight Variable */
+    --bh-fw-light: 300;
+    --bh-fw-regular: 400;
+    --bh-fw-medium: 500;
+    --bh-fw-semibold: 600;
+    --bh-fw-bold: 700;
+    /* Color Variable */
+    --bh-light: #ffffff;
+    --bh-dark: #000000;
+    --bh-brand: #012E5D;
+    --bh-primary: #000000;
+    --bh-primary-inverse: #FFFFFF;
+    --bh-secondary: #333333;
+    --bh-secondary-rgb: 51, 51, 51;
+    --bh-tertiary: #999999;
+    --bh-accent: #C63B2B;
+    --bh-accent-hover: #9E2F22;
+    --bh-info: #0AA2C0;
+    --bh-info-off:#CFF4FC;
+    --bh-info-content:#055160;
+    --bh-success: #3B9B6F;
+    --bh-success-off: #DBF3E8;
+    --bh-success-content: #2C7453;
+    --bh-warning: #FF8300;
+    --bh-warning-off: #FFE6CC;
+    --bh-warning-content: #894701;
+    --bh-failure: #DC3545;
+    --bh-failure-off: #F8D7DA;
+    --bh-failure-content: #B02A37;
+    --bh-error: #DC3545;
+    --bh-error-star: #A91E2C;
+    --bh-focus: rgba(54,149,250,0.6);
+    --bh-linkinverse: #F1F1F1;
+    --bh-linkinverse-secondary: #F1F1F1;
+    --bh-link: #012E5D;
+    --bh-inverse: #CBCBCB;
+    --bh-inverse-brand: #34587D;
+    /* BackgroundColor Variable */
+    --bh-bg-primary:#ffffff;
+    --bh-bg-primary-rgba:255,255,255;
+    --bh-bg-secondary:#F7F7F7;
+    --bh-bg-tertiary:#CBCBCB;
+    --bh-bg-quartenary:#CBCBCB;
+    --bh-bg-brand: #012E5D;
+    --bh-bg-brand-accent: #012E5D;
+    --bh-bg-accent: #C63B2B; 
+    --bh-bg-dark: #333333;
+    --bh-bg-dark-inverse: #333333;
+    --bh-bg-light: #ffffff;
+    --bh-bg-light-grey: #E5E5E5;
+    --bh-bg-light-brand: #E5EAEF; 
+    --bh-bg-light-brand1: #E7F1FB;
+    --bh-bg-inverse-accent: #012E5D;
+
+    /* Border Variable */
+    --bh-border-primary:#999999;
+    --bh-border-secondary:#CBCBCB;
+    --bh-border-tertiary:#F1F1F1;
+    --bh-border-brand: #012E5D;
+    --bh-border-accent: #C63B2B;
+    /* Border Radius Variable */
+    --bh-border-radius-l:16px;
+    --bh-border-radius-m:12px;
+    --bh-border-radius-s:8px;
+    --bh-border-radius-xs:4px;
+    --bh-border-radius-xss:2px;
+    --bh-border-radius-100:100%;
+
+}
+
+//Responsive
+$xxxxl: '(max-width: 1999.98px)';
+$xxxl: '(max-width: 1599.98px)';
+$xxl: '(max-width: 1399.98px)';
+$xl: '(max-width: 1199.98px)';
+$xm: '(max-width: 991.98px)';
+$xs: '(max-width: 767.98px)';
+$xss: '(max-width: 575.98px)';
+$xsss: '(max-width: 480px)';
+
+
+:root.govbh-head__textsize-small{
+    /* Heading Variable */
+    --bh-fs-h1: 34px;
+    --bh-fs-h2: 32px;
+    --bh-fs-h3: 30px;
+    --bh-fs-h4: 28px;
+    --bh-fs-h5: 26px;
+    --bh-fs-h6: 24px;
+    /* Paragraph Variable */
+    --bh-fs-p-xl: 18px;
+    --bh-fs-p-l: 16px;
+    --bh-fs-p-m: 14px;
+    --bh-fs-p-s: 12px;
+    --bh-fs-p-xs: 10px;
+    --bh-fs-p-xxs: 8px;
+}
+:root.govbh-head__textsize-large{
+    /* Heading Variable */
+    --bh-fs-h1: 38px;
+    --bh-fs-h2: 36px;
+    --bh-fs-h3: 34px;
+    --bh-fs-h4: 32px;
+    --bh-fs-h5: 30px;
+    --bh-fs-h6: 28px;
+    /* Paragraph Variable */
+    --bh-fs-p-xl: 22px;
+    --bh-fs-p-l: 20px;
+    --bh-fs-p-m: 18px;
+    --bh-fs-p-s: 16px;
+    --bh-fs-p-xs: 14px;
+    --bh-fs-p-xxs: 12px;
+}
+@media #{$xl}{
+    :root{
+        /* Heading Variable */
+        --bh-fs-h1: 34px;
+        --bh-fs-h2: 32px;
+        --bh-fs-h3: 30px;
+        --bh-fs-h4: 28px;
+        --bh-fs-h5: 26px;
+        --bh-fs-h6: 24px;
+        /* Paragraph Variable */
+        --bh-fs-p-xl: 18px;
+        --bh-fs-p-l: 16px;
+        --bh-fs-p-m: 14px;
+        --bh-fs-p-s: 12px;
+        --bh-fs-p-xs: 10px;
+        --bh-fs-p-xxs: 8px;
+        &.govbh-head__textsize-small{
+            /* Heading Variable */
+            --bh-fs-h1: 32px;
+            --bh-fs-h2: 30px;
+            --bh-fs-h3: 28px;
+            --bh-fs-h4: 26px;
+            --bh-fs-h5: 24px;
+            --bh-fs-h6: 22px;
+            /* Paragraph Variable */
+            --bh-fs-p-xl: 16px;
+            --bh-fs-p-l: 14px;
+            --bh-fs-p-m: 12px;
+            --bh-fs-p-s: 10px;
+            --bh-fs-p-xs: 8px;
+            --bh-fs-p-xxs: 7px;
+        }
+        &.govbh-head__textsize-large{
+            /* Heading Variable */
+            --bh-fs-h1: 36px;
+            --bh-fs-h2: 34px;
+            --bh-fs-h3: 32px;
+            --bh-fs-h4: 30px;
+            --bh-fs-h5: 28px;
+            --bh-fs-h6: 26px;
+            /* Paragraph Variable */
+            --bh-fs-p-xl: 20px;
+            --bh-fs-p-l: 18px;
+            --bh-fs-p-m: 16px;
+            --bh-fs-p-s: 14px;
+            --bh-fs-p-xs: 12px;
+            --bh-fs-p-xxs: 10px;
+        }
+    }
+}
+@media #{$xm}{
+    :root{
+        /* Heading Variable */
+        --bh-fs-h1: 32px;
+        --bh-fs-h2: 30px;
+        --bh-fs-h3: 28px;
+        --bh-fs-h4: 26px;
+        --bh-fs-h5: 24px;
+        --bh-fs-h6: 22px;
+         /* Paragraph Variable */
+        --bh-fs-p-xl: 18px;
+        --bh-fs-p-l: 16px;
+        --bh-fs-p-m: 14px;
+        --bh-fs-p-s: 12px;
+        --bh-fs-p-xs: 10px;
+        --bh-fs-p-xxs: 8px;
+        &.govbh-head__textsize-small{
+            /* Heading Variable */
+            --bh-fs-h1: 30px;
+            --bh-fs-h2: 28px;
+            --bh-fs-h3: 26px;
+            --bh-fs-h4: 24px;
+            --bh-fs-h5: 22px;
+            --bh-fs-h6: 20px;
+        }
+        &.govbh-head__textsize-large{
+            /* Heading Variable */
+            --bh-fs-h1: 34px;
+            --bh-fs-h2: 32px;
+            --bh-fs-h3: 30px;
+            --bh-fs-h4: 28px;
+            --bh-fs-h5: 26px;
+            --bh-fs-h6: 24px;
+            /* Paragraph Variable */
+            --bh-fs-p-xl: 20px;
+            --bh-fs-p-l: 18px;
+            --bh-fs-p-m: 16px;
+            --bh-fs-p-s: 14px;
+            --bh-fs-p-xs: 12px;
+            --bh-fs-p-xxs: 10px;
+        }
+    }
+}
+@media #{$xss}{
+    :root{
+        /* Heading Variable */
+        --bh-fs-h1: 30px;
+        --bh-fs-h2: 28px;
+        --bh-fs-h3: 26px;
+        --bh-fs-h4: 22px;
+        --bh-fs-h5: 20px;
+        --bh-fs-h6: 18px;
+        &.govbh-head__textsize-small{
+            /* Heading Variable */
+            --bh-fs-h1: 28px;
+            --bh-fs-h2: 26px;
+            --bh-fs-h3: 24px;
+            --bh-fs-h4: 22px;
+            --bh-fs-h5: 20px;
+            --bh-fs-h6: 18px;
+        }
+        &.govbh-head__textsize-large{
+            /* Heading Variable */
+            --bh-fs-h1: 32px;
+            --bh-fs-h2: 30px;
+            --bh-fs-h3: 28px;
+            --bh-fs-h4: 26px;
+            --bh-fs-h5: 24px;
+            --bh-fs-h6: 22px;
+        }
+    }
+}
+h1,h2,h3,h4,h5,h6{
+    color: var(--bh-primary);
+    font-weight: var(--bh-fw-bold);
+    line-height: 1.4;
+}
+.govbh-fs-h1,.govbh-fs-h2,.govbh-fs-h3,.govbh-fs-h4,.govbh-fs-h5,.govbh-fs-h6{
+    font-weight: var(--bh-fw-bold);
+    line-height: 1.4;
+}
+h1,.govbh-fs-h1{
+    font-size: var(--bh-fs-h1);    
+}
+h2,.govbh-fs-h2{
+    font-size: var(--bh-fs-h2);
+}
+h3,.govbh-fs-h3{
+    font-size: var(--bh-fs-h3);
+}
+h4,.govbh-fs-h4{
+    font-size: var(--bh-fs-h4);
+}
+h5,.govbh-fs-h5{
+    font-size: var(--bh-fs-h5);
+}
+h6,.govbh-fs-h6{
+    font-size: var(--bh-fs-h6);
+}
+.govbh-text--extra-large{
+    font-size: var(--bh-fs-p-xl);
+}
+.govbh-text--large{
+    font-size: var(--bh-fs-p-l);
+}
+.govbh-text--medium{
+    font-size: var(--bh-fs-p-m);
+}
+.govbh-text--small{
+    font-size: var(--bh-fs-p-s);
+}
+.govbh-text--extra-small{
+    font-size: var(--bh-fs-p-xs);
+}
+.govbh-font-weight--light{
+    font-weight: var(--bh-fw-light);
+}
+.govbh-font-weight--regular{
+    font-weight: var(--bh-fw-regular);
+}
+.govbh-font-weight--medium{
+    font-weight: var(--bh-fw-medium);
+}
+.govbh-font-weight--semibold{
+    font-weight: var(--bh-fw-semibold);
+}
+.govbh-font-weight--bold{    
+    font-weight: var(--bh-fw-bold);
+}
+.govbh-abstract,.govbh-abstract p,abstract , abstract p{
+    font-size: var(--bh-fs-p-xl);
+    font-weight: var(--bh-fw-bold);
+    .govbh-abstract--light,.govbh-abstract--light p{
+        color: var(--bh-tertiary);
+    }
+}
+section,.govbh-section{ 
+    background-color: var(--bh-bg-primary);
+}
+.theme--dark{
+    color: var(--bh-light);
+}
+.text--dark{
+    color: var(--bh-primary);
+}
+.text--brand{
+    color: var(--bh-brand);
+}
+.text--primary{
+    color: var(--bh-primary);
+}
+.text--secondary{
+    color: var(--bh-secondary);
+}
+.text--tertiary{
+    color: var(--bh-tertiary);
+}
+.text--accent{
+    color: var(--bh-accent);
+}
+.text--success{
+    color: var(--bh-success);
+}
+.bg--brand{
+    background-color: var(--bh-bg-brand)!important;
+    color: var(--bh-light);
+    a{
+        color: var(--bh-light);
+    }
+}
+.bg--primary{
+    background-color: var(--bh-bg-primary)!important;
+}
+.bg--secondary, .bg--grey{
+    background-color: var(--bh-bg-secondary);
+}
+.bg--tertiary{
+    background-color: var(--bh-bg-tertiary);
+}
+.bg--dark{
+    background-color: var(--bh-bg-dark);
+}
+.bg--light-grey{
+    background-color: var(--bh-bg-light-grey);
+}
+.bg--light-brand{
+    background-color: var(--bh-bg-light-brand1);
+}
+.govbh--box-shadow{
+    box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.15);
+}
+.govbh-border-grey{
+    border: 1px solid var(--bh-border-secondary);
+}
+.min-w-50{
+    min-width: 50% !important;
+}
+div[tabindex="0"]{
+    &:focus-visible{
+        box-shadow: 0 0px 0px 3px var(--bh-focus) inset;
+        border-radius: var(--bh-border-radius-xss);
+        outline: none;
+    }
+}

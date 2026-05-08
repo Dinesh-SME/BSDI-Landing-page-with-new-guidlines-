@@ -1,0 +1,569 @@
+.govbh-heroslider{
+    position: relative;
+    // &.bg--brand{
+    //     .swiper{
+    //         background: var(--bh-bg-brand);
+    //         .swiper-slide{
+    //             background: var(--bh-bg-brand);
+    //         }
+    //     }
+    // }
+    // &.bg--grey{
+    //     .swiper{
+    //         background: var(--bh-bg-secondary);
+    //         .swiper-slide{
+    //             background: var(--bh-bg-secondary);
+    //         }
+    //     }
+    // }
+    //added comment by Paul - 18.Aug.2025
+    &.theme--dark{
+        .govbh-heroslider__content {
+            h1,p{
+                color: var(--bh-light);
+            }
+        }
+    }
+    .swiper-slide{
+        height: auto;
+        //background-color: var(--bh-bg-primary);
+        .container,.row{
+            height: 100%;
+            @media #{$xm}{
+                flex-direction: column;
+            }
+        }
+        .container.allow-extend {
+            padding: 0;
+            @media #{$xm}{
+                max-width: 100%!important;
+                padding: 0;
+            }
+        }
+        .extend-column{
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            @media #{$xm}{
+                width: 100%!important;
+                height: auto;
+            }
+        }
+        .govbh-heroslider__img{
+            height: 100%;
+            width: 100%;
+            aspect-ratio: 16/7;
+            //height: 550px;
+            // @media #{$xl}{
+            //     height: 500px;
+            // }
+            @media #{$xm}{
+                aspect-ratio: 16/6;
+                //height: 400px;
+            }
+            @media #{$xss}{
+                aspect-ratio: 16/10;
+                //height: 300px;
+            }
+            img{
+                height: 100%;
+                object-fit: cover;                
+            }
+            video{
+                min-height: 100%;
+                min-width: 100%;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+            .govbh-heroslider__video,.govbh-heroslider__youtube{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                @include transition(0.5s);
+                &.active{
+                    visibility: hidden;
+                    opacity: 0;
+                }
+            }
+            .govbh-heroslider__img-poster {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                z-index: 1;
+            }  
+        } 
+        .govbh-heroslider__navigation {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            .govbh-heroslider__navigation-arrows{
+                color: var(--bh-light);
+                background: var(--bh-brand);
+                width: 48px;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 15px;
+                @include transition(0.3s);
+                cursor: pointer;
+                &.swiper-button-disabled{
+                    opacity: 0.5;
+                    pointer-events: none;
+                }
+                &:hover{
+                    background-color: var(--bh-accent);
+                }
+            }
+        } 
+    }
+    .govbh-heroslider__content {
+        padding: 65px 0;
+        padding-inline-end: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding-inline-start: calc(var(--bs-gutter-x) * .5) !important;
+        --bs-gutter-x: 1.5rem;
+        @media #{$xm}{
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 30px 0;
+            padding-inline-end: calc(var(--bs-gutter-x) * .5);
+            padding-inline-start: calc(var(--bs-gutter-x) * .5);
+            --bs-gutter-y: 0;
+        }
+        @media #{$xs}{
+            max-width: 540px;
+        }
+        @media #{$xss}{
+            max-width: 100%;
+            gap: 2px;
+        }
+        .govbh-heroslider__title{
+            font-size: var(--bh-fs-h1);
+            font-weight: var(--bh-fw-bold);
+            line-height: 1.4;
+            padding-inline-start: 20px;
+            position: relative;
+            margin-bottom: 1rem;
+            @include line-clamp(4);
+            @media #{$xsss}{
+                padding-inline-start: 15px;
+            }
+            &::before{
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 5px;
+                background-color: var(--bh-border-accent);
+            }
+        }
+        p{
+            @include line-clamp(3);
+            font-size: var(--bh-fs-p-l);
+        }
+    }    
+    .video-background-controls{
+        visibility: hidden;
+    }
+    .govbh-heroslider__playpause {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 2;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: rgba(#000000,0.2);
+        color: var(--bh-light);
+        font-size: 24px;
+        @include transition(0.3s);
+        border: none;
+        @media #{$xxl}{
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+        }
+        @media #{$xm}{
+            right: auto;
+            left: 0;
+            width: 48px;
+            height: 35px;
+            font-size: 15px;
+            opacity: 0.5;
+            background-color: var(--bh-bg-brand);
+        }
+        .icon--play{
+            display: none;
+        }
+        &.pause{
+            background-color: var(--bh-bg-brand);
+            .icon--play{
+                display: inline-block;
+            }
+            .icon--pause{
+                display: none;
+            }   
+            @media #{$xm}{
+                opacity: 1;
+            }
+        }
+        &:hover{
+            background-color: var(--bh-bg-brand);
+        }
+    }
+}
+.govbh-fullwidthslider{
+    position: relative;
+    //height: calc(100dvh - 195px);
+    height: 100dvh;
+    min-height: 420px;
+    max-height: 720px;
+    @media #{$xxl}{
+        max-height:600px;
+    }
+    @media #{$xl}{
+        max-height:500px;
+    }
+    @media #{$xs}{
+        min-height:auto;
+        max-height:none;
+        height: auto;
+    }
+    .govbh-theme__pagination.govbh-align-bottom{
+        width: 60%;
+        left: 20%;
+    }
+    .swiper{
+        height: 100%;
+    }
+    .govbh-theme__pagination.govbh-align-bottom{
+        @media #{$xs}{
+            bottom: 10px;
+        }
+    }
+    .swiper-slide{   
+        .govbh-fullwidthslider__wrapper{
+            height: 100%;
+            width: 100%;
+        }     
+        .govbh-fullwidthslider__video{
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            &:before{
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 80%;
+                height: 100%;
+                z-index: 1;
+                background: rgb(0,0,0);
+                background: -moz-linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                background: -webkit-linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1); 
+            }
+            &:after{
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 70%;
+                height: 100%;
+                z-index: 1;
+                background: rgb(0,0,0);
+                background: -moz-linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                background: -webkit-linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1); 
+            }
+            &.active{
+                .youtube-background{
+                    opacity: 0;
+                    visibility: hidden;
+                }
+                .govbh-fullwidthslider__img{
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+            .govbh-fullwidthslider__img{
+                opacity: 0;
+                visibility: hidden;
+                z-index: 2;
+                @include transition(0.5s);
+            }
+            .youtube-background{
+                @include transition(0.5s);
+            }
+            .govbh-fullwidthslider__video-local{
+                height: 100%;
+                width: 100%;
+                video{
+                    min-height: 100%;
+                    min-width: 100%;
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            img{
+                height: 100%;
+                object-fit: cover;
+            }
+            .video-background-controls{
+                display: none;
+            }
+        }        
+        .govbh-fullwidthslider__img{
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            &:before{
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 80%;
+                height: 100%;
+                background: rgb(0,0,0);
+                background: -moz-linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                background: -webkit-linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1); 
+            }
+            &:after{
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 70%;
+                height: 100%;
+                background: rgb(0,0,0);
+                background: -moz-linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                background: -webkit-linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1); 
+            }
+            img{
+                height: 100%;
+                object-fit: cover;
+            }
+        }        
+    }
+    .govbh-fullwidthslider__content {
+        padding: 65px 0;
+        position: relative;
+        top: 0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        z-index: 2;
+        @media #{$xm}{
+            padding: 100px 0;
+        }
+        .govbh-fullwidthslider__playpause {
+            position: relative;
+            z-index: 2;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: rgba(#000000,0.2);
+            color: var(--bh-light);
+            font-size: 24px;
+            @include transition(0.3s);
+            border-radius: 100%;
+            text-decoration: none;
+            @media #{$xxl}{
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            @media #{$xs}{
+                width: 43px;
+                height: 43px;
+                font-size: 15px;
+                opacity: 0.5;
+            }
+            .icon--play{
+                display: none;
+            }
+            &.pause{
+                background-color: var(--bh-accent);
+                .icon--play{
+                    display: inline-block;
+                }
+                .icon--pause{
+                    display: none;
+                }   
+                @media #{$xm}{
+                    opacity: 1;
+                }
+            }
+            &:hover{
+                background-color: var(--bh-accent-hover);
+            }
+        }
+        .govbh-fullwidthslider__title{
+            font-size: var(--bh-fs-h1);
+            font-weight: var(--bh-fw-bold);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            padding-inline-start: 20px;
+            padding-inline-end: 40px;
+            position: relative;
+            @include line-clamp(4);
+            margin-block-end: 22px;
+            @media #{$xs}{
+                padding-inline-start: 15px;
+                padding-inline-end: 0px;
+            }
+            &::before{
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 5px;
+                background-color: var(--bh-border-accent);
+                @media #{$xs}{
+                    width: 4px;
+                }
+            }
+        }
+        p{
+            @include line-clamp(3);
+            font-size: var(--bh-fs-p-l);
+            margin-block-end: 20px;
+            @media #{$xss}{
+                display: none;
+            }
+        }
+    }    
+}
+//With Search Slider CSS Starts 
+.govbh-searchslider {
+    position: relative;
+    overflow: hidden;
+    .govbh-searchslider__img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        &:before{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80%;
+            height: 100%;
+            z-index: 1;
+            background: rgb(0,0,0);
+            background: -moz-linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+            background: -webkit-linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+            background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1); 
+        }
+        &:after{
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 70%;
+            height: 100%;
+            z-index: 1;
+            background: rgb(0,0,0);
+            background: -moz-linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+            background: -webkit-linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+            background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5004202364539565) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1); 
+            opacity: 0.2;
+        }
+        img{
+            object-fit: cover;
+            height: 100%;
+        }
+    }
+    .govbh-searchslider__content {
+        margin: 150px auto;
+        position: relative;
+        z-index: 1;
+        max-width: 72%;
+        background: rgba(var(--bh-bg-primary-rgba),0.9);
+        border-radius: var(--bh-border-radius-xs);
+        padding: 30px;
+        padding-block-end: 40px;
+        @media #{$xl}{
+            max-width: 85%;
+        }
+        @media #{$xm}{
+            max-width: 100%;
+            margin: 100px auto;
+        }
+        @media #{$xss}{
+            padding:25px 15px;
+        }
+        h2{
+            font-weight: var(--bh-fw-bold);
+            color: var(--bh-primary);
+            margin-bottom: 10px;
+        }
+        p{
+            font-size: var(--bh-fs-p-s);
+            color: var(--bh-secondary);
+            margin-bottom: 10px;
+        }
+        ul{
+            display: flex;
+            align-items: center;
+            gap:5px 15px;
+            flex-wrap: wrap;
+            li{
+                a{
+                    font-size: var(--bh-fs-p-m);
+                    font-weight: var(--bh-fw-bold);
+                    color: var(--bh-brand);
+                    text-decoration: underline;
+                    padding: 3px 0;
+                    &:hover{
+                        color: var(--bh-accent);
+                    }
+                }
+            }
+        }
+        .govbh-btn{
+            @media #{$xs}{
+                height: 100%;
+            }
+            @media #{$xss}{
+                width: 100%;
+            }
+        }
+    }
+}

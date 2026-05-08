@@ -1,0 +1,207 @@
+// The CSS Variables starts here
+:root {
+    --bh-ff-primary:"Public Sans", sans-serif;
+    --bh-ff-secondary:"Almarai", sans-serif;
+    /* Heading Variable */
+    --bh-fs-h1: 2.25rem;
+    --bh-fs-h2: 2.125rem;
+    --bh-fs-h3: 2rem;
+    --bh-fs-h4: 1.875rem;
+    --bh-fs-h5: 1.75rem;
+    --bh-fs-h6: 1.625rem;
+    /* Paragraph Variable */
+    --bh-fs-p-xl: 1.25rem;
+    --bh-fs-p-l: 1.125rem;
+    --bh-fs-p-m: 1rem;
+    --bh-fs-p-s: 0.875rem;
+    --bh-fs-p-xs: 0.75rem;
+    --bh-fs-p-xxs: 0.625rem;
+    /* Font Weight Variable */
+    --bh-fw-light: 300;
+    --bh-fw-regular: 400;
+    --bh-fw-medium: 500;
+    --bh-fw-semibold: 600;
+    --bh-fw-bold: 700;
+    /* Color Variable */
+    --bh-light: #ffffff;
+    --bh-dark: #000000;
+    --bh-brand: #012E5D;
+    --bh-primary: #000000;
+    --bh-secondary: #333333;
+    --bh-tertiary: #999999;
+    --bh-accent: #C63B2B;
+    --bh-info: #0AA2C0;
+    --bh-info-off:#CFF4FC;
+    --bh-info-content:#055160;
+    --bh-success: #3B9B6F;
+    --bh-success-off: #DBF3E8;
+    --bh-success-content: #2C7453;
+    --bh-warning: #FF8300;
+    --bh-warning-off: #FFE6CC;
+    --bh-warning-content: #CC6900;
+    --bh-failure: #DC3545;
+    --bh-failure-off: #F8D7DA;
+    --bh-failure-content: #B02A37;
+    --bh-error: #DC3545;
+    --bh-focus: rgba(54,149,250,0.6);
+    --bh-linkinverse: #F1F1F1;
+    --bh-inverse: #CBCBCB;
+    /* BackgroundColor Variable */
+    --bh-bg-primary:#ffffff;
+    --bh-bg-primary-rgba:255,255,255;
+    --bh-bg-secondary:#F7F7F7;
+    --bh-bg-tertiary:#CBCBCB;
+    --bh-bg-brand: #012E5D;
+    --bh-bg-dark: #333333;
+    --bh-bg-light-brand: #E5EAEF;
+    /* Border Variable */
+    --bh-border-primary:#999999;
+    --bh-border-secondary:#CBCBCB;
+    --bh-border-tertiary:#F1F1F1;
+    --bh-border-brand: #012E5D;
+    /* Border Radius Variable */
+    --bh-border-radius-l:1rem;
+    --bh-border-radius-m:0.75rem;
+    --bh-border-radius-s:0.5rem;
+    --bh-border-radius-xs:0.25rem;
+    --bh-border-radius-xss:0.125rem;
+    --bh-border-radius-100:100%;
+}
+//Responsive
+$xxxxl: '(max-width: 1990.6238rem)';
+$xxxl: '(max-width: 1590.6238rem)';
+$xxl: '(max-width: 1390.6238rem)';
+$xl: '(max-width: 1190.6238rem)';
+$xm: '(max-width: 990.1238rem)';
+$xs: '(max-width: 760.4988rem)';
+$xss: '(max-width: 570.3738rem)';
+$xsss: '(max-width: 30rem)';
+
+@media #{$xl}{
+    :root{
+        /* Heading Variable */
+        --bh-fs-h1: 2.125rem;
+        --bh-fs-h2: 2rem;
+        --bh-fs-h3: 1.875rem;
+        --bh-fs-h4: 1.75rem;
+        --bh-fs-h5: 1.625rem;
+        --bh-fs-h6: 1.5rem;
+         /* Paragraph Variable */
+         --bh-fs-p-xl: 1.125rem;
+         --bh-fs-p-l: 1rem;
+         --bh-fs-p-m: 0.875rem;
+         --bh-fs-p-s: 0.75rem;
+         --bh-fs-p-xs: 0.625rem;
+         --bh-fs-p-xxs: 0.5rem;
+    }
+}
+@media #{$xm}{
+    :root{
+        /* Heading Variable */
+        --bh-fs-h1: 2rem;
+        --bh-fs-h2: 1.875rem;
+        --bh-fs-h3: 1.75rem;
+        --bh-fs-h4: 1.625rem;
+        --bh-fs-h5: 1.5rem;
+        --bh-fs-h6: 1.375rem;
+         /* Paragraph Variable */
+        --bh-fs-p-xl: 1.125rem;
+        --bh-fs-p-l: 1rem;
+        --bh-fs-p-m: 0.875rem;
+        --bh-fs-p-s: 0.75rem;
+        --bh-fs-p-xs: 0.625rem;
+        --bh-fs-p-xxs: 0.5rem;
+    }
+}
+@media #{$xsss}{
+    :root{
+        --bh-fs-p-xs: 0.625rem;
+    }
+}
+// @font-face {
+//     font-family:"IBM Plex Sans Arabic";
+//     unicode-range: U+30-39;
+// }
+
+//BreakPoint
+// @media (min-width: 100rem) {
+//     .container{
+//         max-width: 95rem;
+//     }
+// }
+
+h1{
+    font-size: var(--bh-fs-h1);
+    font-weight: var(--bh-fw-bold);
+}
+h2{
+    font-size: var(--bh-fs-h2);
+    font-weight: var(--bh-fw-bold);
+}
+h3{
+    font-size: var(--bh-fs-h3);
+    font-weight: var(--bh-fw-bold);
+}
+h4{
+    font-size: var(--bh-fs-h4);
+    font-weight: var(--bh-fw-bold);
+}
+h5{
+    font-size: var(--bh-fs-h5);
+    font-weight: var(--bh-fw-bold);
+}
+h6{
+    font-size: var(--bh-fs-h6);
+    font-weight: var(--bh-fw-bold);
+}
+.--bh-bg-secondary{
+    background-color: var(--bh-bg-secondary);
+}
+.--bh-bg-brand{
+    background-color: var(--bh-bg-brand);
+}
+.--bh-bg-dark{
+    background-color: var(--bh-bg-dark);
+}
+.--bh-light{
+    color: var(--bh-light);
+}
+.--bh-brand{
+    color: var(--bh-brand);
+}
+.--bh-primary{
+    color: var(--bh-primary);
+}
+.--bh-secondary{
+    color: var(--bh-secondary);
+}
+.--bh-tertiary{
+    color: var(--bh-tertiary);
+}
+.--border-top{
+    border-top:0.0625rem solid var(--bh-border-secondary);
+}
+.--border-bottom-primary{
+    border-bottom:0.0625rem solid var(--bh-border-primary);
+}
+.--border-radius-100{
+    border-radius: 100%;
+}
+.--border-radius-l{
+    border-radius: 1rem;
+}
+.--border-radius-m{
+    border-radius: 0.75rem;
+}
+.--border-radius-s{
+    border-radius: 0.5rem;
+}
+.--border-radius-xs{
+    border-radius: 0.25rem;
+}
+.--border-radius-xss{
+    border-radius: 0.125rem;
+}
+.--padding-m{
+    padding: 0.625rem 0.9375rem;
+}
