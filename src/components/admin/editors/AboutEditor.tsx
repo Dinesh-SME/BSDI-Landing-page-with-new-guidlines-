@@ -51,6 +51,25 @@ export default function AboutEditor() {
           onChange={(v) => setDraft({ ...draft, description2: v })}
           onChangeAr={(v) => setDraft({ ...draft, description2_ar: v })}
         />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <BilingualField
+            label="Link Text"
+            value={draft.linkText || ""}
+            valueAr={draft.linkText_ar || ""}
+            onChange={(v) => setDraft({ ...draft, linkText: v })}
+            onChangeAr={(v) => setDraft({ ...draft, linkText_ar: v })}
+          />
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Link URL</label>
+            <input 
+              type="text" 
+              value={draft.linkUrl || ""} 
+              onChange={(e) => setDraft({ ...draft, linkUrl: e.target.value })}
+              className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="#portal"
+            />
+          </div>
+        </div>
         <SectionStyleControls
           label="Heading"
           styleEn={draft.headingStyle || {}}

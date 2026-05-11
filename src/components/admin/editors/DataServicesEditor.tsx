@@ -3,7 +3,7 @@ import { useContentStore, defaultDataServices } from "@/stores/contentStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Save, Plus, Trash2, ImagePlus, Pencil, RotateCcw } from "lucide-react";
+import { Save, Plus, Trash2, ImagePlus, Pencil, RotateCcw, Crop as CropIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ResetConfirmModal from "../ResetConfirmModal";
@@ -153,16 +153,36 @@ export default function DataServicesEditor() {
             </div>
             <div>
               <Label>Logo</Label>
-              <div className="mt-1.5 border-2 border-dashed border-border rounded-xl p-4 text-center">
+              <div className="mt-1.5 border-2 border-dashed border-border rounded-xl p-6 text-center hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors cursor-pointer relative">
                 {newEntity.logo ? (
-                  <img src={newEntity.logo} alt="" className="w-20 h-20 mx-auto object-contain" />
+                  <div className="relative group/logo">
+                    <img src={newEntity.logo} alt="" className="w-24 h-24 mx-auto object-contain" />
+                    <Button 
+                      variant="secondary" 
+                      size="sm" 
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 opacity-0 group-hover/logo:opacity-100 transition-opacity"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCropSrc(newEntity.logo);
+                        setCropTarget("new");
+                      }}
+                    >
+                      <CropIcon size={14} className="mr-1" /> Recrop
+                    </Button>
+                  </div>
                 ) : (
                   <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                    <ImagePlus size={24} />
-                    <span className="text-sm">Upload logo</span>
+                    <ImagePlus size={32} className="text-primary/40" />
+                    <span className="text-sm font-medium">Click to upload logo</span>
+                    <span className="text-[10px] opacity-60">PNG or SVG recommended</span>
                   </div>
                 )}
-                <input type="file" accept="image/*" onChange={(e) => handleLogoUpload(e, "new")} className="mt-2 text-sm" />
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  onChange={(e) => handleLogoUpload(e, "new")} 
+                  className="absolute inset-0 opacity-0 cursor-pointer" 
+                />
               </div>
             </div>
             <div>
@@ -174,7 +194,7 @@ export default function DataServicesEditor() {
               setNewEntity({ name: "", logo: "", link: "" });
               setModalOpen(false);
             }}>
-              Create
+              Create Entity
             </Button>
           </div>
         </DialogContent>
@@ -194,9 +214,22 @@ export default function DataServicesEditor() {
               </div>
               <div>
                 <Label>Logo</Label>
-                <div className="mt-1.5 border-2 border-dashed border-border rounded-xl p-4 text-center">
-                  <img src={editEntity.logo} alt="" className="w-20 h-20 mx-auto object-contain" />
-                  <input type="file" accept="image/*" onChange={(e) => handleLogoUpload(e, "edit")} className="mt-2 text-sm" />
+                <div className="mt-1.5 space-y-3">
+                  <div className="border-2 border-dashed border-border rounded-xl p-6 text-center relative group/edit-logo">
+                    <img src={editEntity.logo} alt="" className="w-24 h-24 mx-auto object-contain" />
+                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover/edit-logo:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                      <Button variant="secondary" size="sm" onClick={() => {
+                        setCropSrc(editEntity.logo);
+                        setCropTarget("edit");
+                      }}>
+                        <CropIcon size={14} className="mr-1" /> Crop
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Label className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Replace Image</Label>
+                    <input type="file" accept="image/*" onChange={(e) => handleLogoUpload(e, "edit")} className="text-xs file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
+                  </div>
                 </div>
               </div>
               <div>
@@ -204,7 +237,7 @@ export default function DataServicesEditor() {
                 <Input value={editEntity.link} onChange={(e) => setEditEntity({ ...editEntity, link: e.target.value })} className="mt-1.5" placeholder="https://..." />
               </div>
               <Button className="w-full" onClick={handleEditUpdate}>
-                Update
+                Update Entity
               </Button>
             </div>
           )}

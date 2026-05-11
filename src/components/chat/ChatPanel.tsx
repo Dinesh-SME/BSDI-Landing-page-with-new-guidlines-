@@ -122,13 +122,6 @@ export default function ChatPanel() {
         </div>
         <div className="flex items-center gap-1">
           <button 
-            onClick={() => setIsOpen(false)}
-            className="p-1.5 hover:bg-white/10 rounded-lg text-white/60 hover:text-white transition-colors"
-            title="Minimize"
-          >
-            <Minimize2 size={14} />
-          </button>
-          <button 
             onClick={() => setIsFullscreen(!isFullscreen)}
             className="p-1.5 hover:bg-white/10 rounded-lg text-white/60 hover:text-white transition-colors"
             title={isFullscreen ? "Restore" : "Expand"}

@@ -56,6 +56,8 @@ const en: Dict = {
   "auth.invalid": "Invalid username or password",
   "auth.loginSubtitle": "Sign in to continue to BSDI",
   "auth.adminPanel": "Admin Panel",
+  "auth.administrator": "Administrator",
+  "auth.user_role": "User",
   "nav.login": "Login",
 };
 
@@ -113,6 +115,8 @@ const ar: Dict = {
   "auth.invalid": "اسم المستخدم أو كلمة المرور غير صحيحة",
   "auth.loginSubtitle": "سجّل الدخول للمتابعة إلى BSDI",
   "auth.adminPanel": "لوحة التحكم",
+  "auth.administrator": "مسؤول النظام",
+  "auth.user_role": "مستخدم",
   "nav.login": "دخول",
 };
 

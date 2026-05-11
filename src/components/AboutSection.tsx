@@ -26,93 +26,90 @@ export default function AboutSection() {
     <section 
       id="about" 
       ref={containerRef}
-      className="relative h-[85vh] md:h-[90vh] w-full overflow-hidden flex items-center justify-center"
+      className="relative h-[70vh] md:h-[80vh] w-full overflow-hidden flex items-center justify-center bg-[#0a192f]"
     >
-      {/* Parallax Background Layer — Natural colors, cinematic zoom */}
+      {/* Parallax Background Layer */}
       <motion.div 
         style={{ y, scale }}
-        className="absolute inset-[-15%] z-0"
+        className="absolute inset-[-10%] z-0"
       >
         <img 
           src={aboutBg} 
           alt="Bahrain Cityscape" 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover grayscale-[30%] contrast-[1.1]"
         />
         
-        {/* Reduced overlays — buildings clearly visible, brand atmosphere maintained */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a192f]/60 via-[#0a192f]/40 to-[#0a192f]/65" />
-        <div className="absolute inset-0 bg-[#001f3f]/20 mix-blend-multiply" />
+        {/* Dark Dramatic Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/70 to-slate-900/90" />
       </motion.div>
-
-      {/* Subtle animated grid pattern for depth */}
-      <div 
-        className="absolute inset-0 z-[1] opacity-[0.04] pointer-events-none"
-        style={{ 
-          backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px"
-        }}
-      />
 
       {/* Foreground Content Container */}
       <motion.div 
         style={{ opacity }}
-        className="container mx-auto px-6 z-10 relative"
+        className="container mx-auto px-6 z-10 relative text-center"
       >
-        <div className="max-w-5xl mx-auto">
-          
-          {/* Glass Container for content */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
+        <div className="max-w-4xl mx-auto space-y-8">
+          {/* Heading */}
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="bg-white/[0.04] backdrop-blur-sm rounded-3xl p-8 md:p-14 border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.2)]"
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white"
+            style={styles.heading}
           >
-            {/* Decorative accent line */}
-            <div className="w-16 h-1 bg-gradient-to-r from-primary to-accent rounded-full mb-8 mx-auto md:mx-0" />
+            {L(about.heading, about.heading_ar)}
+          </motion.h2>
 
-            <div className="text-center md:text-left space-y-8">
-              {/* Heading */}
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white drop-shadow-lg"
-                style={styles.heading}
+          {/* Description */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="space-y-6"
+          >
+            <p 
+              className="text-white/90 text-lg md:text-xl lg:text-2xl leading-relaxed max-w-3xl mx-auto font-medium"
+              style={styles.description}
+            >
+              {L(about.description1, about.description1_ar)}
+            </p>
+            {about.description2 && (
+              <p 
+                className="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
+                style={styles.description}
               >
-                {L(about.heading, about.heading_ar)}
-              </motion.h2>
-
-              {/* Description Paragraphs */}
-              <div className="space-y-6 max-w-4xl">
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.25 }}
-                  className="text-white/90 text-lg md:text-2xl leading-relaxed font-medium"
-                  style={styles.description}
-                >
-                  {L(about.description1, about.description1_ar)}
-                </motion.p>
-
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  className="text-white/60 text-base md:text-xl leading-relaxed"
-                  style={styles.description}
-                >
-                  {L(about.description2, about.description2_ar)}
-                </motion.p>
-              </div>
-            </div>
+                {L(about.description2, about.description2_ar)}
+              </p>
+            )}
           </motion.div>
+
+          {/* Action Link (Reference Style) */}
+          {(about.linkText || about.linkUrl) && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="pt-8"
+            >
+              <a 
+                href={about.linkUrl || "#"}
+                className="group inline-flex items-center gap-3 text-white font-black text-xs md:text-sm uppercase tracking-[0.3em] border-b-2 border-white/30 pb-2 hover:border-white transition-all duration-300"
+              >
+                {L(about.linkText || "LEARN MORE", about.linkText_ar)}
+                <svg 
+                  className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" 
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"
+                >
+                  <path d="M7 17L17 7M17 7H7M17 7V17" />
+                </svg>
+              </a>
+            </motion.div>
+          )}
         </div>
       </motion.div>
-      
       {/* Decorative Top/Bottom Borders */}
       <div className="absolute top-0 left-0 w-full h-px bg-white/10 z-10" />
       <div className="absolute bottom-0 left-0 w-full h-px bg-white/10 z-10" />

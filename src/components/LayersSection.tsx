@@ -146,32 +146,32 @@ export default function LayersSection() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
                   {(selectedLayer.category || selectedLayer.category_ar) && (
                     <Badge className="mb-3 bg-primary/90 text-white border-0 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold">
                       {L(selectedLayer.category || "", selectedLayer.category_ar)}
                     </Badge>
                   )}
-                  <h3 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-2">
+                  <h3 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-2 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
                     {L(selectedLayer.title, selectedLayer.title_ar)}
                   </h3>
                   {selectedLayer.description && (
-                    <p className="text-sm md:text-base text-white/80 line-clamp-2 max-w-xl">
+                    <p className="text-sm md:text-base text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] line-clamp-2 max-w-xl font-medium">
                       {L(selectedLayer.description, selectedLayer.description_ar)}
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="overflow-y-auto p-8 space-y-10 custom-scrollbar">
+              <div className="overflow-y-auto p-5 md:p-6 space-y-6 custom-scrollbar">
                 {/* Dataset Overview */}
                 {(selectedLayer.detailedDescription || selectedLayer.detailedDescription_ar) && (
                   <section>
-                    <h4 className="flex items-center gap-2.5 text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
+                    <h4 className="flex items-center gap-2.5 text-xs font-bold text-muted-foreground/60 uppercase tracking-widest mb-1.5">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                       {labels.overview}
                     </h4>
-                    <p className="text-[15px] text-gray-600 leading-relaxed font-medium">
+                    <p className="text-[15px] text-gray-600 leading-relaxed font-medium mb-0">
                       {L(selectedLayer.detailedDescription || "", selectedLayer.detailedDescription_ar)}
                     </p>
                   </section>
@@ -179,11 +179,11 @@ export default function LayersSection() {
 
                 {/* Spatial Information Grid */}
                 <section>
-                  <h4 className="flex items-center gap-2.5 text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">
+                  <h4 className="flex items-center gap-2.5 text-xs font-bold text-muted-foreground/60 uppercase tracking-widest mb-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                     {labels.spatial}
                   </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
                       { icon: FileType, label: labels.format, value: selectedLayer.dataFormat },
                       { icon: Globe, label: labels.crs, value: selectedLayer.coordinateSystem },
@@ -195,7 +195,7 @@ export default function LayersSection() {
                     ].filter((m) => m.value).map((m, i) => {
                       const Icon = m.icon;
                       return (
-                        <div key={i} className="group/item flex items-center gap-4 p-4 rounded-2xl bg-gray-50/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all duration-300">
+                        <div key={i} className="group/item flex items-center gap-3 p-3 rounded-2xl bg-gray-50/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all duration-300">
                           <div className="p-2.5 rounded-xl bg-white border border-gray-100 text-primary shadow-sm group-hover/item:bg-primary group-hover/item:text-white transition-colors">
                             <Icon size={16} />
                           </div>
@@ -212,10 +212,10 @@ export default function LayersSection() {
                 {/* Usage & Applications */}
                 {(selectedLayer.usageApplications || selectedLayer.usageApplications_ar) && (
                   <section>
-                    <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
+                    <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-1">
                       <Sparkles size={15} className="text-primary" /> {labels.usage}
                     </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-0">
                       {L(selectedLayer.usageApplications || "", selectedLayer.usageApplications_ar)}
                     </p>
                   </section>
@@ -224,7 +224,7 @@ export default function LayersSection() {
                 {/* Tags */}
                 {((isAr ? selectedLayer.tags_ar : selectedLayer.tags) || []).length > 0 && (
                   <section>
-                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-2">
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
                       <Tag size={13} /> {labels.tags}
                     </div>
                     <div className="flex flex-wrap gap-1.5">
@@ -238,7 +238,7 @@ export default function LayersSection() {
                 {/* Related Layers */}
                 {(selectedLayer.relatedLayers || []).length > 0 && (
                   <section>
-                    <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
+                    <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
                       <LayersIcon size={15} className="text-primary" /> {labels.related}
                     </h4>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">

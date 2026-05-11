@@ -207,6 +207,14 @@
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
+
+  /* Analytics Grid Pattern for Empty Cards */
+  .analytics-grid-pattern {
+    background-image: 
+      linear-gradient(to right, currentColor 1px, transparent 1px),
+      linear-gradient(to bottom, currentColor 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
 }
 
 @keyframes float {

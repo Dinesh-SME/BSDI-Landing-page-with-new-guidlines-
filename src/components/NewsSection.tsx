@@ -21,6 +21,7 @@ export default function NewsSection() {
   const fmtDate = useLocalizeDate();
   const styles = useSectionStyles(news);
   const [open, setOpen] = useState(false);
+  const [selectedNews, setSelectedNews] = useState<any>(null);
 
   // All news sorted newest first (for the "All News" popup)
   const allSorted = useMemo(() => {
@@ -65,6 +66,8 @@ export default function NewsSection() {
         >
           {sortedItems.slice(0, 3).map((item, i) => {
             const title = L(item.title, item.title_ar);
+            const hasLink = item.link && item.link !== "#";
+            
             const card = (
               <div
                 className="govbh-newscard"
@@ -89,20 +92,23 @@ export default function NewsSection() {
                     {title}
                   </h3>
                   <div className="govbh-newscard__content-foot">
-                     <div className="govbh-btn govbh-btn--outline govbh-btn--small">
-                        {t("news.readMore")}
-                     </div>
+                     {hasLink ? (
+                       <a href={item.link} target="_blank" rel="noopener noreferrer" className="govbh-btn govbh-btn--outline govbh-btn--small">
+                          {t("news.readMore")}
+                       </a>
+                     ) : (
+                       <button 
+                        onClick={() => setSelectedNews(item)}
+                        className="govbh-btn govbh-btn--outline govbh-btn--small"
+                       >
+                          {t("news.readMore")}
+                       </button>
+                     )}
                   </div>
                 </div>
               </div>
             );
-            if (item.link && item.link !== "#") {
-              return (
-                <a key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="block h-full">
-                  {card}
-                </a>
-              );
-            }
+
             return <div key={item.id}>{card}</div>;
           })}
         </div>
@@ -148,7 +154,12 @@ export default function NewsSection() {
                 const excerpt = L(item.excerpt, item.excerpt_ar);
                 const hasLink = item.link && item.link !== "#";
                 const Inner = (
-                  <div className="flex gap-4 px-6 py-4 hover:bg-muted/50 transition-colors group">
+                  <div 
+                    className="flex gap-4 px-6 py-4 hover:bg-muted/50 transition-colors group cursor-pointer"
+                    onClick={() => {
+                      if (!hasLink) setSelectedNews(item);
+                    }}
+                  >
                     <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden shrink-0 bg-muted">
                       <img
                         src={item.image}
@@ -168,11 +179,9 @@ export default function NewsSection() {
                       <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed line-clamp-2">
                         {excerpt}
                       </p>
-                      {hasLink && (
-                        <span className="inline-flex items-center gap-1 mt-2 text-xs font-medium text-primary">
-                          {t("news.readMore")} <ArrowRight size={12} />
-                        </span>
-                      )}
+                      <span className="inline-flex items-center gap-1 mt-2 text-xs font-medium text-primary">
+                        {t("news.readMore")} <ArrowRight size={12} />
+                      </span>
                     </div>
                   </div>
                 );
@@ -190,6 +199,46 @@ export default function NewsSection() {
               })}
             </ul>
           </ScrollArea>
+        </DialogContent>
+      </Dialog>
+
+      {/* News Detail Popup */}
+      <Dialog open={!!selectedNews} onOpenChange={(o) => !o && setSelectedNews(null)}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-3xl border-none shadow-2xl bg-white">
+          {selectedNews && (
+            <div className="flex flex-col h-full max-h-[90vh]">
+              <div className="relative w-full h-[300px] md:h-[400px]">
+                <img 
+                  src={selectedNews.image} 
+                  alt={L(selectedNews.title, selectedNews.title_ar)} 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <div className="flex items-center gap-3 text-white/80 text-xs font-bold uppercase tracking-[0.2em] mb-3">
+                    <Calendar size={14} className="text-primary-foreground" />
+                    {fmtDate(selectedNews.date)}
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-display font-bold text-white leading-tight">
+                    {L(selectedNews.title, selectedNews.title_ar)}
+                  </h2>
+                </div>
+              </div>
+
+              <ScrollArea className="flex-1 p-8">
+                <div className="max-w-3xl mx-auto space-y-6">
+                  <div className="p-6 bg-primary/5 border-l-4 border-primary rounded-r-xl italic text-lg text-foreground/80 leading-relaxed font-medium">
+                    {L(selectedNews.excerpt, selectedNews.excerpt_ar)}
+                  </div>
+                  <div className="prose prose-slate max-w-none prose-p:text-muted-foreground prose-p:leading-loose prose-p:text-lg">
+                    {(L(selectedNews.description, selectedNews.description_ar) || "Detailed content coming soon.").split('\n').map((para: string, idx: number) => (
+                      <p key={idx}>{para}</p>
+                    ))}
+                  </div>
+                </div>
+              </ScrollArea>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </section>

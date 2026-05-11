@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Save, Plus, Trash2, Pencil, RotateCcw, BarChart3, GripVertical, Settings2, Sparkles, Layout } from "lucide-react";
+import { Save, Plus, Trash2, Pencil, RotateCcw, BarChart3, GripVertical, Settings2, Sparkles, Layout, Info } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ResetConfirmModal from "../ResetConfirmModal";
 import { BilingualField } from "../BilingualField";
-import { VIZ_STYLES } from "@/components/StatVisualization";
+import StatVisualization, { VIZ_STYLES, VizStyle, GridPatternBg } from "@/components/StatVisualization";
 import VisualizationPickerModal from "../VisualizationPickerModal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye, Smartphone, Tablet, Monitor, Moon, Sun } from "lucide-react";
@@ -38,7 +38,7 @@ export default function StatisticsEditor() {
   const { statistics, updateStatistics } = useContentStore();
   const [draft, setDraft] = useState({ ...statistics, stats: [...statistics.stats] });
   const [modalOpen, setModalOpen] = useState(false);
-  const [newStat, setNewStat] = useState({ target: "", suffix: "", label: "", label_ar: "" });
+  const [newStat, setNewStat] = useState({ target: "", suffix: "", label: "", label_ar: "", description: "", description_ar: "" });
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<StatEdit>({ target: "", suffix: "", label: "", label_ar: "" });
   const [resetOpen, setResetOpen] = useState(false);
@@ -102,6 +102,7 @@ export default function StatisticsEditor() {
   };
 
   return (
+    <div className="space-y-6 pb-12">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <div className="flex items-center justify-between mb-6 bg-muted/30 p-2 rounded-2xl border border-border/50">
           <TabsList className="bg-background/50 border border-border/50 rounded-xl p-1">
@@ -112,15 +113,6 @@ export default function StatisticsEditor() {
               <Eye size={16} /> Live Preview
             </TabsTrigger>
           </TabsList>
-
-          <div className="flex items-center gap-4">
-            <Button onClick={handleSave} className="gap-2 shadow-lg shadow-primary/20 h-10 px-6 font-bold text-xs uppercase tracking-tight" size="sm">
-              <Save size={16} /> Deploy Changes
-            </Button>
-            <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-destructive h-10 px-4 font-bold text-xs uppercase tracking-tight" onClick={() => setResetOpen(true)}>
-              <RotateCcw size={16} /> Reset
-            </Button>
-          </div>
         </div>
 
         <TabsContent value="editor" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -217,9 +209,22 @@ export default function StatisticsEditor() {
           </div>
         </TabsContent>
 
-        <TabsContent value="preview" className="animate-in fade-in zoom-in-95 duration-500">
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center justify-between bg-muted/20 p-4 rounded-2xl border border-border/30">
+        <TabsContent value="preview" className="animate-in fade-in zoom-in-95 duration-500 bg-card border border-border/50 rounded-3xl p-8 shadow-xl mt-6 relative z-10">
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/30 pb-6">
+              <div>
+                <h3 className="text-2xl font-display font-bold tracking-tight">Live Preview</h3>
+                <p className="text-xs text-muted-foreground mt-1 font-medium">Unsaved changes preview · Click "Update" to publish</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full border border-emerald-100">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Active Preview</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between bg-muted/10 p-4 rounded-2xl border border-border/30">
               <div className="flex items-center gap-2">
                 <Button 
                   variant={previewMode === "desktop" ? "default" : "outline"} 
@@ -291,6 +296,18 @@ export default function StatisticsEditor() {
             <DialogTitle className="font-display text-xl tracking-tight">Initialize New Metric Widget</DialogTitle>
           </DialogHeader>
           <div className="space-y-5 pt-4">
+            {/* Live Preview Card */}
+            <div className="p-4 rounded-2xl bg-muted/20 border border-border/30 flex flex-col gap-1.5 shadow-inner">
+              <span className="text-[10px] font-black uppercase tracking-[0.18em] text-muted-foreground/60 mb-2">Live Initialization Preview</span>
+              <div className="bg-white/40 backdrop-blur-md rounded-xl p-4 border border-white/40 shadow-sm">
+                <div className="flex items-baseline gap-1 mb-1">
+                  <span className="text-3xl font-display font-bold text-primary">{newStat.target || "0"}</span>
+                  <span className="text-lg font-bold text-primary/60">{newStat.suffix || "+"}</span>
+                </div>
+                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{newStat.label || "New Metric Label"}</p>
+              </div>
+            </div>
+
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Primary Value</Label>
@@ -308,9 +325,16 @@ export default function StatisticsEditor() {
               onChange={(v) => setNewStat({ ...newStat, label: v })}
               onChangeAr={(v) => setNewStat({ ...newStat, label_ar: v })}
             />
+            <BilingualField
+              label="Brief Description"
+              value={newStat.description}
+              valueAr={newStat.description_ar}
+              onChange={(v) => setNewStat({ ...newStat, description: v })}
+              onChangeAr={(v) => setNewStat({ ...newStat, description_ar: v })}
+            />
             <Button className="w-full h-12 mt-2 font-bold uppercase tracking-widest text-xs" disabled={!newStat.target || !newStat.label} onClick={() => {
               setDraft({ ...draft, stats: [...draft.stats, { ...newStat, id: `s${Date.now()}`, visualizationType: "none" }] });
-              setNewStat({ target: "", suffix: "", label: "", label_ar: "" });
+              setNewStat({ target: "", suffix: "", label: "", label_ar: "", description: "", description_ar: "" });
               setModalOpen(false);
             }}>
               Proceed to Full Configuration
@@ -321,7 +345,7 @@ export default function StatisticsEditor() {
 
       {/* Edit Stat Modal */}
       <Dialog open={editIndex !== null} onOpenChange={() => setEditIndex(null)}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-card/95 backdrop-blur-xl border-border/50 shadow-2xl p-0 overflow-hidden rounded-3xl">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-card/95 backdrop-blur-xl border-border/50 shadow-2xl p-0 rounded-3xl">
           <div className="p-8 space-y-8">
             <DialogHeader className="flex flex-row items-center justify-between border-b border-border/30 pb-6 mb-2">
               <div className="flex items-center gap-4">
@@ -437,11 +461,30 @@ export default function StatisticsEditor() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-muted/5 p-6 rounded-2xl border border-border/30">
                 <div className="flex flex-col gap-3">
-                  <div className="p-4 border border-dashed border-primary/30 rounded-2xl bg-white/5 flex flex-col items-center justify-center text-center gap-1.5 h-32">
-                    <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Active Template</span>
-                    <p className="text-xs font-bold text-primary truncate max-w-full px-2">
-                      {editForm.visualizationStyle ? VIZ_STYLES.find(v => v.id === editForm.visualizationStyle)?.label : "NO VISUALIZATION"}
-                    </p>
+                  <div className="relative p-4 border border-dashed border-primary/30 rounded-2xl bg-white/5 flex flex-col items-start justify-start text-left gap-1.5 h-40 overflow-hidden">
+                    <div className="relative z-10 w-full border-b border-primary/10 pb-2 mb-2">
+                      <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Active Template</span>
+                      <p className="text-xs font-bold text-primary truncate max-w-full">
+                        {editForm.visualizationStyle ? VIZ_STYLES.find(v => v.id === editForm.visualizationStyle)?.label : "NO VISUALIZATION"}
+                      </p>
+                    </div>
+
+                    {editForm.visualizationStyle && editForm.visualizationStyle !== "none" ? (
+                      <div className="w-full flex-1 flex items-center justify-center opacity-40 group-hover:opacity-60 transition-opacity">
+                        <StatVisualization 
+                          style={editForm.visualizationStyle as VizStyle}
+                          data={editForm.vizDataStr ? editForm.vizDataStr.split(",").map(v => parseFloat(v.trim())).filter(n => !isNaN(n)) : [30, 50, 40, 70, 55, 80]}
+                          labels={editForm.vizLabelsStr ? editForm.vizLabelsStr.split(",").map(v => v.trim()).filter(Boolean) : ["A","B","C","D","E","F"]}
+                          height={80}
+                          useBrandColors={editForm.useBrandColors}
+                          animationEnabled={false}
+                        />
+                      </div>
+                    ) : editForm.visualizationStyle === "none" ? (
+                      <div className="absolute inset-0 opacity-20 pointer-events-none">
+                        <GridPatternBg isDark={false} />
+                      </div>
+                    ) : null}
                   </div>
                   <Button variant="secondary" size="sm" className="w-full h-10 font-bold text-[10px] uppercase tracking-widest border border-border/50 shadow-sm" onClick={() => setVizPickerOpen(true)}>
                     Change Chart Style
@@ -499,6 +542,15 @@ export default function StatisticsEditor() {
         value={{ type: editForm.visualizationType || "none", style: editForm.visualizationStyle }}
         onApply={(v) => setEditForm({ ...editForm, visualizationType: v.type, visualizationStyle: v.style })}
       />
+
+      <div className="flex items-center gap-4 pt-6 mt-8 border-t border-border/30">
+        <Button onClick={handleSave} size="lg" className="gap-2 px-8 font-bold uppercase tracking-widest text-[11px] shadow-xl shadow-primary/20">
+          <Save size={18} /> Update Statistics Section
+        </Button>
+        <Button variant="outline" size="lg" className="gap-2 px-8 font-bold uppercase tracking-widest text-[11px] text-muted-foreground hover:text-destructive hover:border-destructive" onClick={() => setResetOpen(true)}>
+          <RotateCcw size={18} /> Reset Defaults
+        </Button>
+      </div>
 
       <ResetConfirmModal open={resetOpen} onClose={() => setResetOpen(false)} onConfirm={handleReset} />
     </div>

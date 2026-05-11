@@ -104,13 +104,17 @@ export default function Navbar() {
               {/* Login / Profile */}
               {user ? (
                 <div className="flex items-center gap-3">
-                   <button 
-                    onClick={() => navigate(user.role === "admin" ? "/admin-crm" : "/dashboard")}
-                    className="flex items-center gap-2 text-sm font-bold text-primary"
-                   >
-                     <User size={18} />
-                     <span className="hidden md:inline">{user.name}</span>
-                   </button>
+                    <button 
+                     onClick={() => navigate(user.role === "admin" ? "/admin-crm" : "/dashboard")}
+                     className="flex items-center gap-2 text-sm font-bold text-primary"
+                    >
+                      <User size={18} />
+                      <span className="hidden md:inline">
+                        {user.name === "Administrator" ? t("auth.administrator") : 
+                         user.name === "User" ? t("auth.user_role") : 
+                         user.name}
+                      </span>
+                    </button>
                    <button onClick={logout} className="text-destructive p-1" title={t("auth.logout")}>
                      <LogOut size={18} />
                    </button>

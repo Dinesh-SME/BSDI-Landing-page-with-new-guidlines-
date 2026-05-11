@@ -147,10 +147,28 @@ export default function NewsEditor() {
                       <Input value={item.date} onChange={(e) => updateItem(item.id, { date: e.target.value })} placeholder="Apr 22, 2026" className="mt-1" />
                     </div>
                     <div>
-                      <Label className="text-xs">Link</Label>
+                      <Label className="text-xs">Link (Leave empty to use Popup Modal)</Label>
                       <Input value={item.link || ""} onChange={(e) => updateItem(item.id, { link: e.target.value })} placeholder="https://..." className="mt-1" />
                     </div>
                   </div>
+                  <BilingualField
+                    label="Excerpt (Short Summary)"
+                    value={item.excerpt}
+                    valueAr={item.excerpt_ar || ""}
+                    onChange={(v) => updateItem(item.id, { excerpt: v })}
+                    onChangeAr={(v) => updateItem(item.id, { excerpt_ar: v })}
+                    placeholder="Short summary..."
+                    multiline rows={2}
+                  />
+                  <BilingualField
+                    label="Full Description (Popup Content)"
+                    value={item.description || ""}
+                    valueAr={item.description_ar || ""}
+                    onChange={(v) => updateItem(item.id, { description: v })}
+                    onChangeAr={(v) => updateItem(item.id, { description_ar: v })}
+                    placeholder="Detailed news content..."
+                    multiline rows={4}
+                  />
                   <div className="max-w-xs">
                     <PreviewSlotSelector
                       items={draft.items.map((i) => ({ id: i.id, title: i.title, previewSlot: i.previewSlot ?? null }))}

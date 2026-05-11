@@ -23,58 +23,74 @@ function TechCard({ card, compact = false }: { card: TechnologyCard; compact?: b
   return (
     <Wrapper
       {...wrapperProps}
-      className={`group relative overflow-hidden rounded-3xl bg-white dark:bg-gray-900 border border-border shadow-sm transition-all duration-500 hover:shadow-2xl hover:-translate-y-1.5 flex flex-col ${
-        compact ? "h-[300px]" : "h-[380px]"
-      } ${card.link ? "cursor-pointer" : ""}`}
+      className={`group relative overflow-hidden rounded-2xl flex flex-col
+        bg-white dark:bg-slate-900/80 dark:backdrop-blur-xl
+        border border-gray-100 dark:border-white/10
+        shadow-[0_1px_3px_rgba(0,0,0,0.04),0_6px_24px_rgba(0,0,0,0.04)]
+        hover:shadow-[0_8px_40px_rgba(0,40,85,0.12),0_2px_8px_rgba(0,0,0,0.06)]
+        dark:shadow-[0_1px_3px_rgba(0,0,0,0.2)]
+        dark:hover:shadow-[0_8px_40px_rgba(59,130,246,0.15),0_2px_8px_rgba(0,0,0,0.3)]
+        hover:-translate-y-2 transition-all duration-500 ease-out
+        ${compact ? "h-[320px]" : "h-[380px]"} w-full
+        ${card.link ? "cursor-pointer" : ""}`}
     >
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        {card.icon ? (
-          <img
-            src={card.icon}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            loading="lazy"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
-            <Sparkles size={48} className="text-primary/30" />
-          </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
-      </div>
-
-      {/* Content Overlay */}
-      <div className={`relative z-10 mt-auto ${compact ? "p-5" : "p-6 md:p-8"} space-y-2`}>
-        <div className="flex items-center gap-2 mb-1">
-          <Badge className="bg-primary/90 text-white border-0 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold backdrop-blur-md">
-            {L(card.category || "Technology", card.category_ar)}
-          </Badge>
-          <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-        </div>
+      {/* Card Content */}
+      <div className={`flex flex-col h-full ${compact ? "p-5" : "p-7 md:p-8"}`}>
         
-        <h3 className={`font-display font-bold text-white tracking-tight leading-tight ${
-          compact ? "text-xl" : "text-2xl md:text-3xl"
+        {/* Top Row: Logo left, Badge+Status right */}
+        <div className="flex items-start justify-between mb-6 shrink-0">
+          {/* Logo Container - Fixed Size & Centered */}
+          <div className={`flex-shrink-0 rounded-xl overflow-hidden bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 ${
+            compact ? "w-12 h-12 p-2" : "w-16 h-16 md:w-20 md:h-20 p-3"
+          }`}>
+            {card.icon ? (
+              <img
+                src={card.icon}
+                alt={title}
+                className="max-w-full max-h-full object-contain"
+                loading="lazy"
+              />
+            ) : (
+              <Sparkles size={compact ? 20 : 28} className="text-primary/50" />
+            )}
+          </div>
+
+          {/* Badge + Status */}
+          <div className="flex items-center gap-2">
+            <Badge className="bg-slate-800 dark:bg-slate-700 text-white border-0 px-3 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-sm">
+              {L(card.category || "Technology", card.category_ar)}
+            </Badge>
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)] animate-pulse flex-shrink-0" />
+          </div>
+        </div>
+
+        {/* Title - Handle multiline consistently */}
+        <h3 className={`font-display font-bold text-foreground tracking-tight leading-[1.2] mb-2 line-clamp-2 ${
+          compact ? "text-lg" : "text-xl md:text-2xl"
         }`}>
           {title}
         </h3>
-        
-        <p className={`text-white/75 line-clamp-2 font-medium leading-relaxed ${
+
+        {/* Description - Strict 2 line limit */}
+        <p className={`text-muted-foreground leading-relaxed line-clamp-2 ${
           compact ? "text-xs" : "text-sm md:text-base"
         }`}>
           {description}
         </p>
 
-        <div className={`flex items-center gap-2 text-white font-bold uppercase tracking-widest group-hover:gap-3 transition-all duration-300 ${
-          compact ? "pt-2 text-[10px]" : "pt-3 text-xs"
+        {/* CTA - Locked to bottom */}
+        <div className={`mt-auto flex items-center gap-2 text-foreground font-bold uppercase tracking-widest transition-all duration-300 ${
+          compact ? "pt-4 text-[10px]" : "pt-6 text-xs"
         }`}>
-          <span>{t("common.viewDetails")}</span>
-          <ArrowRight size={compact ? 14 : 16} className="text-accent" />
+          <span className="group-hover:text-primary transition-colors duration-300">
+            {t("common.viewDetails")}
+          </span>
+          <ArrowRight 
+            size={compact ? 14 : 16} 
+            className="text-red-500 transition-transform duration-300 group-hover:translate-x-1.5" 
+          />
         </div>
       </div>
-
-      {/* Top Gradient */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black/20 to-transparent pointer-events-none z-[1]" />
     </Wrapper>
   );
 }
@@ -83,13 +99,13 @@ const gridContainer = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 }
+    transition: { staggerChildren: 0.08 }
   }
 };
 
 const gridItem = {
-  hidden: { opacity: 0, y: 25, scale: 0.97 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: "easeOut" } }
+  hidden: { opacity: 0, y: 30, scale: 0.97 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } }
 };
 
 export default function TechnologiesSection() {
@@ -103,10 +119,10 @@ export default function TechnologiesSection() {
   const [query, setQuery] = useState("");
 
   const previewCards = useMemo(() => {
-    const bySlot = [1, 2, 3]
+    const bySlot = [1, 2, 3, 4]
       .map((s) => technologies.cards.find((c) => c.previewSlot === s))
       .filter(Boolean) as TechnologyCard[];
-    return bySlot.length > 0 ? bySlot : technologies.cards.slice(0, 3);
+    return bySlot.length > 0 ? bySlot : technologies.cards.slice(0, 4);
   }, [technologies.cards]);
 
   const filtered = useMemo(() => {
@@ -140,7 +156,7 @@ export default function TechnologiesSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 max-w-7xl mx-auto"
         >
           {previewCards.map((card) => (
             <motion.div key={card.id} variants={gridItem}>

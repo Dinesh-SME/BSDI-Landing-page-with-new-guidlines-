@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Globe, Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import { useContentStore } from "@/stores/contentStore";
 import { useT, useLocalized } from "@/lib/i18n";
+import dashLogo from "@/assets/dashLogo.png";
+import vision2030Logo from "@/assets/bahrain-2030.svg";
+import bahrainLogo from "@/assets/kingdom-of-bahrain-footer.png";
+import bahrainEmblem from "@/assets/bahrain-emblem.svg";
 
 export default function Footer() {
   const t = useT();
@@ -30,7 +34,9 @@ export default function Footer() {
                 </div>
                 <div className="flex gap-3">
                   <dt className="shrink-0"><Mail size={18} className="text-accent" /></dt>
-                  <dd><a href="mailto:info@iga.gov.bh" className="govbh-footer__tel text-sm hover:text-accent transition-colors">info@iga.gov.bh</a></dd>
+                  <dd>
+                    <a href="mailto:info@iga.gov.bh" className="govbh-footer__tel text-sm hover:text-accent transition-colors">info@iga.gov.bh</a>
+                  </dd>
                 </div>
               </dl>
             </address>
@@ -72,7 +78,7 @@ export default function Footer() {
           <div className="col-xl-3 col-lg-3 col-md-6 w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
             <div className="govbh-footer__head govbh-fs-h5 mb-6">{t("footer.subscribe")}</div>
             <div className="govbh-footer__body mb-8">
-              <form className="govbh-footer__newsletter flex">
+              <form className="govbh-footer__newsletter flex" onSubmit={(e) => e.preventDefault()}>
                 <div className="govbh-footer__newsletter-input relative flex-1">
                   <input
                     type="email"
@@ -103,6 +109,20 @@ export default function Footer() {
                   );
                 })}
               </ul>
+
+              {/* Bahrain Logos Group */}
+              <div className="mt-8 flex items-center gap-10">
+                <img 
+                  src={dashLogo} 
+                  alt="Kingdom of Bahrain" 
+                  className="h-20 md:h-24 w-auto object-contain hover:scale-105 transition-transform duration-300" 
+                />
+                <img 
+                  src={vision2030Logo} 
+                  alt="Bahrain Vision 2030" 
+                  className="h-20 md:h-24 w-auto object-contain hover:scale-105 transition-transform duration-300" 
+                />
+              </div>
             </div>
           </div>
 

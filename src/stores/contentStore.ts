@@ -103,6 +103,8 @@ export interface NewsItem {
   date: string;
   image: string;
   link?: string;
+  description?: string;
+  description_ar?: string;
   priorityPreview?: boolean;
   previewSlot?: null | 1 | 2 | 3 | 4;
 }
@@ -186,7 +188,9 @@ export interface AboutContent extends SectionStyles {
   description1_ar?: string;
   description2: string;
   description2_ar?: string;
-  stats: StatCard[];
+  linkText?: string;
+  linkText_ar?: string;
+  linkUrl?: string;
 }
 
 export interface ServicesContent extends SectionStyles {
@@ -467,6 +471,9 @@ export const defaultAbout: AboutContent = {
   description1_ar: "BSDI (البنية التحتية للبيانات المكانية في البحرين) هي منصة جغرافية موحّدة مصمّمة لتمكين مشاركة البيانات بشكل آمن، والتحليلات المتقدمة، وصنع القرارات الذكية في القطاعات الحكومية والمؤسسية.",
   description2: "It brings together GIS, GeoAI, BIM, and governance standards into a single digital ecosystem — ensuring data accuracy, security, and national-level interoperability.",
   description2_ar: "تجمع بين نظم المعلومات الجغرافية والذكاء الاصطناعي الجغرافي ونمذجة معلومات البناء ومعايير الحوكمة في منظومة رقمية واحدة، تضمن دقة البيانات والأمان والتشغيل البيني على المستوى الوطني.",
+  linkText: "Learn more about BSDI",
+  linkText_ar: "تعرف على المزيد حول BSDI",
+  linkUrl: "#portal",
 };
 
 export const defaultStatistics: StatisticsContent = {
@@ -476,36 +483,33 @@ export const defaultStatistics: StatisticsContent = {
   description: "Impact and growth of Bahrain's national geospatial infrastructure",
   description_ar: "تأثير ونمو البنية التحتية الوطنية للبيانات المكانية في البحرين",
   stats: [
-    { id: "s1", target: "50", suffix: "+", label: "Government Agencies", label_ar: "جهة حكومية",
-      icon: "Building2", description: "Connected national and local entities sharing spatial data.", description_ar: "جهات وطنية ومحلية متصلة لمشاركة البيانات المكانية.",
-      trend: 12, trendDirection: "up",
-      visualizationType: "graph", visualizationStyle: "gradient_area", useBrandColors: true,
-      vizData: [22, 28, 31, 35, 40, 45, 50], vizLabels: ["19","20","21","22","23","24","25"], animationEnabled: true },
-    { id: "s2", target: "1250", suffix: "+", label: "Spatial Layers", label_ar: "طبقة مكانية",
+    { id: "s1", target: "1250", suffix: "+", label: "Spatial Layers", label_ar: "طبقة مكانية",
       icon: "Layers", description: "Curated GIS layers across infrastructure, environment & culture.", description_ar: "طبقات GIS منسّقة عبر البنية التحتية والبيئة والثقافة.",
       trend: 24, trendDirection: "up",
-      visualizationType: "bar", visualizationStyle: "bar_vertical", useBrandColors: true,
-      vizData: [400, 620, 780, 950, 1100, 1250], vizLabels: ["20","21","22","23","24","25"], animationEnabled: true },
+      visualizationType: "none", visualizationStyle: "none", useBrandColors: true,
+      animationEnabled: true },
+    { id: "s2", target: "1250", suffix: "+", label: "Government Agencies", label_ar: "جهة حكومية",
+      icon: "Building2", description: "Connected national and local entities sharing spatial data.", description_ar: "جهات وطنية ومحلية متصلة لمشاركة البيانات المكانية.",
+      trend: 12, trendDirection: "up",
+      visualizationType: "bar", visualizationStyle: "bar_horizontal", useBrandColors: true,
+      vizData: [22, 35, 45, 55, 65, 78], vizLabels: ["20","21","22","23","24","25"], animationEnabled: true },
     { id: "s3", target: "24", suffix: "/7", label: "Secure Infrastructure", label_ar: "بنية تحتية آمنة",
       icon: "ShieldCheck", description: "Always-on monitoring and managed cloud operations.", description_ar: "مراقبة دائمة وعمليات سحابية مُدارة.",
-      trend: 0,
-      visualizationType: "graph", visualizationStyle: "line_smooth", useBrandColors: true,
-      vizData: [98, 99, 99.5, 99.7, 99.9, 99.9, 99.9], vizLabels: ["M","T","W","T","F","S","S"], animationEnabled: true },
-    { id: "s4", target: "99.9", suffix: "%", label: "Data Availability", label_ar: "إتاحة البيانات",
+      visualizationType: "none", visualizationStyle: "none", useBrandColors: true,
+      animationEnabled: true },
+    { id: "s4", target: "1250", suffix: "+", label: "Data Availability", label_ar: "إتاحة البيانات",
       icon: "Activity", description: "Enterprise-grade SLA across all spatial services.", description_ar: "اتفاقيات مستوى خدمة على مستوى المؤسسات.",
-      trend: 2, trendDirection: "up",
-      visualizationType: "graph", visualizationStyle: "area", useBrandColors: true,
-      vizData: [99.2, 99.4, 99.5, 99.7, 99.8, 99.9], animationEnabled: true },
+      visualizationType: "graph", visualizationStyle: "gradient_area", useBrandColors: true,
+      vizData: [40, 60, 50, 75, 65, 85, 80], vizLabels: ["M","T","W","T","F","S","S"], animationEnabled: true },
     { id: "s5", target: "18", suffix: "%", label: "Annual Growth Rate", label_ar: "معدل النمو السنوي",
       icon: "TrendingUp", description: "Year-over-year expansion of datasets and integrations.", description_ar: "توسّع سنوي في مجموعات البيانات والتكاملات.",
-      trend: 18, trendDirection: "up",
-      visualizationType: "bar", visualizationStyle: "bar_vertical", useBrandColors: true,
-      vizData: [12, 14, 15, 16, 18], vizLabels: ["21","22","23","24","25"], animationEnabled: true },
+      visualizationType: "none", visualizationStyle: "none", useBrandColors: true,
+      animationEnabled: true },
     { id: "s6", target: "250", suffix: "TB", label: "Spatial Data Managed", label_ar: "بيانات مكانية مُدارة",
       icon: "Database", description: "Petabyte-ready storage tier for national geospatial assets.", description_ar: "تخزين جاهز للبيتابايت للأصول الجغرافية الوطنية.",
       trend: 30, trendDirection: "up",
-      visualizationType: "bar", visualizationStyle: "bar_horizontal", useBrandColors: true,
-      vizData: [60, 110, 170, 210, 250], vizLabels: ["21","22","23","24","25"], animationEnabled: true },
+      visualizationType: "chart", visualizationStyle: "donut", useBrandColors: true,
+      vizData: [35, 25, 20, 12, 8], vizLabels: ["Roads","Water","Energy","Telecom","Other"], animationEnabled: true },
   ],
 };
 
